@@ -1,0 +1,363 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F10F4669206107E90066C901 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F4668206107E90066C901 /* AppDelegate.swift */; };
+		F10F466B206107E90066C901 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F466A206107E90066C901 /* ViewController.swift */; };
+		F10F466E206107E90066C901 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F10F466C206107E90066C901 /* Main.storyboard */; };
+		F10F4670206107E90066C901 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F10F466F206107E90066C901 /* Assets.xcassets */; };
+		F10F4673206107E90066C901 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F10F4671206107E90066C901 /* LaunchScreen.storyboard */; };
+		F10F46822061082D0066C901 /* FancyAlertTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467A2061082C0066C901 /* FancyAlertTransitionAnimator.swift */; };
+		F10F46832061082D0066C901 /* FancyActionSheetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467B2061082C0066C901 /* FancyActionSheetAction.swift */; };
+		F10F46852061082D0066C901 /* FancyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467D2061082C0066C901 /* FancyAlert.swift */; };
+		F10F46862061082D0066C901 /* UIColor+FancyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467E2061082C0066C901 /* UIColor+FancyAlert.swift */; };
+		F10F46872061082D0066C901 /* FancyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467F2061082C0066C901 /* FancyAlertViewController.swift */; };
+		F10F46882061082D0066C901 /* FancyAlertTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F46802061082D0066C901 /* FancyAlertTransitionManager.swift */; };
+		F123B2462061FF5300CDD105 /* FancyActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */; };
+		F123B248206239E600CDD105 /* FancyActionSheetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B247206239E600CDD105 /* FancyActionSheetHeaderView.swift */; };
+		F123B24A20623E2400CDD105 /* String+FancyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B24920623E2400CDD105 /* String+FancyAlert.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F10F4665206107E90066C901 /* FancyAlertDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FancyAlertDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10F4668206107E90066C901 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F10F466A206107E90066C901 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F10F466D206107E90066C901 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F10F466F206107E90066C901 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F10F4672206107E90066C901 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F10F4674206107E90066C901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F10F467A2061082C0066C901 /* FancyAlertTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertTransitionAnimator.swift; sourceTree = "<group>"; };
+		F10F467B2061082C0066C901 /* FancyActionSheetAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyActionSheetAction.swift; sourceTree = "<group>"; };
+		F10F467D2061082C0066C901 /* FancyAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlert.swift; sourceTree = "<group>"; };
+		F10F467E2061082C0066C901 /* UIColor+FancyAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+FancyAlert.swift"; sourceTree = "<group>"; };
+		F10F467F2061082C0066C901 /* FancyAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertViewController.swift; sourceTree = "<group>"; };
+		F10F46802061082D0066C901 /* FancyAlertTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertTransitionManager.swift; sourceTree = "<group>"; };
+		F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyActionSheetCell.swift; sourceTree = "<group>"; };
+		F123B247206239E600CDD105 /* FancyActionSheetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyActionSheetHeaderView.swift; sourceTree = "<group>"; };
+		F123B24920623E2400CDD105 /* String+FancyAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FancyAlert.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F10F4662206107E90066C901 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F10F465C206107E90066C901 = {
+			isa = PBXGroup;
+			children = (
+				F10F4667206107E90066C901 /* FancyAlertDemo */,
+				F10F4666206107E90066C901 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F10F4666206107E90066C901 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F10F4665206107E90066C901 /* FancyAlertDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F10F4667206107E90066C901 /* FancyAlertDemo */ = {
+			isa = PBXGroup;
+			children = (
+				F10F4668206107E90066C901 /* AppDelegate.swift */,
+				F10F466A206107E90066C901 /* ViewController.swift */,
+				F10F467D2061082C0066C901 /* FancyAlert.swift */,
+				F10F467F2061082C0066C901 /* FancyAlertViewController.swift */,
+				F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */,
+				F123B247206239E600CDD105 /* FancyActionSheetHeaderView.swift */,
+				F10F46802061082D0066C901 /* FancyAlertTransitionManager.swift */,
+				F10F467A2061082C0066C901 /* FancyAlertTransitionAnimator.swift */,
+				F10F467B2061082C0066C901 /* FancyActionSheetAction.swift */,
+				F10F467E2061082C0066C901 /* UIColor+FancyAlert.swift */,
+				F123B24920623E2400CDD105 /* String+FancyAlert.swift */,
+				F10F466C206107E90066C901 /* Main.storyboard */,
+				F10F466F206107E90066C901 /* Assets.xcassets */,
+				F10F4671206107E90066C901 /* LaunchScreen.storyboard */,
+				F10F4674206107E90066C901 /* Info.plist */,
+			);
+			path = FancyAlertDemo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F10F4664206107E90066C901 /* FancyAlertDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F10F4677206107E90066C901 /* Build configuration list for PBXNativeTarget "FancyAlertDemo" */;
+			buildPhases = (
+				F10F4661206107E90066C901 /* Sources */,
+				F10F4662206107E90066C901 /* Frameworks */,
+				F10F4663206107E90066C901 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FancyAlertDemo;
+			productName = FancyAlertDemo;
+			productReference = F10F4665206107E90066C901 /* FancyAlertDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F10F465D206107E90066C901 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = ancheng;
+				TargetAttributes = {
+					F10F4664206107E90066C901 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = F10F4660206107E90066C901 /* Build configuration list for PBXProject "FancyAlertDemo" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F10F465C206107E90066C901;
+			productRefGroup = F10F4666206107E90066C901 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F10F4664206107E90066C901 /* FancyAlertDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F10F4663206107E90066C901 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F10F4673206107E90066C901 /* LaunchScreen.storyboard in Resources */,
+				F10F4670206107E90066C901 /* Assets.xcassets in Resources */,
+				F10F466E206107E90066C901 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F10F4661206107E90066C901 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F10F46862061082D0066C901 /* UIColor+FancyAlert.swift in Sources */,
+				F10F46882061082D0066C901 /* FancyAlertTransitionManager.swift in Sources */,
+				F10F466B206107E90066C901 /* ViewController.swift in Sources */,
+				F123B2462061FF5300CDD105 /* FancyActionSheetCell.swift in Sources */,
+				F123B248206239E600CDD105 /* FancyActionSheetHeaderView.swift in Sources */,
+				F10F46872061082D0066C901 /* FancyAlertViewController.swift in Sources */,
+				F123B24A20623E2400CDD105 /* String+FancyAlert.swift in Sources */,
+				F10F46852061082D0066C901 /* FancyAlert.swift in Sources */,
+				F10F4669206107E90066C901 /* AppDelegate.swift in Sources */,
+				F10F46832061082D0066C901 /* FancyActionSheetAction.swift in Sources */,
+				F10F46822061082D0066C901 /* FancyAlertTransitionAnimator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F10F466C206107E90066C901 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F10F466D206107E90066C901 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F10F4671206107E90066C901 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F10F4672206107E90066C901 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F10F4675206107E90066C901 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F10F4676206107E90066C901 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F10F4678206107E90066C901 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GY6E74AYN5;
+				INFOPLIST_FILE = FancyAlertDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ac.FancyAlertDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F10F4679206107E90066C901 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GY6E74AYN5;
+				INFOPLIST_FILE = FancyAlertDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ac.FancyAlertDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F10F4660206107E90066C901 /* Build configuration list for PBXProject "FancyAlertDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10F4675206107E90066C901 /* Debug */,
+				F10F4676206107E90066C901 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F10F4677206107E90066C901 /* Build configuration list for PBXNativeTarget "FancyAlertDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10F4678206107E90066C901 /* Debug */,
+				F10F4679206107E90066C901 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F10F465D206107E90066C901 /* Project object */;
+}
