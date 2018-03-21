@@ -21,6 +21,8 @@
 		F123B2462061FF5300CDD105 /* FancyActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */; };
 		F123B248206239E600CDD105 /* FancyActionSheetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B247206239E600CDD105 /* FancyActionSheetHeaderView.swift */; };
 		F123B24A20623E2400CDD105 /* String+FancyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B24920623E2400CDD105 /* String+FancyAlert.swift */; };
+		F123B24E2062512B00CDD105 /* FancyActionSheetTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B24D2062512B00CDD105 /* FancyActionSheetTableView.swift */; };
+		F123B2502062574000CDD105 /* FancyAlertTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B24F2062574000CDD105 /* FancyAlertTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyActionSheetCell.swift; sourceTree = "<group>"; };
 		F123B247206239E600CDD105 /* FancyActionSheetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyActionSheetHeaderView.swift; sourceTree = "<group>"; };
 		F123B24920623E2400CDD105 /* String+FancyAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FancyAlert.swift"; sourceTree = "<group>"; };
+		F123B24D2062512B00CDD105 /* FancyActionSheetTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyActionSheetTableView.swift; sourceTree = "<group>"; };
+		F123B24F2062574000CDD105 /* FancyAlertTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyAlertTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,8 @@
 				F10F466A206107E90066C901 /* ViewController.swift */,
 				F10F467D2061082C0066C901 /* FancyAlert.swift */,
 				F10F467F2061082C0066C901 /* FancyAlertViewController.swift */,
+				F123B24D2062512B00CDD105 /* FancyActionSheetTableView.swift */,
+				F123B24F2062574000CDD105 /* FancyAlertTableView.swift */,
 				F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */,
 				F123B247206239E600CDD105 /* FancyActionSheetHeaderView.swift */,
 				F10F46802061082D0066C901 /* FancyAlertTransitionManager.swift */,
@@ -168,8 +174,10 @@
 				F10F466B206107E90066C901 /* ViewController.swift in Sources */,
 				F123B2462061FF5300CDD105 /* FancyActionSheetCell.swift in Sources */,
 				F123B248206239E600CDD105 /* FancyActionSheetHeaderView.swift in Sources */,
+				F123B24E2062512B00CDD105 /* FancyActionSheetTableView.swift in Sources */,
 				F10F46872061082D0066C901 /* FancyAlertViewController.swift in Sources */,
 				F123B24A20623E2400CDD105 /* String+FancyAlert.swift in Sources */,
+				F123B2502062574000CDD105 /* FancyAlertTableView.swift in Sources */,
 				F10F46852061082D0066C901 /* FancyAlert.swift in Sources */,
 				F10F4669206107E90066C901 /* AppDelegate.swift in Sources */,
 				F10F46832061082D0066C901 /* FancyActionSheetAction.swift in Sources */,

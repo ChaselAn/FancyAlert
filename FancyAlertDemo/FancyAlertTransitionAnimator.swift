@@ -38,20 +38,21 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
         let animationDuration = transitionDuration(using: transitionContext)
 
         guard let alertController = controller as? FancyAlertViewController else { return }
-        let tableViewHeight = alertController.tableViewHeight
+        let tableViewHeight = (alertController.tableView as! FancyAlertTableViewSource).tableViewHeight
+        let margin = (alertController.tableView as! FancyAlertTableViewSource).margin
         switch type {
         case .alert:
             alertController.tableView.center = alertController.view.center
-            alertController.tableView.bounds.size = CGSize(width: alertController.view.bounds.width - 2 * alertController.margin, height: tableViewHeight)
+            alertController.tableView.bounds.size = CGSize(width: alertController.view.bounds.width - 2 * margin, height: tableViewHeight)
             UIView.animate(withDuration: animationDuration, animations: {
                 controller.view.alpha = finalAlpha
             }, completion: { finished in
                 transitionContext.completeTransition(finished)
             })
         case .actionSheet:
-            let beginY = !isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - tableViewHeight - alertController.margin
-            let endY = isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - tableViewHeight - alertController.margin
-            alertController.tableView.frame = CGRect(x: alertController.margin, y: beginY, width: alertController.view.bounds.width - 2 * alertController.margin, height: tableViewHeight)
+            let beginY = !isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - tableViewHeight - margin
+            let endY = isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - tableViewHeight - margin
+            alertController.tableView.frame = CGRect(x: margin, y: beginY, width: alertController.view.bounds.width - 2 * margin, height: tableViewHeight)
             UIView.animate(withDuration: animationDuration, animations: { 
                 controller.view.alpha = finalAlpha
                 alertController.tableView.frame.origin.y = endY
