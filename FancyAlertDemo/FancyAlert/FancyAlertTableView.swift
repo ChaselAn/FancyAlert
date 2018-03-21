@@ -10,6 +10,6 @@ import UIKit
 
 class FancyAlertTableView: UITableView {
 
-
+    
 
 }

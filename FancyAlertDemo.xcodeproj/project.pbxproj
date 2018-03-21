@@ -78,6 +78,18 @@
 			children = (
 				F10F4668206107E90066C901 /* AppDelegate.swift */,
 				F10F466A206107E90066C901 /* ViewController.swift */,
+				F123B251206257C600CDD105 /* FancyAlert */,
+				F10F466C206107E90066C901 /* Main.storyboard */,
+				F10F466F206107E90066C901 /* Assets.xcassets */,
+				F10F4671206107E90066C901 /* LaunchScreen.storyboard */,
+				F10F4674206107E90066C901 /* Info.plist */,
+			);
+			path = FancyAlertDemo;
+			sourceTree = "<group>";
+		};
+		F123B251206257C600CDD105 /* FancyAlert */ = {
+			isa = PBXGroup;
+			children = (
 				F10F467D2061082C0066C901 /* FancyAlert.swift */,
 				F10F467F2061082C0066C901 /* FancyAlertViewController.swift */,
 				F123B24D2062512B00CDD105 /* FancyActionSheetTableView.swift */,
@@ -89,12 +101,8 @@
 				F10F467B2061082C0066C901 /* FancyActionSheetAction.swift */,
 				F10F467E2061082C0066C901 /* UIColor+FancyAlert.swift */,
 				F123B24920623E2400CDD105 /* String+FancyAlert.swift */,
-				F10F466C206107E90066C901 /* Main.storyboard */,
-				F10F466F206107E90066C901 /* Assets.xcassets */,
-				F10F4671206107E90066C901 /* LaunchScreen.storyboard */,
-				F10F4674206107E90066C901 /* Info.plist */,
 			);
-			path = FancyAlertDemo;
+			path = FancyAlert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
