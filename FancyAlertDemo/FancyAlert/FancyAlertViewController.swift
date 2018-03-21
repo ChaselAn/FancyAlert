@@ -16,6 +16,7 @@ class FancyAlertViewController: UIViewController {
             (tableView as! FancyAlertTableViewSource).markedColor = markedColor
         }
     }
+    var isEditable = false
     
     private let maskAlpha: CGFloat = 0.75
 
@@ -63,7 +64,7 @@ class FancyAlertViewController: UIViewController {
         case .actionSheet:
             tableView = FancyActionSheetTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width)
         case .alert:
-            break
+            tableView = FancyAlertTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width)
         }
         view.addSubview(tableView)
 

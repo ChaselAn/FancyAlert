@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     private var transitionManager: FancyAlertTransitionManager!
     var actions: [FancyAlertAction] = []
+    var actions1: [FancyAlertAction] = []
 
     let rightButton = UIButton(type: .system)
     let rightButton1 = UIButton(type: .system)
@@ -62,10 +63,12 @@ class ViewController: UIViewController {
         let cancelAction = FancyAlertAction(title: "取消", style: .cancel, action: nil)
         actions = [cancelAction, firstAction, secondAction, markedAction, disabledAction]
 
+        actions1 = [firstAction, cancelAction]
+
     }
 
     @objc private func buttonClicked() {
-        FancyAlert.present(type: .alert, title: nil, actions: actions, maskDidClicked: {
+        FancyAlert.present(type: .alert, title: "大标题大标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions, maskDidClicked: {
             FancyAlert.dismiss()
         })
 //        let actionSheet = UIAlertController(title: "大标题", message: "小标题", preferredStyle: .alert)

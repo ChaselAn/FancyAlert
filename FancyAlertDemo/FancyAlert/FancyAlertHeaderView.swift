@@ -1,5 +1,5 @@
 //
-//  FancyActionSheetHeaderView.swift
+//  FancyAlertHeaderView.swift
 //  FancyAlertDemo
 //
 //  Created by ancheng on 2018/3/21.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FancyActionSheetHeaderView: UIView {
+class FancyAlertHeaderView: UIView {
 
     var headerHeight: CGFloat {
         return  margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + bottomMargin
@@ -21,8 +21,8 @@ class FancyActionSheetHeaderView: UIView {
     private var messageLabelHeight: CGFloat = 0
 
     private let labelSpace:CGFloat = 13
-    private let margin: CGFloat = 10
-    private let bottomMargin: CGFloat = 5
+    private let margin: CGFloat = 25
+    private let bottomMargin: CGFloat = 30
 
     private let message: String?
     private let title: String?
@@ -45,8 +45,8 @@ class FancyActionSheetHeaderView: UIView {
         paragraph.alignment = .center
         if let title = title {
             let attributes: [NSAttributedStringKey: Any] = [.paragraphStyle: paragraph,
-                                                            .font: UIFont.systemFont(ofSize: 13, weight: .medium),
-                                                            .foregroundColor: UIColor.fancyActionSheetTitleDefaultColor]
+                                                            .font: UIFont.systemFont(ofSize: 17, weight: .medium),
+                                                            .foregroundColor: UIColor.fancyAlertTitleDefaultColor]
             let attributeString = NSMutableAttributedString(string: title,
                                                             attributes: attributes)
             titleLabel.attributedText = attributeString
@@ -60,8 +60,8 @@ class FancyActionSheetHeaderView: UIView {
 
         if let message = message {
             let attributes: [NSAttributedStringKey: Any] = [.paragraphStyle: paragraph,
-                                                            .font: UIFont.systemFont(ofSize: 12, weight: .medium),
-                                                            .foregroundColor: UIColor.fancyActionSheetTitleDefaultColor]
+                                                            .font: UIFont.systemFont(ofSize: 14, weight: .regular),
+                                                            .foregroundColor: UIColor.fancyAlertMessageDefaultColor]
             let attributeString = NSMutableAttributedString(string: message,
                                                             attributes: attributes)
             messageLabel.attributedText = attributeString
@@ -73,4 +73,5 @@ class FancyActionSheetHeaderView: UIView {
             messageLabel.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil ? labelSpace : 0), width: labelWidth, height: height)
         }
     }
+
 }

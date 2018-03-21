@@ -1,5 +1,5 @@
 //
-//  FancyActionSheetAction.swift
+//  FancyAlertAction.swift
 //  FancyAlertDemo
 //
 //  Created by ancheng on 2018/3/20.

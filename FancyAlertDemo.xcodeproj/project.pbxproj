@@ -13,7 +13,7 @@
 		F10F4670206107E90066C901 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F10F466F206107E90066C901 /* Assets.xcassets */; };
 		F10F4673206107E90066C901 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F10F4671206107E90066C901 /* LaunchScreen.storyboard */; };
 		F10F46822061082D0066C901 /* FancyAlertTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467A2061082C0066C901 /* FancyAlertTransitionAnimator.swift */; };
-		F10F46832061082D0066C901 /* FancyActionSheetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467B2061082C0066C901 /* FancyActionSheetAction.swift */; };
+		F10F46832061082D0066C901 /* FancyAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467B2061082C0066C901 /* FancyAlertAction.swift */; };
 		F10F46852061082D0066C901 /* FancyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467D2061082C0066C901 /* FancyAlert.swift */; };
 		F10F46862061082D0066C901 /* UIColor+FancyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467E2061082C0066C901 /* UIColor+FancyAlert.swift */; };
 		F10F46872061082D0066C901 /* FancyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467F2061082C0066C901 /* FancyAlertViewController.swift */; };
@@ -23,6 +23,9 @@
 		F123B24A20623E2400CDD105 /* String+FancyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B24920623E2400CDD105 /* String+FancyAlert.swift */; };
 		F123B24E2062512B00CDD105 /* FancyActionSheetTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B24D2062512B00CDD105 /* FancyActionSheetTableView.swift */; };
 		F123B2502062574000CDD105 /* FancyAlertTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B24F2062574000CDD105 /* FancyAlertTableView.swift */; };
+		F123B25320625A4200CDD105 /* FancyAlertHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B25220625A4200CDD105 /* FancyAlertHeaderView.swift */; };
+		F1378A3620625C5200ABEA3D /* FancyAlertTwoActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1378A3520625C5200ABEA3D /* FancyAlertTwoActionCell.swift */; };
+		F1378A38206269A900ABEA3D /* FancyAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1378A37206269A900ABEA3D /* FancyAlertCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +37,7 @@
 		F10F4672206107E90066C901 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F10F4674206107E90066C901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F10F467A2061082C0066C901 /* FancyAlertTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertTransitionAnimator.swift; sourceTree = "<group>"; };
-		F10F467B2061082C0066C901 /* FancyActionSheetAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyActionSheetAction.swift; sourceTree = "<group>"; };
+		F10F467B2061082C0066C901 /* FancyAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertAction.swift; sourceTree = "<group>"; };
 		F10F467D2061082C0066C901 /* FancyAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlert.swift; sourceTree = "<group>"; };
 		F10F467E2061082C0066C901 /* UIColor+FancyAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+FancyAlert.swift"; sourceTree = "<group>"; };
 		F10F467F2061082C0066C901 /* FancyAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +47,9 @@
 		F123B24920623E2400CDD105 /* String+FancyAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FancyAlert.swift"; sourceTree = "<group>"; };
 		F123B24D2062512B00CDD105 /* FancyActionSheetTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyActionSheetTableView.swift; sourceTree = "<group>"; };
 		F123B24F2062574000CDD105 /* FancyAlertTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyAlertTableView.swift; sourceTree = "<group>"; };
+		F123B25220625A4200CDD105 /* FancyAlertHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyAlertHeaderView.swift; sourceTree = "<group>"; };
+		F1378A3520625C5200ABEA3D /* FancyAlertTwoActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyAlertTwoActionCell.swift; sourceTree = "<group>"; };
+		F1378A37206269A900ABEA3D /* FancyAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyAlertCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,12 +99,15 @@
 				F10F467D2061082C0066C901 /* FancyAlert.swift */,
 				F10F467F2061082C0066C901 /* FancyAlertViewController.swift */,
 				F123B24D2062512B00CDD105 /* FancyActionSheetTableView.swift */,
-				F123B24F2062574000CDD105 /* FancyAlertTableView.swift */,
 				F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */,
 				F123B247206239E600CDD105 /* FancyActionSheetHeaderView.swift */,
+				F123B24F2062574000CDD105 /* FancyAlertTableView.swift */,
+				F123B25220625A4200CDD105 /* FancyAlertHeaderView.swift */,
+				F1378A37206269A900ABEA3D /* FancyAlertCell.swift */,
+				F1378A3520625C5200ABEA3D /* FancyAlertTwoActionCell.swift */,
 				F10F46802061082D0066C901 /* FancyAlertTransitionManager.swift */,
 				F10F467A2061082C0066C901 /* FancyAlertTransitionAnimator.swift */,
-				F10F467B2061082C0066C901 /* FancyActionSheetAction.swift */,
+				F10F467B2061082C0066C901 /* FancyAlertAction.swift */,
 				F10F467E2061082C0066C901 /* UIColor+FancyAlert.swift */,
 				F123B24920623E2400CDD105 /* String+FancyAlert.swift */,
 			);
@@ -181,14 +190,17 @@
 				F10F46882061082D0066C901 /* FancyAlertTransitionManager.swift in Sources */,
 				F10F466B206107E90066C901 /* ViewController.swift in Sources */,
 				F123B2462061FF5300CDD105 /* FancyActionSheetCell.swift in Sources */,
+				F1378A3620625C5200ABEA3D /* FancyAlertTwoActionCell.swift in Sources */,
 				F123B248206239E600CDD105 /* FancyActionSheetHeaderView.swift in Sources */,
 				F123B24E2062512B00CDD105 /* FancyActionSheetTableView.swift in Sources */,
 				F10F46872061082D0066C901 /* FancyAlertViewController.swift in Sources */,
+				F1378A38206269A900ABEA3D /* FancyAlertCell.swift in Sources */,
 				F123B24A20623E2400CDD105 /* String+FancyAlert.swift in Sources */,
 				F123B2502062574000CDD105 /* FancyAlertTableView.swift in Sources */,
 				F10F46852061082D0066C901 /* FancyAlert.swift in Sources */,
+				F123B25320625A4200CDD105 /* FancyAlertHeaderView.swift in Sources */,
 				F10F4669206107E90066C901 /* AppDelegate.swift in Sources */,
-				F10F46832061082D0066C901 /* FancyActionSheetAction.swift in Sources */,
+				F10F46832061082D0066C901 /* FancyAlertAction.swift in Sources */,
 				F10F46822061082D0066C901 /* FancyAlertTransitionAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
