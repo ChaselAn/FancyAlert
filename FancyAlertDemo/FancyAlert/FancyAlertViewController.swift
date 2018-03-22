@@ -15,6 +15,7 @@ public class FancyAlertViewController: UIViewController {
     public var isEditable = false
     public let textField = UITextField()
     public var actions: [FancyAlertAction]
+    public var statusBarStyle: UIStatusBarStyle = .default
     
     private let maskAlpha: CGFloat = 0.75
 
@@ -60,6 +61,10 @@ public class FancyAlertViewController: UIViewController {
             super.viewSafeAreaInsetsDidChange()
             safeAreaInsetsBottom = view.safeAreaInsets.bottom
         }
+    }
+
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBarStyle
     }
 
     private func makeUI() {
