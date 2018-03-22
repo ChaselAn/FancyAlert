@@ -61,8 +61,10 @@ class FancyAlertTwoActionCell: UITableViewCell {
 
         leftButton.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
         leftButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        leftButton.addTarget(self, action: #selector(buttonTouchOutside), for: .touchUpOutside)
         rightButton.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
         rightButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(buttonTouchOutside), for: .touchUpOutside)
 
         selectionStyle = .none
     }
@@ -89,10 +91,30 @@ class FancyAlertTwoActionCell: UITableViewCell {
         rightButton.setTitleColor(markedColor, for: .normal)
         rightButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: actions.last!.style == .cancel ? .medium : .semibold)
 
+        leftButton.alpha = tempActions.first!.isEnabled ? 1 : 0.4
+        leftButton.isEnabled = tempActions.first!.isEnabled
+
+        rightButton.alpha = tempActions.last!.isEnabled ? 1 : 0.4
+        rightButton.isEnabled = tempActions.last!.isEnabled
+
+        tempActions.first!.enabledDidChange = { [weak self] isEnabled in
+            self?.leftButton.alpha = tempActions.first!.isEnabled ? 1 : 0.4
+            self?.leftButton.isEnabled = tempActions.first!.isEnabled
+        }
+
+        tempActions.last!.enabledDidChange = { [weak self] isEnabled in
+            self?.rightButton.alpha = tempActions.last!.isEnabled ? 1 : 0.4
+            self?.rightButton.isEnabled = tempActions.last!.isEnabled
+        }
+
     }
 
     @objc private func buttonTouchDown(sender: UIButton) {
         sender.backgroundColor = UIColor.fancyActionSheetSelectedColor
+    }
+
+    @objc private func buttonTouchOutside(sender: UIButton) {
+        sender.backgroundColor = UIColor.white
     }
 
     @objc private func buttonClicked(sender: UIButton) {

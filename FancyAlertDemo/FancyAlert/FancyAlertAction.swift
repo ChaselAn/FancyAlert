@@ -12,15 +12,24 @@ public enum FancyAlertActionStyle {
     case normal
     case cancel
     case marked 
-    case disabled // not dismiss when clicked
+    case disabled // not dismiss when clicked, only used in actionsheet
 }
 
-public struct FancyAlertAction {
+public class FancyAlertAction {
 
     public var title: String
     public var style: FancyAlertActionStyle
     public var handler: (() -> Void)?
+    public var isEnabled: Bool = true {
+        didSet {
+            if isEnabled != oldValue {
+                enabledDidChange?(isEnabled)
+            }
+        }
+    }
 
+    var enabledDidChange: ((Bool) -> Void)?
+    
     public init(title: String, style: FancyAlertActionStyle, handler: (() -> Void)? = nil) {
         self.title = title
         self.style = style

@@ -83,7 +83,9 @@ class ViewController: UIViewController {
         let firstAction = FancyAlertAction(title: "第一个", style: .normal, handler: {
             print("第一个action")
         })
+//        firstAction.isEnabled = false
         let secondAction = FancyAlertAction(title: "第二个", style: .normal, handler: {
+            firstAction.isEnabled = !firstAction.isEnabled
             print("第二个action")
         })
         let markedAction = FancyAlertAction(title: "标记", style: .marked, handler: {
@@ -93,6 +95,7 @@ class ViewController: UIViewController {
             print("不可用action")
         })
         let cancelAction = FancyAlertAction(title: "取消", style: .cancel, handler: {
+//            firstAction.isEnabled = !firstAction.isEnabled
             print("取消action")
         })
         actions = [cancelAction, firstAction, secondAction, markedAction, disabledAction]
@@ -160,7 +163,9 @@ class ViewController: UIViewController {
         }
 
 //        let actionSheet = UIAlertController(title: "大标题", message: "小标题圣诞快乐福建阿凉快圣诞节法律手段减肥啦圣诞节了肯定就是分开了", preferredStyle: .actionSheet)
-//        actionSheet.addAction(UIAlertAction.init(title: "是吗", style: .default, handler: nil))
+//        let action = UIAlertAction.init(title: "是吗", style: .default, handler: nil)
+//        action.isEnabled = false
+//        actionSheet.addAction(action)
 //        actionSheet.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
 //        present(actionSheet, animated: true, completion: nil)
     }

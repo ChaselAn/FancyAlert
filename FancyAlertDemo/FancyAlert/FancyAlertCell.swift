@@ -35,10 +35,19 @@ class FancyAlertCell: UITableViewCell {
         topSeparatorView.backgroundColor = UIColor.fancyAlertSeparatorColor
     }
 
-    func setData(title: String, style: FancyAlertActionStyle, markedColor: UIColor) {
-        titleLabel.text = title
-        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: style == .cancel ? .medium : .semibold)
+    func setData(action: FancyAlertAction, markedColor: UIColor) {
+        titleLabel.text = action.title
+        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: action.style == .cancel ? .medium : .semibold)
         titleLabel.textColor = markedColor
+
+        titleLabel.alpha = action.isEnabled ? 1 : 0.4
+        isUserInteractionEnabled = action.isEnabled
+
+        let tempAction = action
+        tempAction.enabledDidChange = { [weak self] isEnabled in
+            self?.titleLabel.alpha = action.isEnabled ? 1 : 0.4
+            self?.isUserInteractionEnabled = action.isEnabled
+        }
     }
 
     private func makeUI() {

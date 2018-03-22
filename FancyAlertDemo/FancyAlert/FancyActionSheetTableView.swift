@@ -84,7 +84,7 @@ extension FancyActionSheetTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FancyActionSheetCell", for: indexPath) as! FancyActionSheetCell
         let action = indexPath.section == 0 ? actions[indexPath.row] : actions.last!
-        cell.setData(title: action.title, style: action.style, markedColor: markedColor)
+        cell.setData(action: action, markedColor: markedColor)
         return cell
     }
 }

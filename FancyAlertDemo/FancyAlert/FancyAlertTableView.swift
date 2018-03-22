@@ -112,7 +112,7 @@ extension FancyAlertTableView: UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FancyAlertCell", for: indexPath) as! FancyAlertCell
             let action = actions[indexPath.row]
-            cell.setData(title: action.title, style: action.style, markedColor: markedColor)
+            cell.setData(action: action, markedColor: markedColor)
             return cell
         }
     }

@@ -25,9 +25,9 @@ class FancyActionSheetCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setData(title: String, style: FancyAlertActionStyle, markedColor: UIColor) {
-        titleLabel.text = title
-        switch style {
+    func setData(action: FancyAlertAction, markedColor: UIColor) {
+        titleLabel.text = action.title
+        switch action.style {
         case .normal:
             titleLabel.textColor = UIColor.fancyAlertNormalDefaultColor
         case .marked:
@@ -36,6 +36,14 @@ class FancyActionSheetCell: UITableViewCell {
             titleLabel.textColor = UIColor.fancyAlertDisabledDefaultColor
         case .cancel:
             titleLabel.textColor = markedColor
+        }
+        titleLabel.alpha = action.isEnabled ? 1 : 0.4
+        isUserInteractionEnabled = action.isEnabled
+
+        let tempAction = action
+        tempAction.enabledDidChange = { [weak self] isEnabled in
+            self?.titleLabel.alpha = action.isEnabled ? 1 : 0.4
+            self?.isUserInteractionEnabled = action.isEnabled
         }
     }
 
