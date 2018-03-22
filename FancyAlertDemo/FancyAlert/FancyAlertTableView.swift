@@ -75,7 +75,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         if offsetY > 0 {
             UIView.animate(withDuration: duration, animations: { [weak self] in
                 guard let strongSelf = self else { return }
-                let ty = strongSelf.textField.center.y + strongSelf.frame.origin.y - keyboardY / 2
+                let ty = strongSelf.center.y - keyboardY / 2
                 strongSelf.transform = CGAffineTransform(translationX: 0, y: -ty)
             })
         } else {

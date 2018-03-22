@@ -137,9 +137,9 @@ class ViewController: UIViewController {
 
         } else if sender == button3 {
 
-            let alertVC = FancyAlertViewController(type: .alert, title: nil, message: "小标题小标题小标题小", actions: actions2)
-            alertVC.textField.placeholder = "请输入文字"
-            alertVC.isEditable = true
+            let alertVC = FancyAlertViewController(type: .alert, title: nil, message: "小标题小标题小标题小", actions: actions1)
+//            alertVC.textField.placeholder = "请输入文字"
+//            alertVC.isEditable = true
             alertVC.maskDidClicked = {
                 alertVC.dismiss(animated: true, completion: nil)
             }
@@ -148,6 +148,7 @@ class ViewController: UIViewController {
         } else if sender == button4 {
 
             let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
+            alertVC.isEditable = true
             alertVC.maskDidClicked = {
                 alertVC.dismiss(animated: true, completion: nil)
             }
