@@ -30,6 +30,8 @@ public class FancyAlertViewController: UIViewController {
     private let message: String?
     private var actions: [FancyAlertAction]
 
+    var safeAreaInsetsBottom: CGFloat = 0
+
     public init(type: UIAlertControllerStyle, title: String?, message: String? = nil, actions: [FancyAlertAction]) {
         self.type = type
         self.actions = actions
@@ -51,6 +53,13 @@ public class FancyAlertViewController: UIViewController {
         super.viewDidLoad()
 
         makeUI()
+    }
+
+    public override func viewSafeAreaInsetsDidChange() {
+        if #available(iOS 11.0, *) {
+            super.viewSafeAreaInsetsDidChange()
+            safeAreaInsetsBottom = view.safeAreaInsets.bottom
+        }
     }
 
     private func makeUI() {
