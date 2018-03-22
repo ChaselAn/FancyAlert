@@ -14,6 +14,7 @@ public class FancyAlertViewController: UIViewController {
     public var markedColor = UIColor.fancyAlertMarkedDefaultColor
     public var isEditable = false
     public let textField = UITextField()
+    public var actions: [FancyAlertAction]
     
     private let maskAlpha: CGFloat = 0.75
 
@@ -24,7 +25,6 @@ public class FancyAlertViewController: UIViewController {
     private let type: UIAlertControllerStyle
     private let fancyTitle: String?
     private let message: String?
-    private var actions: [FancyAlertAction]
 
     var safeAreaInsetsBottom: CGFloat = 0
 
@@ -43,6 +43,10 @@ public class FancyAlertViewController: UIViewController {
 
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    public func addAction(_ action: FancyAlertAction) {
+        actions.append(action)
     }
 
     public override func viewDidLoad() {
@@ -85,6 +89,7 @@ public class FancyAlertViewController: UIViewController {
     }
 
     @objc private func maskControlDidClicked() {
+        self.dismiss(animated: true, completion: nil)
         maskDidClicked?()
     }
 }

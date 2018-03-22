@@ -10,8 +10,6 @@ import UIKit
 
 public class FancyAlert {
 
-    private static let shared = FancyAlert()
-
     public static func present(type: UIAlertControllerStyle, title: String?, message: String? = nil, actions: [FancyAlertAction], maskDidClicked: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
 
         let alertViewController = FancyAlertViewController(type: type, title: title, message: message, actions: actions)
