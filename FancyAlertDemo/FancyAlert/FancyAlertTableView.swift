@@ -123,7 +123,7 @@ extension FancyAlertTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if actions.count == 2 { return }
-        actions[indexPath.row].action?()
+        actions[indexPath.row].handler?()
         actionCompleted?()
     }
 

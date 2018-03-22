@@ -19,12 +19,12 @@ public struct FancyAlertAction {
 
     public var title: String
     public var style: FancyAlertActionStyle
-    public var action: (() -> Void)?
+    public var handler: (() -> Void)?
 
-    public init(title: String, style: FancyAlertActionStyle, action: (() -> Void)?) {
+    public init(title: String, style: FancyAlertActionStyle, handler: (() -> Void)?) {
         self.title = title
         self.style = style
-        self.action = action
+        self.handler = handler
     }
     
 }

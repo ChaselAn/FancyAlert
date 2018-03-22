@@ -95,10 +95,10 @@ extension FancyActionSheetTableView: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             let action = actions[indexPath.row]
-            action.action?()
+            action.handler?()
             if action.style == .disabled { return }
         } else {
-            actions.last?.action?()
+            actions.last?.handler?()
         }
         actionCompleted?()
     }
