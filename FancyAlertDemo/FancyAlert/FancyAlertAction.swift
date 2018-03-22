@@ -21,7 +21,7 @@ public struct FancyAlertAction {
     public var style: FancyAlertActionStyle
     public var handler: (() -> Void)?
 
-    public init(title: String, style: FancyAlertActionStyle, handler: (() -> Void)?) {
+    public init(title: String, style: FancyAlertActionStyle, handler: (() -> Void)? = nil) {
         self.title = title
         self.style = style
         self.handler = handler
