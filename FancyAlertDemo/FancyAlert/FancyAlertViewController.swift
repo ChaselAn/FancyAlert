@@ -77,6 +77,9 @@ public class FancyAlertViewController: UIViewController {
             tableView = alertTableView
         }
         (tableView as! FancyAlertTableViewSource).markedColor = markedColor
+        (tableView as! FancyAlertTableViewSource).actionCompleted = { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
         view.addSubview(tableView)
 
     }

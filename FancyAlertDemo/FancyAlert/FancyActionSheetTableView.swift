@@ -12,6 +12,7 @@ protocol FancyAlertTableViewSource: class {
     var tableViewHeight: CGFloat { get }
     var markedColor: UIColor { set get }
     var margin: CGFloat { get }
+    var actionCompleted: (() -> Void)? { set get }
 }
 class FancyActionSheetTableView: UITableView, FancyAlertTableViewSource {
 
@@ -22,6 +23,9 @@ class FancyActionSheetTableView: UITableView, FancyAlertTableViewSource {
     let cornerRadius: CGFloat = 10
     let margin: CGFloat = 13
     var markedColor = UIColor.fancyAlertMarkedDefaultColor
+
+    var actionCompleted: (() -> Void)?
+
     private let actionSheetCellHeight: CGFloat = 50
     private let separatorSectionHeaderHeight:CGFloat = 11
 
@@ -89,7 +93,14 @@ extension FancyActionSheetTableView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        if indexPath.section == 0 {
+            let action = actions[indexPath.row]
+            action.action?()
+            if action.style == .disabled { return }
+        } else {
+            actions.last?.action?()
+        }
+        actionCompleted?()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

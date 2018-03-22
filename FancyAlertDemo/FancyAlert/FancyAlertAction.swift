@@ -11,8 +11,8 @@ import UIKit
 public enum FancyAlertActionStyle {
     case normal
     case cancel
-    case marked
-    case disabled
+    case marked 
+    case disabled // not dismiss when clicked
 }
 
 public struct FancyAlertAction {

@@ -21,6 +21,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
             headerView?.markedColor = markedColor
         }
     }
+    var actionCompleted: (() -> Void)?
 
     private let alertCellHeight: CGFloat = 50
 
@@ -96,6 +97,7 @@ extension FancyAlertTableView: UITableViewDataSource {
         if actions.count == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FancyAlertTwoActionCell", for: indexPath) as! FancyAlertTwoActionCell
             cell.setData(actions: actions, markedColor: markedColor)
+            cell.buttonDidClicked = actionCompleted
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FancyAlertCell", for: indexPath) as! FancyAlertCell
@@ -110,7 +112,9 @@ extension FancyAlertTableView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        if actions.count == 2 { return }
+        actions[indexPath.row].action?()
+        actionCompleted?()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

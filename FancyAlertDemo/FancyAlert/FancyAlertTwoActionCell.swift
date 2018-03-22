@@ -10,6 +10,8 @@ import UIKit
 
 class FancyAlertTwoActionCell: UITableViewCell {
 
+    var buttonDidClicked: (() -> Void)?
+
     private var leftButton = UIButton()
     private var rightButton = UIButton()
     private var centerSeparatorView: UIView = {
@@ -22,6 +24,8 @@ class FancyAlertTwoActionCell: UITableViewCell {
         view.backgroundColor = UIColor.fancyAlertSeparatorColor
         return view
     }()
+
+    private var actions: [FancyAlertAction] = []
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -76,7 +80,7 @@ class FancyAlertTwoActionCell: UITableViewCell {
         if tempActions.last!.style == .cancel && tempActions.first!.style != .cancel {
             tempActions.swapAt(0, 1)
         }
-
+        self.actions = tempActions
         leftButton.setTitle(tempActions.first!.title, for: .normal)
         leftButton.setTitleColor(markedColor, for: .normal)
         leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: actions.first!.style == .cancel ? .medium : .semibold)
@@ -93,6 +97,13 @@ class FancyAlertTwoActionCell: UITableViewCell {
 
     @objc private func buttonClicked(sender: UIButton) {
         sender.backgroundColor = UIColor.white
+
+        if sender == leftButton {
+            actions.first?.action?()
+        } else if sender == rightButton {
+            actions.last?.action?()
+        }
+        buttonDidClicked?()
     }
 
 }

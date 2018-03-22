@@ -81,11 +81,21 @@ class ViewController: UIViewController {
         rightButton4.frame = CGRect(x: 200, y: 500, width: 150, height: 50)
         view.addSubview(rightButton4)
 
-        let firstAction = FancyAlertAction(title: "第一个", style: .normal, action: nil)
-        let secondAction = FancyAlertAction(title: "第二个", style: .normal, action: nil)
-        let markedAction = FancyAlertAction(title: "标记", style: .marked, action: nil)
-        let disabledAction = FancyAlertAction(title: "不可用", style: .disabled, action: nil)
-        let cancelAction = FancyAlertAction(title: "取消", style: .cancel, action: nil)
+        let firstAction = FancyAlertAction(title: "第一个", style: .normal, action: {
+            print("第一个action")
+        })
+        let secondAction = FancyAlertAction(title: "第二个", style: .normal, action: {
+            print("第二个action")
+        })
+        let markedAction = FancyAlertAction(title: "标记", style: .marked, action: {
+            print("标记action")
+        })
+        let disabledAction = FancyAlertAction(title: "不可用", style: .disabled, action: {
+            print("不可用action")
+        })
+        let cancelAction = FancyAlertAction(title: "取消", style: .cancel, action: {
+            print("取消action")
+        })
         actions = [cancelAction, firstAction, secondAction, markedAction, disabledAction]
 
         actions1 = [firstAction, cancelAction]
