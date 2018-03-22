@@ -27,7 +27,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     private let alertCellHeight: CGFloat = 50
 
     private var actions: [FancyAlertAction]
-    private var headerView: FancyAlertHeaderView?
+    private(set) var headerView: FancyAlertHeaderView?
 
     init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, isEditable: Bool) {
         self.actions = actions
@@ -45,6 +45,10 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
             headerView = FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable)
             headerView!.frame.size.height = headerView!.headerHeight
             tableHeaderView = headerView
+
+            if isEditable {
+                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame), name: .UIKeyboardWillChangeFrame, object: nil)
+            }
         }
 
         if actions.count > 2, let index = self.actions.index(where: { $0.style == .cancel }) {
@@ -57,7 +61,31 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc private func keyboardWillChangeFrame(notification: Notification) {
+        guard let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double else { return }
+        guard let keyboardY = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect)?.origin.y else { return }
+        let offsetY = UIScreen.main.bounds.height - keyboardY
+
+        guard let headerView = headerView else { return }
+
+        if offsetY > 0 {
+            UIView.animate(withDuration: duration, animations: { [weak self] in
+                guard let strongSelf = self else { return }
+                let ty = headerView.textField.center.y + strongSelf.frame.origin.y - keyboardY / 2
+                strongSelf.transform = CGAffineTransform(translationX: 0, y: -ty)
+            })
+        } else {
+            UIView.animate(withDuration: duration, animations: { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.transform = CGAffineTransform.identity
+            })
+        }
+    }
 }
 
 extension FancyAlertTableView: UITableViewDataSource {

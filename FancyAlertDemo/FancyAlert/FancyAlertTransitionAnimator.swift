@@ -42,12 +42,21 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
         let margin = (alertController.tableView as! FancyAlertTableViewSource).margin
         switch type {
         case .alert:
-            alertController.tableView.center = alertController.view.center
+            if !isDismissing {
+                alertController.tableView.center = alertController.view.center
+            }
             alertController.tableView.bounds.size = CGSize(width: alertController.view.bounds.width - 2 * margin, height: tableViewHeight)
             UIView.animate(withDuration: animationDuration, animations: {
                 controller.view.alpha = finalAlpha
-            }, completion: { finished in
+            }, completion: { [weak self] finished in
                 transitionContext.completeTransition(finished)
+                let textField = (alertController.tableView as? FancyAlertTableView)?.headerView?.textField
+                guard let strongSelf = self else { return }
+                if strongSelf.isDismissing {
+                    textField?.resignFirstResponder()
+                } else {
+                    textField?.becomeFirstResponder()
+                }
             })
         case .actionSheet:
             let beginY = !isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - tableViewHeight - margin

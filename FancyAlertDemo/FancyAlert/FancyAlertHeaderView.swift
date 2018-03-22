@@ -11,14 +11,13 @@ import UIKit
 class FancyAlertHeaderView: UIView {
 
     var headerHeight: CGFloat {
-        return  margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + (isEditable ? 20 + 30 : 0) + bottomMargin
+        return  margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + (isEditable ? textFieldTopMargin + textFieldHeight : 0) + bottomMargin
     }
     var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor
 
     private lazy var titleLabel = UILabel()
     private lazy var messageLabel = UILabel()
-    private lazy var textField = UITextField()
-
+    private(set) lazy var textField = UITextField()
 
     private var titleLableHeight: CGFloat = 0
     private var messageLabelHeight: CGFloat = 0
@@ -26,6 +25,8 @@ class FancyAlertHeaderView: UIView {
     private let labelSpace:CGFloat = 13
     private let margin: CGFloat = 25
     private let bottomMargin: CGFloat = 30
+    private let textFieldTopMargin: CGFloat = 25
+    private let textFieldHeight: CGFloat = 30
 
     private let message: String?
     private let title: String?
@@ -80,11 +81,22 @@ class FancyAlertHeaderView: UIView {
         if isEditable {
             addSubview(textField)
             textField.borderStyle = .none
-            textField.becomeFirstResponder()
-            textField.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil ? labelSpace : 0) + messageLabelHeight + (message != nil ? 20 : 0), width: labelWidth, height: 30)
+            textField.font = UIFont.systemFont(ofSize: 16)
+            textField.delegate = self
+            textField.textColor = UIColor.fancyAlertMessageDefaultColor
+            textField.textAlignment = .center
+            textField.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil ? labelSpace : 0) + messageLabelHeight + (message != nil ? textFieldTopMargin : 0), width: labelWidth, height: textFieldHeight)
             textField.tintColor = markedColor
-            
         }
+    }
+
+}
+
+extension FancyAlertHeaderView: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
 }
