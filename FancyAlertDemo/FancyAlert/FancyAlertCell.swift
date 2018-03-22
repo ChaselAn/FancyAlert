@@ -57,6 +57,6 @@ class FancyAlertCell: UITableViewCell {
         topSeparatorView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         topSeparatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         topSeparatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        topSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        topSeparatorView.heightAnchor.constraint(equalToConstant: separatorHeight).isActive = true
     }
 }

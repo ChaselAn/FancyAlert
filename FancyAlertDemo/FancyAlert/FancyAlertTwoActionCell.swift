@@ -41,7 +41,7 @@ class FancyAlertTwoActionCell: UITableViewCell {
         centerSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         centerSeparatorView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         centerSeparatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        centerSeparatorView.widthAnchor.constraint(equalToConstant: 1).isActive = true
+        centerSeparatorView.widthAnchor.constraint(equalToConstant: separatorHeight).isActive = true
 
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         rightButton.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -53,7 +53,7 @@ class FancyAlertTwoActionCell: UITableViewCell {
         topSeparatorView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         topSeparatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         topSeparatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        topSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        topSeparatorView.heightAnchor.constraint(equalToConstant: separatorHeight).isActive = true
 
         leftButton.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
         leftButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
