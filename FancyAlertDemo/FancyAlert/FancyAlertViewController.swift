@@ -11,11 +11,7 @@ import UIKit
 public class FancyAlertViewController: UIViewController {
     
     public var maskDidClicked: (() -> Void)?
-    public var markedColor = UIColor.fancyAlertMarkedDefaultColor {
-        didSet {
-            (tableView as! FancyAlertTableViewSource).markedColor = markedColor
-        }
-    }
+    public var markedColor = UIColor.fancyAlertMarkedDefaultColor
     public var isEditable = false
     public let textField = UITextField()
     
@@ -80,6 +76,7 @@ public class FancyAlertViewController: UIViewController {
             let alertTableView = FancyAlertTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width, isEditable: isEditable, textField: textField)
             tableView = alertTableView
         }
+        (tableView as! FancyAlertTableViewSource).markedColor = markedColor
         view.addSubview(tableView)
 
     }

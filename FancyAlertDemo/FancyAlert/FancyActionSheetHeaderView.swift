@@ -11,7 +11,7 @@ import UIKit
 class FancyActionSheetHeaderView: UIView {
 
     var headerHeight: CGFloat {
-        return  margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + bottomMargin
+        return  topMargin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + bottomMargin
     }
 
     private lazy var titleLabel = UILabel()
@@ -21,8 +21,9 @@ class FancyActionSheetHeaderView: UIView {
     private var messageLabelHeight: CGFloat = 0
 
     private let labelSpace:CGFloat = 13
-    private let margin: CGFloat = 10
-    private let bottomMargin: CGFloat = 5
+    private let horizontalMargin: CGFloat = 25
+    private let topMargin: CGFloat = 10
+    private let bottomMargin: CGFloat = 10
 
     private let message: String?
     private let title: String?
@@ -52,10 +53,10 @@ class FancyActionSheetHeaderView: UIView {
             titleLabel.attributedText = attributeString
             titleLabel.numberOfLines = 0
             addSubview(titleLabel)
-            let labelWidth = width - 2 * outsideMargin - 2 * margin
+            let labelWidth = width - 2 * outsideMargin - 2 * horizontalMargin
             let height = title.fancyAlert_getHeight(maxWidth: labelWidth, attributes: attributes)
             titleLableHeight = height
-            titleLabel.frame = CGRect(x: margin, y: margin, width: labelWidth, height: height)
+            titleLabel.frame = CGRect(x: horizontalMargin, y: topMargin, width: labelWidth, height: height)
         }
 
         if let message = message {
@@ -67,10 +68,10 @@ class FancyActionSheetHeaderView: UIView {
             messageLabel.attributedText = attributeString
             messageLabel.numberOfLines = 0
             addSubview(messageLabel)
-            let labelWidth = width - 2 * outsideMargin - 2 * margin
+            let labelWidth = width - 2 * outsideMargin - 2 * horizontalMargin
             let height = message.fancyAlert_getHeight(maxWidth: labelWidth, attributes: attributes)
             messageLabelHeight = height
-            messageLabel.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil ? labelSpace : 0), width: labelWidth, height: height)
+            messageLabel.frame = CGRect(x: horizontalMargin, y: topMargin + titleLableHeight + (title != nil ? labelSpace : 0), width: labelWidth, height: height)
         }
     }
 }

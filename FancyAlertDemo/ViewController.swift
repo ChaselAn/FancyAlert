@@ -102,6 +102,7 @@ class ViewController: UIViewController {
         if sender == button {
             let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions2)
             alertVC.textField.placeholder = "请输入文字"
+            alertVC.markedColor = UIColor.green
             alertVC.isEditable = true
             alertVC.maskDidClicked = {
                 alertVC.dismiss(animated: true, completion: nil)
@@ -110,8 +111,6 @@ class ViewController: UIViewController {
         } else if sender == button1 {
 
             let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions2)
-            alertVC.textField.placeholder = "请输入文字"
-            alertVC.isEditable = false
             alertVC.maskDidClicked = {
                 alertVC.dismiss(animated: true, completion: nil)
             }
@@ -150,9 +149,15 @@ class ViewController: UIViewController {
     @objc private func rightButtonButtonClicked(sender: UIButton) {
 
         if sender == rightButton {
-            FancyAlert.present(type: .actionSheet, title: "大标题大标题", message: "小标题小标题", actions: actions, maskDidClicked: {
-                FancyAlert.dismiss()
-            })
+//            FancyAlert.present(type: .actionSheet, title: "大标题大标题", message: "小标题小标题", actions: actions, maskDidClicked: {
+//                FancyAlert.dismiss()
+//            })
+            let alertVC = FancyAlertViewController(type: .actionSheet, title: "大标题大标题", message: "小标题小标题", actions: actions)
+            alertVC.maskDidClicked = {
+                alertVC.dismiss(animated: true, completion: nil)
+            }
+            alertVC.markedColor = UIColor.green
+            present(alertVC, animated: true, completion: nil)
         } else if sender == rightButton1 {
             FancyAlert.present(type: .actionSheet, title: "大标题大标题大标题大标题大标题大题大标题大标题大标题大标题大标题大标标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions, maskDidClicked: {
                 FancyAlert.dismiss()

@@ -11,9 +11,13 @@ import UIKit
 class FancyAlertHeaderView: UIView {
 
     var headerHeight: CGFloat {
-        return  margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + (isEditable ? textFieldTopMargin + textFieldHeight : 0) + bottomMargin
+        return  margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + (isEditable ? textFieldHeight + textFieldTopMargin : 0) + bottomMargin
     }
-    var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor
+    var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor {
+        didSet {
+            textField.tintColor = markedColor
+        }
+    }
 
     private lazy var titleLabel = UILabel()
     private lazy var messageLabel = UILabel()
@@ -23,28 +27,30 @@ class FancyAlertHeaderView: UIView {
 
     private let labelSpace:CGFloat = 13
     private let margin: CGFloat = 25
-    private let bottomMargin: CGFloat = 30
+    private let bottomMargin: CGFloat = 20
     private let textFieldTopMargin: CGFloat = 25
     private let textFieldHeight: CGFloat = 30
 
     private let message: String?
     private let title: String?
     private let isEditable: Bool
+    private let textField: UITextField!
 
     init(title: String?, message: String?, width: CGFloat, margin: CGFloat, isEditable: Bool, textField: UITextField) {
         self.message = message
         self.title = title
         self.isEditable = isEditable
+        self.textField = textField
         super.init(frame: CGRect.zero)
 
-        makeUI(title: title, message: message, width: width, outsideMargin: margin, textField: textField)
+        makeUI(title: title, message: message, width: width, outsideMargin: margin)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat, textField: UITextField) {
+    private func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat) {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineHeightMultiple = 1.5
         paragraph.alignment = .center
@@ -84,7 +90,7 @@ class FancyAlertHeaderView: UIView {
             textField.delegate = self
             textField.textColor = UIColor.fancyAlertMessageDefaultColor
             textField.textAlignment = .center
-            textField.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil ? labelSpace : 0) + messageLabelHeight + (message != nil ? textFieldTopMargin : 0), width: labelWidth, height: textFieldHeight)
+            textField.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textFieldTopMargin, width: labelWidth, height: textFieldHeight)
             textField.tintColor = markedColor
         }
     }
