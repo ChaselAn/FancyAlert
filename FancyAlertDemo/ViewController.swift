@@ -13,6 +13,13 @@ class ViewController: UIViewController {
     private var transitionManager: FancyAlertTransitionManager!
     var actions: [FancyAlertAction] = []
     var actions1: [FancyAlertAction] = []
+    var actions2: [FancyAlertAction] = []
+
+    let button = UIButton(type: .system)
+    let button1 = UIButton(type: .system)
+    let button2 = UIButton(type: .system)
+    let button3 = UIButton(type: .system)
+    let button4 = UIButton(type: .system)
 
     let rightButton = UIButton(type: .system)
     let rightButton1 = UIButton(type: .system)
@@ -23,12 +30,30 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let button = UIButton(type: .system)
         button.setTitle("show alert", for: .normal)
         button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         button.frame = CGRect(x: 50, y: 100, width: 100, height: 50)
         view.addSubview(button)
 
+        button1.setTitle("show alert", for: .normal)
+        button1.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        button1.frame = CGRect(x: 50, y: 200, width: 100, height: 50)
+        view.addSubview(button1)
+
+        button2.setTitle("show alert", for: .normal)
+        button2.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        button2.frame = CGRect(x: 50, y: 300, width: 100, height: 50)
+        view.addSubview(button2)
+
+        button3.setTitle("show alert", for: .normal)
+        button3.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        button3.frame = CGRect(x: 50, y: 400, width: 100, height: 50)
+        view.addSubview(button3)
+
+        button4.setTitle("show alert", for: .normal)
+        button4.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        button4.frame = CGRect(x: 50, y: 500, width: 100, height: 50)
+        view.addSubview(button4)
 
         rightButton.setTitle("show actionSheet", for: .normal)
         rightButton.addTarget(self, action: #selector(rightButtonButtonClicked), for: .touchUpInside)
@@ -65,22 +90,61 @@ class ViewController: UIViewController {
 
         actions1 = [firstAction, cancelAction]
 
+        actions2 = [cancelAction, firstAction, secondAction]
+
     }
 
-    @objc private func buttonClicked() {
+    @objc private func buttonClicked(sender: UIButton) {
 //        FancyAlert.present(type: .alert, title: "大标题大标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions, maskDidClicked: {
 //            FancyAlert.dismiss()
 //        })
-        let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions)
-        alertVC.isEditable = true
-        alertVC.maskDidClicked = {
-            alertVC.dismiss(animated: true, completion: nil)
+
+        if sender == button {
+            let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions2)
+            alertVC.textField.placeholder = "请输入文字"
+            alertVC.isEditable = true
+            alertVC.maskDidClicked = {
+                alertVC.dismiss(animated: true, completion: nil)
+            }
+            present(alertVC, animated: true, completion: nil)
+        } else if sender == button1 {
+
+            let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions2)
+            alertVC.textField.placeholder = "请输入文字"
+            alertVC.isEditable = false
+            alertVC.maskDidClicked = {
+                alertVC.dismiss(animated: true, completion: nil)
+            }
+            present(alertVC, animated: true, completion: nil)
+
+        } else if sender == button2 {
+
+            let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标", message: nil, actions: actions2)
+            alertVC.isEditable = true
+            alertVC.maskDidClicked = {
+                alertVC.dismiss(animated: true, completion: nil)
+            }
+            present(alertVC, animated: true, completion: nil)
+
+        } else if sender == button3 {
+
+            let alertVC = FancyAlertViewController(type: .alert, title: nil, message: "小标题小标题小标题小", actions: actions2)
+            alertVC.textField.placeholder = "请输入文字"
+            alertVC.isEditable = true
+            alertVC.maskDidClicked = {
+                alertVC.dismiss(animated: true, completion: nil)
+            }
+            present(alertVC, animated: true, completion: nil)
+
+        } else if sender == button4 {
+
+            let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
+            alertVC.maskDidClicked = {
+                alertVC.dismiss(animated: true, completion: nil)
+            }
+            present(alertVC, animated: true, completion: nil)
+
         }
-        present(alertVC, animated: true, completion: nil)
-//        let actionSheet = UIAlertController(title: "大标题", message: "小标题", preferredStyle: .alert)
-//        actionSheet.addAction(UIAlertAction.init(title: "是吗", style: .destructive, handler: nil))
-//        actionSheet.addAction(UIAlertAction.init(title: "cancel", style: .cancel, handler: nil))
-//        present(actionSheet, animated: true, completion: nil)
     }
 
     @objc private func rightButtonButtonClicked(sender: UIButton) {

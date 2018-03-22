@@ -22,15 +22,15 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         }
     }
 
-    var textField: UITextField?
-
     private let alertCellHeight: CGFloat = 50
 
     private var actions: [FancyAlertAction]
     private(set) var headerView: FancyAlertHeaderView?
+    private let textField: UITextField
 
-    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, isEditable: Bool) {
+    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, isEditable: Bool, textField: UITextField) {
         self.actions = actions
+        self.textField = textField
         super.init(frame: CGRect.zero, style: .plain)
         backgroundColor = .white
         isScrollEnabled = false
@@ -42,7 +42,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         register(FancyAlertCell.self, forCellReuseIdentifier: "FancyAlertCell")
         separatorStyle = .none
         if title != nil || message != nil {
-            headerView = FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable)
+            headerView = FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable, textField: textField)
             headerView!.frame.size.height = headerView!.headerHeight
             tableHeaderView = headerView
 
@@ -71,12 +71,10 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         guard let keyboardY = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect)?.origin.y else { return }
         let offsetY = UIScreen.main.bounds.height - keyboardY
 
-        guard let headerView = headerView else { return }
-
         if offsetY > 0 {
             UIView.animate(withDuration: duration, animations: { [weak self] in
                 guard let strongSelf = self else { return }
-                let ty = headerView.textField.center.y + strongSelf.frame.origin.y - keyboardY / 2
+                let ty = strongSelf.textField.center.y + strongSelf.frame.origin.y - keyboardY / 2
                 strongSelf.transform = CGAffineTransform(translationX: 0, y: -ty)
             })
         } else {

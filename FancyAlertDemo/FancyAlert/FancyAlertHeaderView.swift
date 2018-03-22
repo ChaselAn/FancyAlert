@@ -17,7 +17,6 @@ class FancyAlertHeaderView: UIView {
 
     private lazy var titleLabel = UILabel()
     private lazy var messageLabel = UILabel()
-    private(set) lazy var textField = UITextField()
 
     private var titleLableHeight: CGFloat = 0
     private var messageLabelHeight: CGFloat = 0
@@ -32,20 +31,20 @@ class FancyAlertHeaderView: UIView {
     private let title: String?
     private let isEditable: Bool
 
-    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, isEditable: Bool) {
+    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, isEditable: Bool, textField: UITextField) {
         self.message = message
         self.title = title
         self.isEditable = isEditable
         super.init(frame: CGRect.zero)
 
-        makeUI(title: title, message: message, width: width, outsideMargin: margin)
+        makeUI(title: title, message: message, width: width, outsideMargin: margin, textField: textField)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat) {
+    private func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat, textField: UITextField) {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineHeightMultiple = 1.5
         paragraph.alignment = .center

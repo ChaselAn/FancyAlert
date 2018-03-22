@@ -17,9 +17,7 @@ public class FancyAlertViewController: UIViewController {
         }
     }
     public var isEditable = false
-    public var textField: UITextField? {
-        return (tableView as? FancyAlertTableView)?.textField
-    }
+    public let textField = UITextField()
     
     private let maskAlpha: CGFloat = 0.75
 
@@ -70,7 +68,8 @@ public class FancyAlertViewController: UIViewController {
         case .actionSheet:
             tableView = FancyActionSheetTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width)
         case .alert:
-            tableView = FancyAlertTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width, isEditable: isEditable)
+            let alertTableView = FancyAlertTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width, isEditable: isEditable, textField: textField)
+            tableView = alertTableView
         }
         view.addSubview(tableView)
 
