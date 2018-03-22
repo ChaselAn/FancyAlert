@@ -28,7 +28,7 @@ public class FancyAlertViewController: UIViewController {
 
     var safeAreaInsetsBottom: CGFloat = 0
 
-    public init(type: UIAlertControllerStyle, title: String?, message: String? = nil, actions: [FancyAlertAction]) {
+    public init(type: UIAlertControllerStyle, title: String?, message: String? = nil, actions: [FancyAlertAction] = []) {
         self.type = type
         self.actions = actions
         self.fancyTitle = title

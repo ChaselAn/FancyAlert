@@ -8,7 +8,7 @@
 
 import UIKit
 
-public extension UIColor {
+extension UIColor {
 
     public static var fancyAlertTitleDefaultColor: UIColor { return #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1) } // 333333
     public static var fancyAlertMessageDefaultColor: UIColor { return #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1) } // 4a4a4a
