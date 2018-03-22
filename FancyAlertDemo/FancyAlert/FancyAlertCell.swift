@@ -30,6 +30,11 @@ class FancyAlertCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        topSeparatorView.backgroundColor = UIColor.fancyAlertSeparatorColor
+    }
+
     func setData(title: String, style: FancyAlertActionStyle, markedColor: UIColor) {
         titleLabel.text = title
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: style == .cancel ? .medium : .semibold)

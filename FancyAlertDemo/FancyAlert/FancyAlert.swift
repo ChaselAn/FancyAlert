@@ -15,8 +15,6 @@ public class FancyAlert {
     public static func present(type: UIAlertControllerStyle, title: String?, message: String? = nil, actions: [FancyAlertAction], maskDidClicked: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
 
         let alertViewController = FancyAlertViewController(type: type, title: title, message: message, actions: actions)
-        alertViewController.modalPresentationStyle = .custom
-        alertViewController.modalPresentationCapturesStatusBarAppearance = true
         alertViewController.maskDidClicked = maskDidClicked
         DispatchQueue.main.async {
             UIApplication.shared.keyWindow?.rootViewController?.present(alertViewController, animated: true, completion: completion)

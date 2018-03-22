@@ -8,15 +8,18 @@
 
 import UIKit
 
-class FancyAlertViewController: UIViewController {
+public class FancyAlertViewController: UIViewController {
     
-    var maskDidClicked: (() -> Void)?
-    var markedColor = UIColor.fancyAlertMarkedDefaultColor {
+    public var maskDidClicked: (() -> Void)?
+    public var markedColor = UIColor.fancyAlertMarkedDefaultColor {
         didSet {
             (tableView as! FancyAlertTableViewSource).markedColor = markedColor
         }
     }
-    var isEditable = false
+    public var isEditable = false
+    public var textField: UITextField? {
+        return (tableView as? FancyAlertTableView)?.textField
+    }
     
     private let maskAlpha: CGFloat = 0.75
 
@@ -29,7 +32,7 @@ class FancyAlertViewController: UIViewController {
     private let message: String?
     private var actions: [FancyAlertAction]
 
-    init(type: UIAlertControllerStyle, title: String?, message: String? = nil, actions: [FancyAlertAction]) {
+    public init(type: UIAlertControllerStyle, title: String?, message: String? = nil, actions: [FancyAlertAction]) {
         self.type = type
         self.actions = actions
         self.fancyTitle = title
@@ -37,13 +40,16 @@ class FancyAlertViewController: UIViewController {
         alertTransitionManager = FancyAlertTransitionManager(type: type)
         super.init(nibName: nil, bundle: nil)
         transitioningDelegate = alertTransitionManager
+
+        modalPresentationStyle = .custom
+        modalPresentationCapturesStatusBarAppearance = true
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         makeUI()
@@ -64,7 +70,7 @@ class FancyAlertViewController: UIViewController {
         case .actionSheet:
             tableView = FancyActionSheetTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width)
         case .alert:
-            tableView = FancyAlertTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width)
+            tableView = FancyAlertTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width, isEditable: isEditable)
         }
         view.addSubview(tableView)
 

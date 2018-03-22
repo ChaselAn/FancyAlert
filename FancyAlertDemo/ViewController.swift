@@ -68,9 +68,15 @@ class ViewController: UIViewController {
     }
 
     @objc private func buttonClicked() {
-        FancyAlert.present(type: .alert, title: "大标题大标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions, maskDidClicked: {
-            FancyAlert.dismiss()
-        })
+//        FancyAlert.present(type: .alert, title: "大标题大标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions, maskDidClicked: {
+//            FancyAlert.dismiss()
+//        })
+        let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions)
+        alertVC.isEditable = true
+        alertVC.maskDidClicked = {
+            alertVC.dismiss(animated: true, completion: nil)
+        }
+        present(alertVC, animated: true, completion: nil)
 //        let actionSheet = UIAlertController(title: "大标题", message: "小标题", preferredStyle: .alert)
 //        actionSheet.addAction(UIAlertAction.init(title: "是吗", style: .destructive, handler: nil))
 //        actionSheet.addAction(UIAlertAction.init(title: "cancel", style: .cancel, handler: nil))

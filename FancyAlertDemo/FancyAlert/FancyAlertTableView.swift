@@ -16,13 +16,20 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
 
     let cornerRadius: CGFloat = 10
     let margin: CGFloat = 39
-    var markedColor = UIColor.fancyAlertMarkedDefaultColor
+    var markedColor = UIColor.fancyAlertMarkedDefaultColor {
+        didSet {
+            headerView?.markedColor = markedColor
+        }
+    }
+
+    var textField: UITextField?
+
     private let alertCellHeight: CGFloat = 50
 
     private var actions: [FancyAlertAction]
     private var headerView: FancyAlertHeaderView?
 
-    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat) {
+    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, isEditable: Bool) {
         self.actions = actions
         super.init(frame: CGRect.zero, style: .plain)
         backgroundColor = .white
@@ -35,7 +42,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         register(FancyAlertCell.self, forCellReuseIdentifier: "FancyAlertCell")
         separatorStyle = .none
         if title != nil || message != nil {
-            headerView = FancyAlertHeaderView(title: title, message: message, width: width, margin: margin)
+            headerView = FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable)
             headerView!.frame.size.height = headerView!.headerHeight
             tableHeaderView = headerView
         }

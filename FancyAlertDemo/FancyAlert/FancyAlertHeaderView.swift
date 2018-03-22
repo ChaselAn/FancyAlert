@@ -11,11 +11,14 @@ import UIKit
 class FancyAlertHeaderView: UIView {
 
     var headerHeight: CGFloat {
-        return  margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + bottomMargin
+        return  margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + (isEditable ? 20 + 30 : 0) + bottomMargin
     }
+    var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor
 
     private lazy var titleLabel = UILabel()
     private lazy var messageLabel = UILabel()
+    private lazy var textField = UITextField()
+
 
     private var titleLableHeight: CGFloat = 0
     private var messageLabelHeight: CGFloat = 0
@@ -26,10 +29,12 @@ class FancyAlertHeaderView: UIView {
 
     private let message: String?
     private let title: String?
+    private let isEditable: Bool
 
-    init(title: String?, message: String?, width: CGFloat, margin: CGFloat) {
+    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, isEditable: Bool) {
         self.message = message
         self.title = title
+        self.isEditable = isEditable
         super.init(frame: CGRect.zero)
 
         makeUI(title: title, message: message, width: width, outsideMargin: margin)
@@ -43,6 +48,7 @@ class FancyAlertHeaderView: UIView {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineHeightMultiple = 1.5
         paragraph.alignment = .center
+        let labelWidth = width - 2 * outsideMargin - 2 * margin
         if let title = title {
             let attributes: [NSAttributedStringKey: Any] = [.paragraphStyle: paragraph,
                                                             .font: UIFont.systemFont(ofSize: 17, weight: .medium),
@@ -52,7 +58,6 @@ class FancyAlertHeaderView: UIView {
             titleLabel.attributedText = attributeString
             titleLabel.numberOfLines = 0
             addSubview(titleLabel)
-            let labelWidth = width - 2 * outsideMargin - 2 * margin
             let height = title.fancyAlert_getHeight(maxWidth: labelWidth, attributes: attributes)
             titleLableHeight = height
             titleLabel.frame = CGRect(x: margin, y: margin, width: labelWidth, height: height)
@@ -67,10 +72,18 @@ class FancyAlertHeaderView: UIView {
             messageLabel.attributedText = attributeString
             messageLabel.numberOfLines = 0
             addSubview(messageLabel)
-            let labelWidth = width - 2 * outsideMargin - 2 * margin
             let height = message.fancyAlert_getHeight(maxWidth: labelWidth, attributes: attributes)
             messageLabelHeight = height
             messageLabel.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil ? labelSpace : 0), width: labelWidth, height: height)
+        }
+
+        if isEditable {
+            addSubview(textField)
+            textField.borderStyle = .none
+            textField.becomeFirstResponder()
+            textField.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil ? labelSpace : 0) + messageLabelHeight + (message != nil ? 20 : 0), width: labelWidth, height: 30)
+            textField.tintColor = markedColor
+            
         }
     }
 
