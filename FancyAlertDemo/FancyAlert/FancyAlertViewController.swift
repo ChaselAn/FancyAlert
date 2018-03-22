@@ -21,7 +21,7 @@ public class FancyAlertViewController: UIViewController {
 
     private(set) var tableView: UITableView!
 
-    private var maskControl = UIControl()
+    private(set) var maskControl = UIControl()
     private let alertTransitionManager: FancyAlertTransitionManager
     private let type: UIAlertControllerStyle
     private let fancyTitle: String?

@@ -34,10 +34,11 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
         }
         let initialAlpha: CGFloat = isDismissing ? 1 : 0
         let finalAlpha: CGFloat = isDismissing ? 0 : 1
-        controller.view.alpha = initialAlpha
+
         let animationDuration = transitionDuration(using: transitionContext)
 
         guard let alertController = controller as? FancyAlertViewController else { return }
+        alertController.maskControl.alpha = initialAlpha
         let tableViewHeight = (alertController.tableView as! FancyAlertTableViewSource).tableViewHeight
         let margin = (alertController.tableView as! FancyAlertTableViewSource).margin
         switch type {
@@ -47,7 +48,7 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
             }
             alertController.tableView.bounds.size = CGSize(width: alertController.view.bounds.width - 2 * margin, height: tableViewHeight)
             UIView.animate(withDuration: animationDuration, animations: {
-                controller.view.alpha = finalAlpha
+                alertController.maskControl.alpha = finalAlpha
             }, completion: { [weak self] finished in
                 transitionContext.completeTransition(finished)
                 let textField = alertController.textField
@@ -63,7 +64,7 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
             let endY = isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - tableViewHeight - margin - alertController.safeAreaInsetsBottom
             alertController.tableView.frame = CGRect(x: margin, y: beginY, width: alertController.view.bounds.width - 2 * margin, height: tableViewHeight)
             UIView.animate(withDuration: animationDuration, animations: { 
-                controller.view.alpha = finalAlpha
+                alertController.maskControl.alpha = finalAlpha
                 alertController.tableView.frame.origin.y = endY
             }, completion: { finished in
                 transitionContext.completeTransition(finished)
