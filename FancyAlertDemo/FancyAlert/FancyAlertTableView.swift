@@ -29,6 +29,8 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     private(set) var headerView: FancyAlertHeaderView?
     private let textField: UITextField
 
+    private var workItem: DispatchWorkItem?
+
     init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, isEditable: Bool, textField: UITextField) {
         self.actions = actions
         self.textField = textField
@@ -71,18 +73,26 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         guard let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double else { return }
         guard let keyboardY = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect)?.origin.y else { return }
         let offsetY = UIScreen.main.bounds.height - keyboardY
-
+        
         if offsetY > 0 {
-            UIView.animate(withDuration: duration, animations: { [weak self] in
-                guard let strongSelf = self else { return }
-                let ty = strongSelf.center.y - keyboardY / 2
-                strongSelf.transform = CGAffineTransform(translationX: 0, y: -ty)
+            workItem?.cancel()
+            workItem = DispatchWorkItem(block: {
+                UIView.animate(withDuration: duration, animations: { [weak self] in
+                    guard let strongSelf = self else { return }
+                    let ty = strongSelf.center.y - keyboardY / 2
+                    strongSelf.transform = CGAffineTransform(translationX: 0, y: -ty)
+                })
             })
+            DispatchQueue.main.async(execute: workItem!)
         } else {
-            UIView.animate(withDuration: duration, animations: { [weak self] in
-                guard let strongSelf = self else { return }
-                strongSelf.transform = CGAffineTransform.identity
+            workItem?.cancel()
+            workItem = DispatchWorkItem(block: {
+                UIView.animate(withDuration: duration, animations: { [weak self] in
+                    guard let strongSelf = self else { return }
+                    strongSelf.transform = CGAffineTransform.identity
+                })
             })
+            DispatchQueue.main.async(execute: workItem!)
         }
     }
 }

@@ -90,6 +90,7 @@ class FancyAlertHeaderView: UIView {
             textField.delegate = self
             textField.textColor = UIColor.fancyAlertMessageDefaultColor
             textField.textAlignment = .center
+            textField.returnKeyType = .done
             textField.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textFieldTopMargin, width: labelWidth, height: textFieldHeight)
             textField.tintColor = markedColor
         }
