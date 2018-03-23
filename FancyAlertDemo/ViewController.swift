@@ -117,6 +117,7 @@ class ViewController: UIViewController {
             alertVC.textField.placeholder = "请输入文字"
             alertVC.markedColor = UIColor.green
             alertVC.isEditable = true
+            alertVC.textField.fancy_maxInputLength = 5
             present(alertVC, animated: true, completion: nil)
         } else if sender == button1 {
 

@@ -93,7 +93,55 @@ class FancyAlertHeaderView: UIView {
             textField.returnKeyType = .done
             textField.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textFieldTopMargin, width: labelWidth, height: textFieldHeight)
             textField.tintColor = markedColor
+
+            if textField.fancy_maxInputLength != nil {
+                NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: .UITextFieldTextDidChange, object: nil)
+            }
         }
+    }
+
+    @objc private func textFieldDidChange(notification: NSNotification) {
+
+        guard let tempText = textField.text as NSString?, let textMaxLength = textField.fancy_maxInputLength else { return }
+
+        let textCount = tempText.length
+        let lang = textInputMode?.primaryLanguage
+        if lang == "zh-Hans" {
+            guard let selectedRange = textField.markedTextRange else {
+                if textCount > textMaxLength {
+                    let rangeIndex = tempText.rangeOfComposedCharacterSequence(at: textMaxLength)
+                    if rangeIndex.length > 1 { //判断第三方输入法的emoji表情
+                        textField.text = tempText.substring(to: rangeIndex.location)
+                    } else {
+                        let range = tempText.rangeOfComposedCharacterSequences(for: NSRange(location: 0, length: textMaxLength))
+                        textField.text = tempText.substring(with: range)
+                    }
+                }
+                return
+            }
+            if let _ = textField.position(from: selectedRange.start, offset: 0) {
+                if textCount > textMaxLength {
+                    let rangeIndex = tempText.rangeOfComposedCharacterSequence(at: textMaxLength)
+                    if rangeIndex.length > 1 {
+                        textField.text = tempText.substring(to: rangeIndex.location)
+                    }
+                }
+            }
+        } else {
+            if textCount > textMaxLength {
+                let rangeIndex = tempText.rangeOfComposedCharacterSequence(at: textMaxLength)
+                if rangeIndex.length > 1 {
+                    textField.text = tempText.substring(to: rangeIndex.location)
+                } else {
+                    let range = tempText.rangeOfComposedCharacterSequences(for: NSRange(location: 0, length: textMaxLength))
+                    textField.text = tempText.substring(with: range)
+                }
+            }
+        }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
 }
