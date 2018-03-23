@@ -93,6 +93,7 @@ extension FancyActionSheetTableView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        actionCompleted?()
         if indexPath.section == 0 {
             let action = actions[indexPath.row]
             action.handler?()
@@ -100,7 +101,6 @@ extension FancyActionSheetTableView: UITableViewDelegate {
         } else {
             actions.last?.handler?()
         }
-        actionCompleted?()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

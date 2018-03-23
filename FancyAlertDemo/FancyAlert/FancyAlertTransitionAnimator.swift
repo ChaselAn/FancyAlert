@@ -38,17 +38,17 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
         let animationDuration = transitionDuration(using: transitionContext)
 
         guard let alertController = controller as? FancyAlertViewController else { return }
-        alertController.maskControl.alpha = initialAlpha
         let tableViewHeight = (alertController.tableView as! FancyAlertTableViewSource).tableViewHeight
         let margin = (alertController.tableView as! FancyAlertTableViewSource).margin
         switch type {
         case .alert:
+            alertController.view.alpha = initialAlpha
             if !isDismissing {
                 alertController.tableView.center = alertController.view.center
             }
             alertController.tableView.bounds.size = CGSize(width: alertController.view.bounds.width - 2 * margin, height: tableViewHeight)
             UIView.animate(withDuration: animationDuration, animations: {
-                alertController.maskControl.alpha = finalAlpha
+                alertController.view.alpha = finalAlpha
             }, completion: { [weak self] finished in
                 transitionContext.completeTransition(finished)
                 let textField = alertController.textField
@@ -60,6 +60,7 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
                 }
             })
         case .actionSheet:
+            alertController.maskControl.alpha = initialAlpha
             let beginY = !isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - tableViewHeight - margin - alertController.safeAreaInsetsBottom
             let endY = isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - tableViewHeight - margin - alertController.safeAreaInsetsBottom
             alertController.tableView.frame = CGRect(x: margin, y: beginY, width: alertController.view.bounds.width - 2 * margin, height: tableViewHeight)
