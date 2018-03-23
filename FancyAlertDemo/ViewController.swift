@@ -126,18 +126,21 @@ class ViewController: UIViewController {
         } else if sender == button2 {
 
             let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标", message: nil, actions: actions2)
-            alertVC.isEditable = true
+//            alertVC.isEditable = true
             present(alertVC, animated: true, completion: nil)
 
         } else if sender == button3 {
 
-            let alertVC = FancyAlertViewController(type: .alert, title: nil, message: "小标题小标题小标题小", actions: actions1)
+//            let alertVC = FancyAlertViewController(type: .alert, title: nil, message: "小标题小标题小标题小", actions: actions1)
+//            present(alertVC, animated: true, completion: nil)
+            let alertVC = FancyAlertViewController(type: .alert, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
+//            alertVC.isEditable = true
             present(alertVC, animated: true, completion: nil)
 
         } else if sender == button4 {
 
             let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
-            alertVC.isEditable = true
+//            alertVC.isEditable = true
             present(alertVC, animated: true, completion: nil)
 
         }

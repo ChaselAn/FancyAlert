@@ -22,7 +22,12 @@ class FancyAlertTransitionAnimator: NSObject {
 extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.25
+        switch type {
+        case .alert:
+            return 0.15
+        case .actionSheet:
+            return 0.25
+        }
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
