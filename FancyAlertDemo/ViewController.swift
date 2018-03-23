@@ -163,7 +163,7 @@ class ViewController: UIViewController {
         } else if sender == rightButton3 {
             FancyAlert.present(style: .actionSheet, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions)
         } else if sender == rightButton4 {
-            FancyAlert.present(style: .actionSheet, title: nil, message: nil, actions: actions)
+            FancyAlert.present(style: .actionSheet, title: nil, message: nil, actions: actions1)
         }
 
 //        let actionSheet = UIAlertController(title: "大标题", message: "小标题圣诞快乐福建阿凉快圣诞节法律手段减肥啦圣诞节了肯定就是分开了", preferredStyle: .actionSheet)

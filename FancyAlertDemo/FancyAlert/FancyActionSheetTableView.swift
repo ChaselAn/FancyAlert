@@ -27,7 +27,7 @@ class FancyActionSheetTableView: UITableView, FancyAlertTableViewSource {
     var actionCompleted: (() -> Void)?
 
     private let actionSheetCellHeight: CGFloat = 50
-    private let separatorSectionHeaderHeight:CGFloat = 11
+    private let separatorSectionHeaderHeight:CGFloat = 8 + separatorHeight
 
     private var actions: [FancyAlertAction]
     private var headerView: FancyActionSheetHeaderView?
@@ -126,7 +126,7 @@ extension FancyActionSheetTableView: UITableViewDelegate {
         separatorView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         separatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         separatorView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        separatorView.heightAnchor.constraint(equalToConstant: separatorHeight).isActive = true
 
         return haveCancelAction ? containerView : nil
     }
