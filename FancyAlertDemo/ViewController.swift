@@ -135,7 +135,7 @@ class ViewController: UIViewController {
 //            let alertVC = FancyAlertViewController(type: .alert, title: nil, message: "小标题小标题小标题小", actions: actions1)
 //            present(alertVC, animated: true, completion: nil)
             let alertVC = FancyAlertViewController(type: .alert, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
-//            alertVC.isEditable = true
+            alertVC.isEditable = true
             present(alertVC, animated: true, completion: nil)
 
         } else if sender == button4 {

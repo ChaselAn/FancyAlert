@@ -50,10 +50,12 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
             alertController.view.alpha = initialAlpha
             if !isDismissing {
                 alertController.tableView.center = alertController.view.center
+                alertController.tableView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
             }
             alertController.tableView.bounds.size = CGSize(width: alertController.view.bounds.width - 2 * margin, height: tableViewHeight)
             UIView.animate(withDuration: animationDuration, animations: {
                 alertController.view.alpha = finalAlpha
+                alertController.tableView.transform = CGAffineTransform.identity
             }, completion: { [weak self] finished in
                 transitionContext.completeTransition(finished)
                 let textField = alertController.textField
