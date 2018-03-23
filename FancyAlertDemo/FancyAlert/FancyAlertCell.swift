@@ -53,6 +53,8 @@ class FancyAlertCell: UITableViewCell {
     private func makeUI() {
 
         titleLabel.textAlignment = .center
+        titleLabel.minimumScaleFactor = 0.1
+        titleLabel.adjustsFontSizeToFitWidth = true
 
         contentView.addSubview(titleLabel)
         contentView.addSubview(topSeparatorView)

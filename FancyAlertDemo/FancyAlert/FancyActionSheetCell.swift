@@ -26,6 +26,8 @@ class FancyActionSheetCell: UITableViewCell {
     }
 
     func setData(action: FancyAlertAction, markedColor: UIColor) {
+        titleLabel.minimumScaleFactor = 0.1
+        titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.text = action.title
         switch action.style {
         case .normal:

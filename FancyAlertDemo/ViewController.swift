@@ -113,7 +113,7 @@ class ViewController: UIViewController {
 //        })
 
         if sender == button {
-            let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions2)
+            let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions2)
             alertVC.textField.placeholder = "请输入文字"
             alertVC.markedColor = UIColor.green
             alertVC.isEditable = true
@@ -121,12 +121,12 @@ class ViewController: UIViewController {
             present(alertVC, animated: true, completion: nil)
         } else if sender == button1 {
 
-            let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions2)
+            let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions2)
             present(alertVC, animated: true, completion: nil)
 
         } else if sender == button2 {
 
-            let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标", message: nil, actions: actions2)
+            let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题大标题大标", message: nil, actions: actions2)
 //            alertVC.isEditable = true
             present(alertVC, animated: true, completion: nil)
 
@@ -134,13 +134,13 @@ class ViewController: UIViewController {
 
 //            let alertVC = FancyAlertViewController(type: .alert, title: nil, message: "小标题小标题小标题小", actions: actions1)
 //            present(alertVC, animated: true, completion: nil)
-            let alertVC = FancyAlertViewController(type: .alert, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
+            let alertVC = FancyAlertViewController(style: .alert, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
             alertVC.isEditable = true
             present(alertVC, animated: true, completion: nil)
 
         } else if sender == button4 {
 
-            let alertVC = FancyAlertViewController(type: .alert, title: "大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
+            let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
 //            alertVC.isEditable = true
             present(alertVC, animated: true, completion: nil)
 
@@ -153,24 +153,24 @@ class ViewController: UIViewController {
 //            FancyAlert.present(type: .actionSheet, title: "大标题大标题", message: "小标题小标题", actions: actions, maskDidClicked: {
 //                FancyAlert.dismiss()
 //            })
-            let alertVC = FancyAlertViewController(type: .actionSheet, title: "大标题大标题", message: "小标题小标题", actions: actions)
+            let alertVC = FancyAlertViewController(style: .actionSheet, title: "大标题大标题", message: "小标题小标题", actions: actions)
             alertVC.markedColor = UIColor.green
             present(alertVC, animated: true, completion: nil)
         } else if sender == rightButton1 {
-            FancyAlert.present(type: .actionSheet, title: "大标题大标题大标题大标题大标题大题大标题大标题大标题大标题大标题大标标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions)
+            FancyAlert.present(style: .actionSheet, title: "大标题大标题大标题大标题大标题大题大标题大标题大标题大标题大标题大标标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions)
         } else if sender == rightButton2 {
-            FancyAlert.present(type: .actionSheet, title: "大标题大标题大标题大标题大标题标题大标题大标题大标题大标题大标题大标题大标题大标题", message: nil, actions: actions)
+            FancyAlert.present(style: .actionSheet, title: "大标题大标题大标题大标题大标题标题大标题大标题大标题大标题大标题大标题大标题大标题", message: nil, actions: actions)
         } else if sender == rightButton3 {
-            FancyAlert.present(type: .actionSheet, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions)
+            FancyAlert.present(style: .actionSheet, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions)
         } else if sender == rightButton4 {
-            FancyAlert.present(type: .actionSheet, title: nil, message: nil, actions: actions)
+            FancyAlert.present(style: .actionSheet, title: nil, message: nil, actions: actions)
         }
 
 //        let actionSheet = UIAlertController(title: "大标题", message: "小标题圣诞快乐福建阿凉快圣诞节法律手段减肥啦圣诞节了肯定就是分开了", preferredStyle: .actionSheet)
 //        let action = UIAlertAction.init(title: "是吗", style: .default, handler: nil)
 //        action.isEnabled = false
 //        actionSheet.addAction(action)
-//        actionSheet.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+//        actionSheet.addAction(UIAlertAction.init(title: "取消收款方结果绿色空间都发给老师叫对方立刻感觉山东路放假桂林市地方见过凉快圣诞节发过来跨境电商发过来跨境电商立丰国际", style: .cancel, handler: nil))
 //        present(actionSheet, animated: true, completion: nil)
     }
 

@@ -86,10 +86,14 @@ class FancyAlertTwoActionCell: UITableViewCell {
         leftButton.setTitle(tempActions.first!.title, for: .normal)
         leftButton.setTitleColor(markedColor, for: .normal)
         leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: actions.first!.style == .cancel ? .medium : .semibold)
+        leftButton.titleLabel?.minimumScaleFactor = 0.1
+        leftButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         rightButton.setTitle(tempActions.last!.title, for: .normal)
         rightButton.setTitleColor(markedColor, for: .normal)
         rightButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: actions.last!.style == .cancel ? .medium : .semibold)
+        rightButton.titleLabel?.minimumScaleFactor = 0.1
+        rightButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         leftButton.alpha = tempActions.first!.isEnabled ? 1 : 0.4
         leftButton.isEnabled = tempActions.first!.isEnabled

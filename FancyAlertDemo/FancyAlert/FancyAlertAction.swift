@@ -12,7 +12,7 @@ public enum FancyAlertActionStyle {
     case normal
     case cancel
     case marked 
-    case disabled // not dismiss when clicked, only used in actionsheet
+    case disabled // 点击后不会dismiss，只适用于actionsheet
 }
 
 public class FancyAlertAction {

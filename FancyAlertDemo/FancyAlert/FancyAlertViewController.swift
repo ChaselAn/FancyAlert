@@ -9,18 +9,25 @@
 import UIKit
 
 public class FancyAlertViewController: UIViewController {
-    
+
+    // 遮罩被点击后的事件
     public var maskDidClicked: (() -> Void)?
+
+    // 被标记的颜色，修改此属性，会影响alert的选项颜色 以及actionsheet中marked、cancel类型的选项
     public var markedColor = UIColor.fancyAlertMarkedDefaultColor
+
+    // 是否有输入框，只适用于alert
     public var isEditable = false
+
+    // 只适用于alert， 可以通过textField.fancy_maxInputLength属性限制输入的最大字数
     public let textField = UITextField()
+
     public var actions: [FancyAlertAction]
     public var statusBarStyle: UIStatusBarStyle = .default
-    
+
     private let maskAlpha: CGFloat = 0.75
 
     private(set) var tableView: UITableView!
-
     private(set) var maskControl = UIControl()
     private let alertTransitionManager: FancyAlertTransitionManager
     private let type: UIAlertControllerStyle
@@ -29,8 +36,8 @@ public class FancyAlertViewController: UIViewController {
 
     var safeAreaInsetsBottom: CGFloat = 0
 
-    public init(type: UIAlertControllerStyle, title: String?, message: String? = nil, actions: [FancyAlertAction] = []) {
-        self.type = type
+    public init(style: UIAlertControllerStyle, title: String?, message: String? = nil, actions: [FancyAlertAction] = []) {
+        self.type = style
         self.actions = actions
         self.fancyTitle = title
         self.message = message
