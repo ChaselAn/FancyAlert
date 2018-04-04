@@ -14,7 +14,6 @@
 		F10F4673206107E90066C901 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F10F4671206107E90066C901 /* LaunchScreen.storyboard */; };
 		F10F46822061082D0066C901 /* FancyAlertTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467A2061082C0066C901 /* FancyAlertTransitionAnimator.swift */; };
 		F10F46832061082D0066C901 /* FancyAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467B2061082C0066C901 /* FancyAlertAction.swift */; };
-		F10F46852061082D0066C901 /* FancyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467D2061082C0066C901 /* FancyAlert.swift */; };
 		F10F46872061082D0066C901 /* FancyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F467F2061082C0066C901 /* FancyAlertViewController.swift */; };
 		F10F46882061082D0066C901 /* FancyAlertTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10F46802061082D0066C901 /* FancyAlertTransitionManager.swift */; };
 		F123B2462061FF5300CDD105 /* FancyActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */; };
@@ -37,7 +36,6 @@
 		F10F4674206107E90066C901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F10F467A2061082C0066C901 /* FancyAlertTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertTransitionAnimator.swift; sourceTree = "<group>"; };
 		F10F467B2061082C0066C901 /* FancyAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertAction.swift; sourceTree = "<group>"; };
-		F10F467D2061082C0066C901 /* FancyAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlert.swift; sourceTree = "<group>"; };
 		F10F467F2061082C0066C901 /* FancyAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertViewController.swift; sourceTree = "<group>"; };
 		F10F46802061082D0066C901 /* FancyAlertTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertTransitionManager.swift; sourceTree = "<group>"; };
 		F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyActionSheetCell.swift; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 		F123B251206257C600CDD105 /* FancyAlert */ = {
 			isa = PBXGroup;
 			children = (
-				F10F467D2061082C0066C901 /* FancyAlert.swift */,
 				F10F467F2061082C0066C901 /* FancyAlertViewController.swift */,
 				F123B24D2062512B00CDD105 /* FancyActionSheetTableView.swift */,
 				F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */,
@@ -193,7 +190,6 @@
 				F10F46872061082D0066C901 /* FancyAlertViewController.swift in Sources */,
 				F1378A38206269A900ABEA3D /* FancyAlertCell.swift in Sources */,
 				F123B2502062574000CDD105 /* FancyAlertTableView.swift in Sources */,
-				F10F46852061082D0066C901 /* FancyAlert.swift in Sources */,
 				F123B25320625A4200CDD105 /* FancyAlertHeaderView.swift in Sources */,
 				F10F4669206107E90066C901 /* AppDelegate.swift in Sources */,
 				F10F46832061082D0066C901 /* FancyAlertAction.swift in Sources */,

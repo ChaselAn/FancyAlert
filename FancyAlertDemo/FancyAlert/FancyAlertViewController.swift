@@ -37,16 +37,22 @@ public class FancyAlertViewController: UIViewController {
     }
 
     // title
-    public var fancyTitle: String? {
+//    public var fancyTitle: String? {
+//        didSet {
+//            (tableView as? FancyAlertTableViewSource)?.title = fancyTitle
+//        }
+//    }
+
+    public override var title: String? {
         didSet {
-            (tableView as! FancyAlertTableViewSource).title = fancyTitle
+            (tableView as? FancyAlertTableViewSource)?.title = title
         }
     }
 
     // message
     public var message: String? {
         didSet {
-            (tableView as! FancyAlertTableViewSource).message = message
+            (tableView as? FancyAlertTableViewSource)?.message = message
         }
     }
 
@@ -69,10 +75,11 @@ public class FancyAlertViewController: UIViewController {
     public init(style: UIAlertControllerStyle, title: String?, message: String? = nil, actions: [FancyAlertAction] = []) {
         self.type = style
         self.actions = actions
-        self.fancyTitle = title
         self.message = message
         alertTransitionManager = FancyAlertTransitionManager(type: type)
         super.init(nibName: nil, bundle: nil)
+        
+        self.title = title
         transitioningDelegate = alertTransitionManager
 
         modalPresentationStyle = .custom
@@ -117,9 +124,9 @@ public class FancyAlertViewController: UIViewController {
 
         switch type {
         case .actionSheet:
-            tableView = FancyActionSheetTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width)
+            tableView = FancyActionSheetTableView(title: title, message: message, actions: actions, width: view.bounds.width)
         case .alert:
-            let alertTableView = FancyAlertTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width, isEditable: isEditable, textField: textField, progress: hasProgress ? progress : nil)
+            let alertTableView = FancyAlertTableView(title: title, message: message, actions: actions, width: view.bounds.width, isEditable: isEditable, textField: textField, progress: hasProgress ? progress : nil)
             tableView = alertTableView
         }
         (tableView as! FancyAlertTableViewSource).markedColor = markedColor

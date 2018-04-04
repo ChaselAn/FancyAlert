@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     var actions: [FancyAlertAction] = []
     var actions1: [FancyAlertAction] = []
     var actions2: [FancyAlertAction] = []
+    var actions3: [FancyAlertAction] = []
 
     let button = UIButton(type: .system)
     let button1 = UIButton(type: .system)
@@ -105,6 +106,7 @@ class ViewController: UIViewController {
 
         actions2 = [cancelAction, firstAction, secondAction]
 
+        actions3 = [firstAction]
     }
     
 
@@ -141,7 +143,7 @@ class ViewController: UIViewController {
 
         } else if sender == button4 {
 
-            let alertVC = FancyAlertViewController(style: .alert, title: "发送中", message: "3张图片", actions: actions1)
+            let alertVC = FancyAlertViewController(style: .alert, title: "发送中", message: "3张图片", actions: actions3)
 //            alertVC.isEditable = true
             alertVC.hasProgress = true
             alertVC.progress = 0.5
@@ -152,10 +154,10 @@ class ViewController: UIViewController {
                             alertVC.progress += 0.1
                         } else {
                             alertVC.progress = 0
-                            alertVC.fancyTitle = "已发送"
-                            alertVC.message = nil
+                            alertVC.title = "已发送"
+                            alertVC.message = "asdfljklasdf"
                             alertVC.hasProgress = false
-                            alertVC.actions = self.actions2
+                            alertVC.actions = self.actions3
                         }
                     })
                     timer.fire()
@@ -175,13 +177,17 @@ class ViewController: UIViewController {
             alertVC.markedColor = UIColor.green
             present(alertVC, animated: true, completion: nil)
         } else if sender == rightButton1 {
-            FancyAlert.present(style: .actionSheet, title: "大标题大标题大标题大标题大标题大题大标题大标题大标题大标题大标题大标标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions)
+            let alertController = FancyAlertViewController(style: .actionSheet, title: "大标题大标题大标题大标题大标题大题大标题大标题大标题大标题大标题大标标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions)
+            present(alertController, animated: true, completion: nil)
         } else if sender == rightButton2 {
-            FancyAlert.present(style: .actionSheet, title: "大标题大标题大标题大标题大标题标题大标题大标题大标题大标题大标题大标题大标题大标题", message: nil, actions: actions)
+            let alertController = FancyAlertViewController(style: .actionSheet, title: "大标题大标题大标题大标题大标题标题大标题大标题大标题大标题大标题大标题大标题大标题", message: nil, actions: actions)
+            present(alertController, animated: true, completion: nil)
         } else if sender == rightButton3 {
-            FancyAlert.present(style: .actionSheet, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions)
+            let alertController = FancyAlertViewController(style: .actionSheet, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions)
+            present(alertController, animated: true, completion: nil)
         } else if sender == rightButton4 {
-            FancyAlert.present(style: .actionSheet, title: nil, message: nil, actions: actions1)
+            let alertController = FancyAlertViewController(style: .actionSheet, title: nil, message: nil, actions: actions)
+            present(alertController, animated: true, completion: nil)
         }
 
 //        let actionSheet = UIAlertController(title: "大标题", message: "小标题圣诞快乐福建阿凉快圣诞节法律手段减肥啦圣诞节了肯定就是分开了", preferredStyle: .actionSheet)
