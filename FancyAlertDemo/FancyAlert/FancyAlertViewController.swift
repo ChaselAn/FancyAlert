@@ -23,7 +23,11 @@ public class FancyAlertViewController: UIViewController {
     public let textField = UITextField()
 
     // 是否有进度条，只适用于alert
-    public var hasProgress = false
+    public var hasProgress = false {
+        didSet {
+            (tableView as? FancyAlertTableView)?.hasProgress = hasProgress
+        }
+    }
 
     // 进度条的进度，只适用于alert
     public var progress: Float = 0 {
@@ -32,7 +36,25 @@ public class FancyAlertViewController: UIViewController {
         }
     }
 
-    public var actions: [FancyAlertAction]
+    // title
+    public var fancyTitle: String? {
+        didSet {
+            (tableView as! FancyAlertTableViewSource).title = fancyTitle
+        }
+    }
+
+    // message
+    public var message: String? {
+        didSet {
+            (tableView as! FancyAlertTableViewSource).message = message
+        }
+    }
+
+    public var actions: [FancyAlertAction] {
+        didSet {
+            (tableView as? FancyAlertTableViewSource)?.actions = actions
+        }
+    }
     public var statusBarStyle: UIStatusBarStyle = .default
 
     private let maskAlpha: CGFloat = 0.75
@@ -41,8 +63,6 @@ public class FancyAlertViewController: UIViewController {
     private(set) var maskControl = UIControl()
     private let alertTransitionManager: FancyAlertTransitionManager
     private let type: UIAlertControllerStyle
-    private let fancyTitle: String?
-    private let message: String?
 
     var safeAreaInsetsBottom: CGFloat = 0
 

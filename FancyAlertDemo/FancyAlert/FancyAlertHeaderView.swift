@@ -10,9 +10,40 @@ import UIKit
 
 class FancyAlertHeaderView: UIView {
 
+    var message: String? {
+        didSet {
+            if message != tempMessage {
+                tempMessage = message
+                makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
+                heightChanged?()
+            }
+        }
+    }
+    var title: String? {
+        didSet {
+            if title != tempTitle {
+                tempTitle = title
+                makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
+                heightChanged?()
+            }
+        }
+    }
+
+    var progress: Float? {
+        didSet {
+            if progress != tempProgress {
+                tempProgress = progress
+                makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
+                heightChanged?()
+            }
+        }
+    }
+
+    var heightChanged: (() -> Void)?
+
     var headerHeight: CGFloat {
-        let progressAreaHeight = progress != nil ? progressHeight + progressVerticalMargin : 0
-        return  margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + (isEditable ? textFieldHeight + textFieldTopMargin : 0) + bottomMargin + progressAreaHeight
+        let progressAreaHeight = tempProgress != nil ? progressHeight + progressVerticalMargin : 0
+        return  margin + titleLableHeight + (tempTitle != nil && tempMessage != nil ? labelSpace : 0) + messageLabelHeight + (isEditable ? textFieldHeight + textFieldTopMargin : 0) + bottomMargin + progressAreaHeight
     }
     var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor {
         didSet {
@@ -41,21 +72,25 @@ class FancyAlertHeaderView: UIView {
     private let progressVerticalMargin: CGFloat = 22
     private let progressHeight: CGFloat = 4
 
-    private let message: String?
-    private let title: String?
+    private var tempTitle: String?
+    private var tempMessage: String?
     private let isEditable: Bool
     private let textField: UITextField!
-    private let progress: Float?
+    private var tempProgress: Float?
+    private let width: CGFloat
+    private let outsideMargin: CGFloat
 
     init(title: String?, message: String?, width: CGFloat, margin: CGFloat, isEditable: Bool, textField: UITextField, progress: Float?) {
-        self.message = message
-        self.title = title
+        self.tempMessage = message
+        self.tempTitle = title
         self.isEditable = isEditable
         self.textField = textField
-        self.progress = progress
+        self.tempProgress = progress
+        self.width = width
+        self.outsideMargin = margin
         super.init(frame: CGRect.zero)
 
-        makeUI(title: title, message: message, width: width, outsideMargin: margin)
+        makeUI(title: tempTitle, message: tempMessage, width: width, outsideMargin: margin)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -85,10 +120,15 @@ class FancyAlertHeaderView: UIView {
             titleLableHeight = height
             titleLabel.frame = CGRect(x: margin, y: margin, width: labelWidth, height: height)
 
-            if progress != nil {
+            if tempProgress != nil {
                 addSubview(progressView)
                 progressView.frame = CGRect(x: progressHorizontalMargin, y: margin + height + progressVerticalMargin, width: progressWidth, height: progressHeight)
+            } else {
+                progressView.removeFromSuperview()
             }
+        } else {
+            titleLableHeight = 0
+            titleLabel.removeFromSuperview()
         }
 
         if let message = message {
@@ -104,12 +144,17 @@ class FancyAlertHeaderView: UIView {
             messageLabelHeight = height
             messageLabel.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil ? labelSpace : 0), width: labelWidth, height: height)
 
-            if title == nil && progress != nil {
+            if title == nil && tempProgress != nil {
                 addSubview(progressView)
                 progressView.frame = CGRect(x: progressHorizontalMargin, y: margin + titleLableHeight + height + progressVerticalMargin, width: progressWidth, height: progressHeight)
-            } else if title != nil && progress != nil {
+            } else if title != nil && tempProgress != nil {
                 messageLabel.frame.origin.y += progressHeight + progressVerticalMargin
+            } else {
+                progressView.removeFromSuperview()
             }
+        } else {
+            messageLabelHeight = 0
+            messageLabel.removeFromSuperview()
         }
 
         if isEditable {
@@ -128,7 +173,7 @@ class FancyAlertHeaderView: UIView {
             }
         }
 
-        if let progress = progress {
+        if let progress = tempProgress {
             progressView.progress = progress
         }
     }

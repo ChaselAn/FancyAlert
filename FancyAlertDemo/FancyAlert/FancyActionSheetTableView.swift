@@ -9,12 +9,18 @@
 import UIKit
 
 protocol FancyAlertTableViewSource: class {
+    var title: String? { set get }
+    var message: String? { set get }
+    var actions: [FancyAlertAction] { set get }
     var tableViewHeight: CGFloat { get }
     var markedColor: UIColor { set get }
     var margin: CGFloat { get }
     var actionCompleted: (() -> Void)? { set get }
 }
 class FancyActionSheetTableView: UITableView, FancyAlertTableViewSource {
+
+    var title: String? // 暂时没用到，留着备用
+    var message: String? // 暂时没用到，留着备用
 
     var tableViewHeight: CGFloat {
         return CGFloat(actions.count) * actionSheetCellHeight + (haveCancelAction ? separatorSectionHeaderHeight : 0) + cornerRadius + (headerView?.headerHeight ?? 0)
@@ -29,7 +35,7 @@ class FancyActionSheetTableView: UITableView, FancyAlertTableViewSource {
     private let actionSheetCellHeight: CGFloat = 50
     private let separatorSectionHeaderHeight:CGFloat = 8 + separatorHeight
 
-    private var actions: [FancyAlertAction]
+    var actions: [FancyAlertAction]
     private var headerView: FancyActionSheetHeaderView?
 
     private var haveCancelAction: Bool = false

@@ -10,6 +10,30 @@ import UIKit
 
 class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
 
+    var title: String? {
+        didSet {
+            headerView?.title = title
+        }
+    }
+    var message: String? {
+        didSet {
+            headerView?.message = message
+        }
+    }
+
+    var actions: [FancyAlertAction] {
+        didSet {
+            reloadData()
+            bounds.size.height = tableViewHeight
+        }
+    }
+
+    var hasProgress: Bool = false {
+        didSet {
+            headerView?.progress = hasProgress ? progress : nil
+        }
+    }
+
     var tableViewHeight: CGFloat {
         return (actions.count == 2 ? alertCellHeight : CGFloat(actions.count) * alertCellHeight) + (headerView?.headerHeight ?? 0)
     }
@@ -25,15 +49,16 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
 
     private let alertCellHeight: CGFloat = 50
 
-    private var actions: [FancyAlertAction]
     private(set) var headerView: FancyAlertHeaderView?
     private let textField: UITextField
+    private let progress: Float?
 
     private var workItem: DispatchWorkItem?
 
     init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, isEditable: Bool, textField: UITextField, progress: Float?) {
         self.actions = actions
         self.textField = textField
+        self.progress = progress
         super.init(frame: CGRect.zero, style: .plain)
         backgroundColor = .white
         isScrollEnabled = false
@@ -47,6 +72,12 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         if title != nil || message != nil {
             headerView = FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable, textField: textField, progress: progress)
             headerView!.frame.size.height = headerView!.headerHeight
+            headerView?.heightChanged = { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.headerView!.frame.size.height = strongSelf.headerView!.headerHeight
+                strongSelf.bounds.size.height = strongSelf.tableViewHeight
+                strongSelf.reloadData()
+            }
             tableHeaderView = headerView
 
             if isEditable {

@@ -98,6 +98,7 @@ class ViewController: UIViewController {
 //            firstAction.isEnabled = !firstAction.isEnabled
             print("取消action")
         })
+
         actions = [cancelAction, firstAction, secondAction, markedAction, disabledAction]
 
         actions1 = [firstAction, cancelAction]
@@ -146,11 +147,15 @@ class ViewController: UIViewController {
             alertVC.progress = 0.5
             present(alertVC, animated: true, completion: {
                 if #available(iOS 10.0, *) {
-                    let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (_) in
+                    let timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (_) in
                         if alertVC.progress < 1 {
                             alertVC.progress += 0.1
                         } else {
                             alertVC.progress = 0
+                            alertVC.fancyTitle = "已发送"
+                            alertVC.message = nil
+                            alertVC.hasProgress = false
+                            alertVC.actions = self.actions2
                         }
                     })
                     timer.fire()
