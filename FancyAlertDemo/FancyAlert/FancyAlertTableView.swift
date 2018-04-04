@@ -31,7 +31,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
 
     private var workItem: DispatchWorkItem?
 
-    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, isEditable: Bool, textField: UITextField) {
+    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, isEditable: Bool, textField: UITextField, progress: Float?) {
         self.actions = actions
         self.textField = textField
         super.init(frame: CGRect.zero, style: .plain)
@@ -45,7 +45,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         register(FancyAlertCell.self, forCellReuseIdentifier: "FancyAlertCell")
         separatorStyle = .none
         if title != nil || message != nil {
-            headerView = FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable, textField: textField)
+            headerView = FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable, textField: textField, progress: progress)
             headerView!.frame.size.height = headerView!.headerHeight
             tableHeaderView = headerView
 
@@ -67,6 +67,10 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    func setProgress(_ progress: Float) {
+        headerView?.setProgress(progress)
     }
 
     @objc private func keyboardWillChangeFrame(notification: Notification) {

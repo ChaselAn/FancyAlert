@@ -20,6 +20,9 @@ extension UIColor {
 
     public static var fancyAlertSeparatorColor: UIColor { return #colorLiteral(red: 0.9254901961, green: 0.9254901961, blue: 0.9254901961, alpha: 1) } // ececec
     public static var fancyActionSheetSelectedColor: UIColor { return #colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1) } // ededed
+
+    public static var fancyAlertProgressTintColor: UIColor { return #colorLiteral(red: 0.7647058824, green: 0.7647058824, blue: 0.7647058824, alpha: 1) } // c3c3c3
+    public static var fancyAlertTrackTintColor: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.8901960784, blue: 0.8901960784, alpha: 1) } // e3e3e3
 }
 
 extension String {

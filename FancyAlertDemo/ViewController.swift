@@ -140,9 +140,22 @@ class ViewController: UIViewController {
 
         } else if sender == button4 {
 
-            let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
+            let alertVC = FancyAlertViewController(style: .alert, title: "发送中", message: "3张图片", actions: actions1)
 //            alertVC.isEditable = true
-            present(alertVC, animated: true, completion: nil)
+            alertVC.hasProgress = true
+            alertVC.progress = 0.5
+            present(alertVC, animated: true, completion: {
+                if #available(iOS 10.0, *) {
+                    let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (_) in
+                        if alertVC.progress < 1 {
+                            alertVC.progress += 0.1
+                        } else {
+                            alertVC.progress = 0
+                        }
+                    })
+                    timer.fire()
+                }
+            })
 
         }
     }

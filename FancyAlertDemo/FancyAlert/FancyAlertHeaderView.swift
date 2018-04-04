@@ -11,7 +11,8 @@ import UIKit
 class FancyAlertHeaderView: UIView {
 
     var headerHeight: CGFloat {
-        return  margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + (isEditable ? textFieldHeight + textFieldTopMargin : 0) + bottomMargin
+        let progressAreaHeight = progress != nil ? progressHeight + progressVerticalMargin : 0
+        return  margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + (isEditable ? textFieldHeight + textFieldTopMargin : 0) + bottomMargin + progressAreaHeight
     }
     var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor {
         didSet {
@@ -21,6 +22,12 @@ class FancyAlertHeaderView: UIView {
 
     private lazy var titleLabel = UILabel()
     private lazy var messageLabel = UILabel()
+    private lazy var progressView: UIProgressView = {
+        let progressView = UIProgressView()
+        progressView.trackTintColor = .fancyAlertTrackTintColor
+        progressView.progressTintColor = .fancyAlertProgressTintColor
+        return progressView
+    }()
 
     private var titleLableHeight: CGFloat = 0
     private var messageLabelHeight: CGFloat = 0
@@ -30,17 +37,22 @@ class FancyAlertHeaderView: UIView {
     private let bottomMargin: CGFloat = 28
     private let textFieldTopMargin: CGFloat = 25
     private let textFieldHeight: CGFloat = 30
+    private let progressHorizontalMargin: CGFloat = 29
+    private let progressVerticalMargin: CGFloat = 22
+    private let progressHeight: CGFloat = 4
 
     private let message: String?
     private let title: String?
     private let isEditable: Bool
     private let textField: UITextField!
+    private let progress: Float?
 
-    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, isEditable: Bool, textField: UITextField) {
+    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, isEditable: Bool, textField: UITextField, progress: Float?) {
         self.message = message
         self.title = title
         self.isEditable = isEditable
         self.textField = textField
+        self.progress = progress
         super.init(frame: CGRect.zero)
 
         makeUI(title: title, message: message, width: width, outsideMargin: margin)
@@ -50,11 +62,16 @@ class FancyAlertHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func setProgress(_ progress: Float) {
+        progressView.progress = progress
+    }
+
     private func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat) {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineHeightMultiple = 1.5
         paragraph.alignment = .center
         let labelWidth = width - 2 * outsideMargin - 2 * margin
+        let progressWidth = width - 2 * outsideMargin - 2 * progressHorizontalMargin
         if let title = title {
             let attributes: [NSAttributedStringKey: Any] = [.paragraphStyle: paragraph,
                                                             .font: UIFont.systemFont(ofSize: 17, weight: .medium),
@@ -67,6 +84,11 @@ class FancyAlertHeaderView: UIView {
             let height = title.fancyAlert_getHeight(maxWidth: labelWidth, attributes: attributes)
             titleLableHeight = height
             titleLabel.frame = CGRect(x: margin, y: margin, width: labelWidth, height: height)
+
+            if progress != nil {
+                addSubview(progressView)
+                progressView.frame = CGRect(x: progressHorizontalMargin, y: margin + height + progressVerticalMargin, width: progressWidth, height: progressHeight)
+            }
         }
 
         if let message = message {
@@ -81,6 +103,13 @@ class FancyAlertHeaderView: UIView {
             let height = message.fancyAlert_getHeight(maxWidth: labelWidth, attributes: attributes)
             messageLabelHeight = height
             messageLabel.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil ? labelSpace : 0), width: labelWidth, height: height)
+
+            if title == nil && progress != nil {
+                addSubview(progressView)
+                progressView.frame = CGRect(x: progressHorizontalMargin, y: margin + titleLableHeight + height + progressVerticalMargin, width: progressWidth, height: progressHeight)
+            } else if title != nil && progress != nil {
+                messageLabel.frame.origin.y += progressHeight + progressVerticalMargin
+            }
         }
 
         if isEditable {
@@ -97,6 +126,10 @@ class FancyAlertHeaderView: UIView {
             if textField.fancy_maxInputLength != nil {
                 NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: .UITextFieldTextDidChange, object: nil)
             }
+        }
+
+        if let progress = progress {
+            progressView.progress = progress
         }
     }
 

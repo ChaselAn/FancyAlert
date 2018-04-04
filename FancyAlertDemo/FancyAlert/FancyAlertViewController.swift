@@ -22,6 +22,16 @@ public class FancyAlertViewController: UIViewController {
     // 只适用于alert， 可以通过textField.fancy_maxInputLength属性限制输入的最大字数
     public let textField = UITextField()
 
+    // 是否有进度条，只适用于alert
+    public var hasProgress = false
+
+    // 进度条的进度，只适用于alert
+    public var progress: Float = 0 {
+        didSet {
+            (tableView as? FancyAlertTableView)?.setProgress(progress)
+        }
+    }
+
     public var actions: [FancyAlertAction]
     public var statusBarStyle: UIStatusBarStyle = .default
 
@@ -89,7 +99,7 @@ public class FancyAlertViewController: UIViewController {
         case .actionSheet:
             tableView = FancyActionSheetTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width)
         case .alert:
-            let alertTableView = FancyAlertTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width, isEditable: isEditable, textField: textField)
+            let alertTableView = FancyAlertTableView(title: fancyTitle, message: message, actions: actions, width: view.bounds.width, isEditable: isEditable, textField: textField, progress: hasProgress ? progress : nil)
             tableView = alertTableView
         }
         (tableView as! FancyAlertTableViewSource).markedColor = markedColor
