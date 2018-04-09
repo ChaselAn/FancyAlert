@@ -124,12 +124,12 @@ class FancyAlertTwoActionCell: UITableViewCell {
     @objc private func buttonClicked(sender: UIButton) {
         sender.backgroundColor = UIColor.white
 
+        buttonDidClicked?()
         if sender == leftButton {
             actions.first?.handler?()
         } else if sender == rightButton {
             actions.last?.handler?()
         }
-        buttonDidClicked?()
     }
 
 }
