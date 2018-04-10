@@ -37,12 +37,6 @@ public class FancyAlertViewController: UIViewController {
     }
 
     // title
-//    public var fancyTitle: String? {
-//        didSet {
-//            (tableView as? FancyAlertTableViewSource)?.title = fancyTitle
-//        }
-//    }
-
     public override var title: String? {
         didSet {
             (tableView as? FancyAlertTableViewSource)?.title = title
