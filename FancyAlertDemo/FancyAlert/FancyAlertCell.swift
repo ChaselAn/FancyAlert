@@ -44,7 +44,8 @@ class FancyAlertCell: UITableViewCell {
         isUserInteractionEnabled = action.isEnabled
 
         let tempAction = action
-        tempAction.enabledDidChange = { [weak self] isEnabled in
+        tempAction.enabledDidChange = { [weak self, weak action] isEnabled in
+            guard let action = action else { return }
             self?.titleLabel.alpha = action.isEnabled ? 1 : 0.4
             self?.isUserInteractionEnabled = action.isEnabled
         }

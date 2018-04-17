@@ -101,14 +101,18 @@ class FancyAlertTwoActionCell: UITableViewCell {
         rightButton.alpha = tempActions.last!.isEnabled ? 1 : 0.4
         rightButton.isEnabled = tempActions.last!.isEnabled
 
-        tempActions.first!.enabledDidChange = { [weak self] isEnabled in
-            self?.leftButton.alpha = tempActions.first!.isEnabled ? 1 : 0.4
-            self?.leftButton.isEnabled = tempActions.first!.isEnabled
+        let firstAction = tempActions.first!
+        firstAction.enabledDidChange = { [weak self, weak firstAction] isEnabled in
+            guard let firstAction = firstAction else { return }
+            self?.leftButton.alpha = firstAction.isEnabled ? 1 : 0.4
+            self?.leftButton.isEnabled = firstAction.isEnabled
         }
 
-        tempActions.last!.enabledDidChange = { [weak self] isEnabled in
-            self?.rightButton.alpha = tempActions.last!.isEnabled ? 1 : 0.4
-            self?.rightButton.isEnabled = tempActions.last!.isEnabled
+        let lastAction = tempActions.last!
+        lastAction.enabledDidChange = { [weak self, weak lastAction] isEnabled in
+            guard let lastAction = lastAction else { return }
+            self?.rightButton.alpha = lastAction.isEnabled ? 1 : 0.4
+            self?.rightButton.isEnabled = lastAction.isEnabled
         }
 
     }
