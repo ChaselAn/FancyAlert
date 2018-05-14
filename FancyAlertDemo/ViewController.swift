@@ -139,6 +139,8 @@ class ViewController: UIViewController {
 //            present(alertVC, animated: true, completion: nil)
             let alertVC = FancyAlertViewController(style: .alert, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
             alertVC.isEditable = true
+            alertVC.textField.fancy_maxInputLength = 10
+            alertVC.markedColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
             present(alertVC, animated: true, completion: nil)
 
         } else if sender == button4 {

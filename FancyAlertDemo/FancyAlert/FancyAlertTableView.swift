@@ -30,7 +30,8 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
 
     var hasProgress: Bool = false {
         didSet {
-            headerView?.progress = hasProgress ? progress : nil
+            updateHeaderView()
+            (headerView as? FancyAlertProgressHeaderView)?.progress = hasProgress ? progress : nil
         }
     }
 
@@ -42,16 +43,75 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     let margin: CGFloat = 39
     var markedColor = UIColor.fancyAlertMarkedDefaultColor {
         didSet {
-            headerView?.markedColor = markedColor
+            (headerView as? FancyAlertTextFieldHeaderView)?.markedColor = markedColor
         }
     }
     var actionCompleted: (() -> Void)?
 
     private let alertCellHeight: CGFloat = 50
 
-    private(set) var headerView: FancyAlertHeaderView?
+    private(set) lazy var baseHeaderView: FancyAlertBaseHeaderView? = {
+        if title != nil || message != nil {
+            let headerView = FancyAlertBaseHeaderView(title: title, message: message, width: alertWidth, margin: margin)
+            //                FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable, textField: textField, progress: progress)
+            headerView.frame.size.height = headerView.headerHeight
+            headerView.heightChanged = { [weak self, weak headerView] in
+                guard let strongSelf = self, let headerView = headerView else { return }
+                headerView.frame.size.height = headerView.headerHeight
+                strongSelf.bounds.size.height = strongSelf.tableViewHeight
+                strongSelf.reloadData()
+            }
+            return headerView
+        }
+        return nil
+    }()
+
+    private(set) lazy var progressHeaderView: FancyAlertProgressHeaderView? = {
+        if title != nil || message != nil {
+            let headerView = FancyAlertProgressHeaderView(title: title, message: message, width: alertWidth, margin: margin, progress: progress)
+            //                FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable, textField: textField, progress: progress)
+            headerView.frame.size.height = headerView.headerHeight
+            headerView.heightChanged = { [weak self, weak headerView] in
+                guard let strongSelf = self, let headerView = headerView else { return }
+                headerView.frame.size.height = headerView.headerHeight
+                strongSelf.bounds.size.height = strongSelf.tableViewHeight
+                strongSelf.reloadData()
+            }
+            return headerView
+        }
+        return nil
+    }()
+
+    private(set) lazy var textFieldHeaderView: FancyAlertTextFieldHeaderView? = {
+        if title != nil || message != nil {
+            let headerView = FancyAlertTextFieldHeaderView(title: title, message: message, width: alertWidth, margin: margin, isEditable: isEditable, textField: textField)
+            //                FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable, textField: textField, progress: progress)
+            headerView.frame.size.height = headerView.headerHeight
+            headerView.heightChanged = { [weak self, weak headerView] in
+                guard let strongSelf = self, let headerView = headerView else { return }
+                headerView.frame.size.height = headerView.headerHeight
+                strongSelf.bounds.size.height = strongSelf.tableViewHeight
+                strongSelf.reloadData()
+            }
+            return headerView
+        }
+        return nil
+    }()
+
+    private var headerView: FancyAlertBaseHeaderView? {
+        if hasProgress {
+            return progressHeaderView
+        } else if isEditable {
+            return textFieldHeaderView
+        } else {
+            return baseHeaderView
+        }
+    }
+
     private let textField: UITextField
     private let progress: Float?
+    private let alertWidth: CGFloat
+    private let isEditable: Bool
 
     private var workItem: DispatchWorkItem?
 
@@ -59,6 +119,11 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         self.actions = actions
         self.textField = textField
         self.progress = progress
+        self.alertWidth = width
+        self.isEditable = isEditable
+        self.title = title
+        self.message = message
+        self.hasProgress = progress != nil
         super.init(frame: CGRect.zero, style: .plain)
         backgroundColor = .white
         isScrollEnabled = false
@@ -70,14 +135,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         register(FancyAlertCell.self, forCellReuseIdentifier: "FancyAlertCell")
         separatorStyle = .none
         if title != nil || message != nil {
-            headerView = FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable, textField: textField, progress: progress)
-            headerView!.frame.size.height = headerView!.headerHeight
-            headerView?.heightChanged = { [weak self] in
-                guard let strongSelf = self else { return }
-                strongSelf.headerView!.frame.size.height = strongSelf.headerView!.headerHeight
-                strongSelf.bounds.size.height = strongSelf.tableViewHeight
-                strongSelf.reloadData()
-            }
+
             tableHeaderView = headerView
 
             if isEditable {
@@ -101,7 +159,12 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     }
 
     func setProgress(_ progress: Float) {
-        headerView?.setProgress(progress)
+        (headerView as? FancyAlertProgressHeaderView)?.setProgress(progress)
+    }
+
+    private func updateHeaderView() {
+        tableHeaderView = headerView
+        reloadData()
     }
 
     @objc private func keyboardWillChangeFrame(notification: Notification) {

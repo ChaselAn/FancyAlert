@@ -50,6 +50,7 @@ public class FancyAlertViewController: UIViewController {
         }
     }
 
+    // actions
     public var actions: [FancyAlertAction] {
         didSet {
             (tableView as? FancyAlertTableViewSource)?.actions = actions
