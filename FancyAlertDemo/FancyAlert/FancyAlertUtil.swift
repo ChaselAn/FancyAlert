@@ -37,18 +37,3 @@ extension String {
 }
 
 let separatorHeight = 1 / UIScreen.main.scale
-
-extension UITextField {
-    
-    private static var fancy_maxInputLengthKey: Character!
-
-    public var fancy_maxInputLength: Int? {
-        set {
-            objc_setAssociatedObject(self, &UITextField.fancy_maxInputLengthKey, newValue, .OBJC_ASSOCIATION_RETAIN)
-        }
-        get {
-            return objc_getAssociatedObject(self, &UITextField.fancy_maxInputLengthKey) as? Int
-        }
-    }
-}
-

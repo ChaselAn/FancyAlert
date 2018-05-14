@@ -44,6 +44,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     var markedColor = UIColor.fancyAlertMarkedDefaultColor {
         didSet {
             (headerView as? FancyAlertTextFieldHeaderView)?.markedColor = markedColor
+            (headerView as? FancyAlertTextViewHeaderView)?.markedColor = markedColor
         }
     }
     var actionCompleted: (() -> Void)?
@@ -53,7 +54,6 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     private(set) lazy var baseHeaderView: FancyAlertBaseHeaderView? = {
         if title != nil || message != nil {
             let headerView = FancyAlertBaseHeaderView(title: title, message: message, width: alertWidth, margin: margin)
-            //                FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable, textField: textField, progress: progress)
             headerView.frame.size.height = headerView.headerHeight
             headerView.heightChanged = { [weak self, weak headerView] in
                 guard let strongSelf = self, let headerView = headerView else { return }
@@ -69,7 +69,6 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     private(set) lazy var progressHeaderView: FancyAlertProgressHeaderView? = {
         if title != nil || message != nil {
             let headerView = FancyAlertProgressHeaderView(title: title, message: message, width: alertWidth, margin: margin, progress: progress)
-            //                FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable, textField: textField, progress: progress)
             headerView.frame.size.height = headerView.headerHeight
             headerView.heightChanged = { [weak self, weak headerView] in
                 guard let strongSelf = self, let headerView = headerView else { return }
@@ -83,44 +82,58 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     }()
 
     private(set) lazy var textFieldHeaderView: FancyAlertTextFieldHeaderView? = {
-        if title != nil || message != nil {
-            let headerView = FancyAlertTextFieldHeaderView(title: title, message: message, width: alertWidth, margin: margin, isEditable: isEditable, textField: textField)
-            //                FancyAlertHeaderView(title: title, message: message, width: width, margin: margin, isEditable: isEditable, textField: textField, progress: progress)
-            headerView.frame.size.height = headerView.headerHeight
-            headerView.heightChanged = { [weak self, weak headerView] in
-                guard let strongSelf = self, let headerView = headerView else { return }
-                headerView.frame.size.height = headerView.headerHeight
-                strongSelf.bounds.size.height = strongSelf.tableViewHeight
-                strongSelf.reloadData()
-            }
-            return headerView
+        guard title != nil || message != nil else {
+            return nil
         }
-        return nil
+        let headerView = FancyAlertTextFieldHeaderView(title: title, message: message, width: alertWidth, margin: margin, editType: editType)
+        headerView.frame.size.height = headerView.headerHeight
+        headerView.heightChanged = { [weak self, weak headerView] in
+            guard let strongSelf = self, let headerView = headerView else { return }
+            headerView.frame.size.height = headerView.headerHeight
+            strongSelf.bounds.size.height = strongSelf.tableViewHeight
+            strongSelf.reloadData()
+        }
+        return headerView
+    }()
+
+    private(set) lazy var textViewHeaderView: FancyAlertTextViewHeaderView? = {
+        guard title != nil || message != nil else {
+            return nil
+        }
+        let headerView = FancyAlertTextViewHeaderView(title: title, message: message, width: alertWidth, margin: margin, editType: editType)
+        headerView.frame.size.height = headerView.headerHeight
+        headerView.heightChanged = { [weak self, weak headerView] in
+            guard let strongSelf = self, let headerView = headerView else { return }
+            headerView.frame.size.height = headerView.headerHeight
+            strongSelf.bounds.size.height = strongSelf.tableViewHeight
+            strongSelf.reloadData()
+        }
+        return headerView
     }()
 
     private var headerView: FancyAlertBaseHeaderView? {
         if hasProgress {
             return progressHeaderView
-        } else if isEditable {
+        } else if case .textField = editType {
             return textFieldHeaderView
+        }else if case .textView = editType {
+            return textViewHeaderView
         } else {
             return baseHeaderView
         }
     }
 
-    private let textField: UITextField
     private let progress: Float?
     private let alertWidth: CGFloat
-    private let isEditable: Bool
+    private let editType: FancyAlertViewController.TempEditType
 
     private var workItem: DispatchWorkItem?
 
-    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, isEditable: Bool, textField: UITextField, progress: Float?) {
+    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, editType: FancyAlertViewController.TempEditType, progress: Float?) {
         self.actions = actions
-        self.textField = textField
         self.progress = progress
         self.alertWidth = width
-        self.isEditable = isEditable
+        self.editType = editType
         self.title = title
         self.message = message
         self.hasProgress = progress != nil
@@ -138,7 +151,9 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
 
             tableHeaderView = headerView
 
-            if isEditable {
+            switch editType {
+            case .none: break
+            default:
                 NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame), name: .UIKeyboardWillChangeFrame, object: nil)
             }
         }

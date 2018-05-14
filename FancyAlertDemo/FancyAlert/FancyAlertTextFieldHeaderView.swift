@@ -15,29 +15,28 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
     }
     var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor {
         didSet {
-            textField.tintColor = markedColor
+            textField?.textField.tintColor = textField?.cursorColor ?? markedColor
         }
     }
-
-    private lazy var titleLabel = UILabel()
-    private lazy var progressView: UIProgressView = {
-        let progressView = UIProgressView()
-        progressView.trackTintColor = .fancyAlertTrackTintColor
-        progressView.progressTintColor = .fancyAlertProgressTintColor
-        return progressView
-    }()
 
     private let labelSpace:CGFloat = 13
     private let bottomMargin: CGFloat = 28
     private let textFieldTopMargin: CGFloat = 25
     private let textFieldHeight: CGFloat = 30
 
-    private let isEditable: Bool
-    private let textField: UITextField!
+    private var isEditable = false
+    private var textField: FancyTextField?
 
-    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, isEditable: Bool, textField: UITextField) {
-        self.isEditable = isEditable
-        self.textField = textField
+    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, editType: FancyAlertViewController.TempEditType) {
+        switch editType {
+        case .textField(let textField):
+            self.textField = textField
+            self.isEditable = true
+        case .none:
+            self.isEditable = false
+        default:
+            assertionFailure()
+        }
         super.init(title: title, message: message, width: width, margin: margin)
     }
 
@@ -48,18 +47,21 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
     override func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat) {
         super.makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
 
-        if isEditable {
+        if isEditable, let fancyTextField = textField {
+            let textField = fancyTextField.textField
             addSubview(textField)
-            textField.borderStyle = .none
-            textField.font = UIFont.systemFont(ofSize: 16)
+            textField.text = fancyTextField.text
+            textField.borderStyle = fancyTextField.borderStyle
+            textField.font = fancyTextField.font
             textField.delegate = self
-            textField.textColor = UIColor.fancyAlertMessageDefaultColor
-            textField.textAlignment = .center
-            textField.returnKeyType = .done
+            textField.textColor = fancyTextField.textColor
+            textField.textAlignment = fancyTextField.textAlignment
+            textField.returnKeyType = fancyTextField.returnKeyType
             textField.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textFieldTopMargin, width: labelWidth, height: textFieldHeight)
-            textField.tintColor = markedColor
+            textField.tintColor = fancyTextField.cursorColor ?? markedColor
+            textField.placeholder = fancyTextField.placeholder
 
-            if textField.fancy_maxInputLength != nil {
+            if fancyTextField.maxInputLength != nil {
                 NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: .UITextFieldTextDidChange, object: nil)
             }
         }
@@ -68,7 +70,7 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
 
     @objc private func textFieldDidChange(notification: NSNotification) {
 
-        guard let tempText = textField.text as NSString?, let textMaxLength = textField.fancy_maxInputLength else { return }
+        guard let textField = textField?.textField, let tempText = textField.text as NSString?, let textMaxLength = self.textField?.maxInputLength else { return }
 
         let textCount = tempText.length
         let lang = textInputMode?.primaryLanguage

@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     let button2 = UIButton(type: .system)
     let button3 = UIButton(type: .system)
     let button4 = UIButton(type: .system)
+    let button5 = UIButton(type: .system)
 
     let rightButton = UIButton(type: .system)
     let rightButton1 = UIButton(type: .system)
@@ -54,6 +55,11 @@ class ViewController: UIViewController {
         button4.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         button4.frame = CGRect(x: 50, y: 500, width: 100, height: 50)
         view.addSubview(button4)
+
+        button5.setTitle("show alert", for: .normal)
+        button5.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        button5.frame = CGRect(x: 50, y: 600, width: 100, height: 50)
+        view.addSubview(button5)
 
         rightButton.setTitle("show actionSheet", for: .normal)
         rightButton.addTarget(self, action: #selector(rightButtonButtonClicked), for: .touchUpInside)
@@ -119,8 +125,8 @@ class ViewController: UIViewController {
             let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题大标题大标题大标题大标题大标题大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions2)
             alertVC.textField.placeholder = "请输入文字"
             alertVC.markedColor = UIColor.green
-            alertVC.isEditable = true
-            alertVC.textField.fancy_maxInputLength = 5
+            alertVC.editType = .textField
+            alertVC.textField.maxInputLength = 5
             present(alertVC, animated: true, completion: nil)
         } else if sender == button1 {
 
@@ -138,8 +144,8 @@ class ViewController: UIViewController {
 //            let alertVC = FancyAlertViewController(type: .alert, title: nil, message: "小标题小标题小标题小", actions: actions1)
 //            present(alertVC, animated: true, completion: nil)
             let alertVC = FancyAlertViewController(style: .alert, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
-            alertVC.isEditable = true
-            alertVC.textField.fancy_maxInputLength = 10
+            alertVC.editType = .textField
+            alertVC.textField.maxInputLength = 10
             alertVC.markedColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
             present(alertVC, animated: true, completion: nil)
 
@@ -166,6 +172,11 @@ class ViewController: UIViewController {
                 }
             })
 
+        } else if sender == button5 {
+            let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
+            alertVC.editType = .textView
+            alertVC.textView.maxInputLength = 50
+            present(alertVC, animated: true, completion: nil)
         }
     }
 

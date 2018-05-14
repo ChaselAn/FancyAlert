@@ -16,11 +16,14 @@ public class FancyAlertViewController: UIViewController {
     // 被标记的颜色，修改此属性，会影响alert的选项颜色 以及actionsheet中marked、cancel类型的选项
     public var markedColor = UIColor.fancyAlertMarkedDefaultColor
 
-    // 是否有输入框，只适用于alert
-    public var isEditable = false
+    // 输入框类型，只适用于alert
+    public var editType: EditType = .none
 
-    // 只适用于alert， 可以通过textField.fancy_maxInputLength属性限制输入的最大字数
-    public let textField = UITextField()
+    // 只适用于alert
+    public let textField = FancyTextField()
+
+    // 只适用于alert
+    public let textView = FancyTextView()
 
     // 是否有进度条，只适用于alert
     public var hasProgress = false {
@@ -58,12 +61,24 @@ public class FancyAlertViewController: UIViewController {
     }
     public var statusBarStyle: UIStatusBarStyle = .default
 
+    public enum EditType {
+        case none
+        case textField
+        case textView
+    }
+
     private let maskAlpha: CGFloat = 0.75
 
     private(set) var tableView: UITableView!
     private(set) var maskControl = UIControl()
     private let alertTransitionManager: FancyAlertTransitionManager
     private let type: UIAlertControllerStyle
+
+    enum TempEditType {
+        case none
+        case textField(FancyTextField)
+        case textView(FancyTextView)
+    }
 
     var safeAreaInsetsBottom: CGFloat = 0
 
@@ -121,7 +136,16 @@ public class FancyAlertViewController: UIViewController {
         case .actionSheet:
             tableView = FancyActionSheetTableView(title: title, message: message, actions: actions, width: view.bounds.width)
         case .alert:
-            let alertTableView = FancyAlertTableView(title: title, message: message, actions: actions, width: view.bounds.width, isEditable: isEditable, textField: textField, progress: hasProgress ? progress : nil)
+            let editType: TempEditType
+            switch self.editType {
+            case .none:
+                editType = .none
+            case .textField:
+                editType = .textField(textField)
+            case .textView:
+                editType = .textView(textView)
+            }
+            let alertTableView = FancyAlertTableView(title: title, message: message, actions: actions, width: view.bounds.width, editType: editType, progress: hasProgress ? progress : nil)
             tableView = alertTableView
         }
         (tableView as! FancyAlertTableViewSource).markedColor = markedColor

@@ -58,7 +58,7 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
                 alertController.tableView.transform = CGAffineTransform.identity
             }, completion: { [weak self] finished in
                 transitionContext.completeTransition(finished)
-                let textField = alertController.textField
+                let textField = alertController.textField.textField
                 guard let strongSelf = self else { return }
                 if strongSelf.isDismissing {
                     textField.resignFirstResponder()

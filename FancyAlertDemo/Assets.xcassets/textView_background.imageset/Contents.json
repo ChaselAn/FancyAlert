@@ -1,0 +1,26 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "Rectangle 2.pdf",
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 6,
+          "top" : 5,
+          "right" : 6,
+          "left" : 6
+        }
+      }
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
