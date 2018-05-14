@@ -11,13 +11,13 @@ import UIKit
 public class FancyTextView {
 
     public var text: String?
-    public var height: CGFloat = 116
+    public var height: CGFloat = Config.textViewHeight
     public var maxInputLength: Int?
     public var font = UIFont.systemFont(ofSize: 14)
     public var textColor = UIColor.fancyAlertMessageDefaultColor
     public var textAlignment: NSTextAlignment = .left
     public var cursorColor: UIColor?
-    public var lineSpacing: CGFloat = 10
+    public var lineSpacing: CGFloat = Config.textViewLineSpacing
 
     // 以下属性maxInputLength不为nil时有效
     public var maxInputLimitLabelColor = UIColor.fancyAlertProgressTintColor

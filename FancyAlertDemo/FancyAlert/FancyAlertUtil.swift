@@ -37,3 +37,9 @@ extension String {
 }
 
 let separatorHeight = 1 / UIScreen.main.scale
+
+public class Config {
+
+    static var textViewHeight: CGFloat = 116
+    static var textViewLineSpacing: CGFloat = 6
+}

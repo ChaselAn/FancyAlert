@@ -42,7 +42,7 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
     private let bottomMargin: CGFloat = 28
     private let textViewTopMargin: CGFloat = 25
     private var textViewHeight: CGFloat {
-        return textView?.height ?? 116
+        return textView?.height ?? Config.textViewHeight
     }
     private let textViewTopPadding: CGFloat = 14
     private let textViewLeftPadding: CGFloat = 24
@@ -87,17 +87,18 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
 
         let tempTextView = fancyTextView.textView
         addSubview(tempTextView)
-        tempTextView.text = fancyTextView.text
         tempTextView.backgroundColor = .clear
-        tempTextView.font = fancyTextView.font
-        tempTextView.textColor = fancyTextView.textColor
-        tempTextView.textAlignment = fancyTextView.textAlignment
         tempTextView.tintColor = fancyTextView.cursorColor ?? markedColor
         tempTextView.frame = CGRect(x: margin + textViewLeftPadding, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textViewTopMargin + textViewTopPadding, width: labelWidth - 2 * textViewLeftPadding, height: textViewHeight)
         tempTextView.delegate = self
+
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = fancyTextView.lineSpacing
-        tempTextView.attributedText = NSAttributedString(string: tempTextView.text, attributes: [.paragraphStyle: paragraphStyle])
+        paragraphStyle.alignment = fancyTextView.textAlignment
+        tempTextView.attributedText = NSAttributedString(string: fancyTextView.text ?? "",
+                                                         attributes: [.paragraphStyle: paragraphStyle,
+                                                                      .foregroundColor: fancyTextView.textColor,
+                                                                      .font: fancyTextView.font])
 
         if fancyTextView.maxInputLength != nil, let limitLabel = limitLabel {
             addSubview(limitLabel)
@@ -109,30 +110,35 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
 extension FancyAlertTextViewHeaderView: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
-        guard let tempText = textView.text, let textMaxLength = self.textView?.maxInputLength, let lineSpacing = self.textView?.lineSpacing else { return }
+        guard let tempText = textView.text, let textMaxLength = self.textView?.maxInputLength else { return }
+        guard let fancyTextView = self.textView else { return }
 
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = lineSpacing
+        paragraphStyle.lineSpacing = fancyTextView.lineSpacing
+        paragraphStyle.alignment = fancyTextView.textAlignment
+        let attributes: [NSAttributedStringKey: Any] = [.paragraphStyle: paragraphStyle,
+                                                        .foregroundColor: fancyTextView.textColor,
+                                                        .font: fancyTextView.font]
 
         let textCount = tempText.count
         let lang = textInputMode?.primaryLanguage
         if lang == "zh-Hans" {
             guard let _ = textView.markedTextRange else {
                 if textCount > textMaxLength {
-                    textView.attributedText = NSAttributedString(string: String(tempText.prefix(textMaxLength)), attributes: [.paragraphStyle: paragraphStyle])
+                    textView.attributedText = NSAttributedString(string: String(tempText.prefix(textMaxLength)), attributes: attributes)
                     limitLabel?.text = "\(max(0, tempInputLength - String(tempText.prefix(textMaxLength)).count))"
                 } else {
-                    textView.attributedText = NSAttributedString(string: tempText, attributes: [.paragraphStyle: paragraphStyle])
+                    textView.attributedText = NSAttributedString(string: tempText, attributes: attributes)
                     limitLabel?.text = "\(max(0, tempInputLength - tempText.count))"
                 }
                 return
             }
         } else {
             if textCount > textMaxLength {
-                textView.attributedText = NSAttributedString(string: String(tempText.prefix(textMaxLength)), attributes: [.paragraphStyle: paragraphStyle])
+                textView.attributedText = NSAttributedString(string: String(tempText.prefix(textMaxLength)), attributes: attributes)
                 limitLabel?.text = "\(max(0, tempInputLength - String(tempText.prefix(textMaxLength)).count))"
             } else {
-                textView.attributedText = NSAttributedString(string: tempText, attributes: [.paragraphStyle: paragraphStyle])
+                textView.attributedText = NSAttributedString(string: tempText, attributes: attributes)
                 limitLabel?.text = "\(max(0, tempInputLength - tempText.count))"
             }
 
