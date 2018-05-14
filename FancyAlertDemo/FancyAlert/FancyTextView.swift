@@ -8,14 +8,10 @@
 
 import UIKit
 
-public class FancyTextView {
+public class FancyTextView: UITextView {
 
-    public var text: String?
     public var height: CGFloat = Config.textViewHeight
     public var maxInputLength: Int?
-    public var font = UIFont.systemFont(ofSize: 14)
-    public var textColor = UIColor.fancyAlertMessageDefaultColor
-    public var textAlignment: NSTextAlignment = .left
     public var cursorColor: UIColor?
     public var lineSpacing: CGFloat = Config.textViewLineSpacing
 
@@ -23,5 +19,14 @@ public class FancyTextView {
     public var maxInputLimitLabelColor = UIColor.fancyAlertProgressTintColor
     public var maxInputLimitLabelFont = UIFont.systemFont(ofSize: 12)
 
-    let textView = UITextView()
+    public override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        font = UIFont.systemFont(ofSize: 14)
+        textColor = UIColor.fancyAlertMessageDefaultColor
+        textAlignment = .left
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

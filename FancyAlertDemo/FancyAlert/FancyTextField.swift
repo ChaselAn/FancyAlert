@@ -8,17 +8,21 @@
 
 import UIKit
 
-public class FancyTextField {
+public class FancyTextField: UITextField {
 
-    public var text: String?
     public var maxInputLength: Int?
-    public var borderStyle: UITextBorderStyle = .none
-    public var font = UIFont.systemFont(ofSize: 16)
-    public var textColor = UIColor.fancyAlertMessageDefaultColor
-    public var textAlignment: NSTextAlignment = .center
-    public var returnKeyType: UIReturnKeyType = .done
     public var cursorColor: UIColor?
-    public var placeholder: String?
 
-    let textField = UITextField()
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        borderStyle = .none
+        font = UIFont.systemFont(ofSize: 16)
+        textColor = UIColor.fancyAlertMessageDefaultColor
+        textAlignment = .center
+        returnKeyType = .done
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

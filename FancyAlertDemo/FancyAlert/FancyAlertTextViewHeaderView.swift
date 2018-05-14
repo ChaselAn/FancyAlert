@@ -12,7 +12,7 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
 
     var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor {
         didSet {
-            textView?.textView.tintColor = textView?.cursorColor ?? markedColor
+            textView?.tintColor = textView?.cursorColor ?? markedColor
         }
     }
     
@@ -80,29 +80,28 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
     override func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat) {
         super.makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
 
-        guard isEditable, let fancyTextView = textView else { return }
+        guard isEditable, let textView = textView else { return }
 
         addSubview(textViewBackgroundImageView)
         textViewBackgroundImageView.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textViewTopMargin, width: labelWidth, height: textViewHeight + 2 * textViewTopPadding + limitLabelTotalHeight)
 
-        let tempTextView = fancyTextView.textView
-        addSubview(tempTextView)
-        tempTextView.backgroundColor = .clear
-        tempTextView.tintColor = fancyTextView.cursorColor ?? markedColor
-        tempTextView.frame = CGRect(x: margin + textViewLeftPadding, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textViewTopMargin + textViewTopPadding, width: labelWidth - 2 * textViewLeftPadding, height: textViewHeight)
-        tempTextView.delegate = self
+        addSubview(textView)
+        textView.backgroundColor = .clear
+        textView.tintColor = textView.cursorColor ?? markedColor
+        textView.frame = CGRect(x: margin + textViewLeftPadding, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textViewTopMargin + textViewTopPadding, width: labelWidth - 2 * textViewLeftPadding, height: textViewHeight)
+        textView.delegate = self
 
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = fancyTextView.lineSpacing
-        paragraphStyle.alignment = fancyTextView.textAlignment
-        tempTextView.attributedText = NSAttributedString(string: fancyTextView.text ?? "",
+        paragraphStyle.lineSpacing = textView.lineSpacing
+        paragraphStyle.alignment = textView.textAlignment
+        textView.attributedText = NSAttributedString(string: textView.text ?? "",
                                                          attributes: [.paragraphStyle: paragraphStyle,
-                                                                      .foregroundColor: fancyTextView.textColor,
-                                                                      .font: fancyTextView.font])
+                                                                      .foregroundColor: textView.textColor as Any,
+                                                                      .font: textView.font as Any])
 
-        if fancyTextView.maxInputLength != nil, let limitLabel = limitLabel {
+        if textView.maxInputLength != nil, let limitLabel = limitLabel {
             addSubview(limitLabel)
-            limitLabel.frame = CGRect(x: tempTextView.frame.origin.x, y: tempTextView.frame.maxY + limitLabelTopMargin, width: tempTextView.bounds.width, height: limitLabelHeight)
+            limitLabel.frame = CGRect(x: textView.frame.origin.x, y: textView.frame.maxY + limitLabelTopMargin, width: textView.bounds.width, height: limitLabelHeight)
         }
     }
 }
@@ -117,8 +116,8 @@ extension FancyAlertTextViewHeaderView: UITextViewDelegate {
         paragraphStyle.lineSpacing = fancyTextView.lineSpacing
         paragraphStyle.alignment = fancyTextView.textAlignment
         let attributes: [NSAttributedStringKey: Any] = [.paragraphStyle: paragraphStyle,
-                                                        .foregroundColor: fancyTextView.textColor,
-                                                        .font: fancyTextView.font]
+                                                        .foregroundColor: fancyTextView.textColor as Any,
+                                                        .font: fancyTextView.font as Any]
 
         let textCount = tempText.count
         let lang = textInputMode?.primaryLanguage

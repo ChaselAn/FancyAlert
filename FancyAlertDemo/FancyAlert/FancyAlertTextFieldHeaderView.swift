@@ -15,7 +15,7 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
     }
     var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor {
         didSet {
-            textField?.textField.tintColor = textField?.cursorColor ?? markedColor
+            textField?.tintColor = textField?.cursorColor ?? markedColor
         }
     }
 
@@ -47,21 +47,13 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
     override func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat) {
         super.makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
 
-        if isEditable, let fancyTextField = textField {
-            let textField = fancyTextField.textField
+        if isEditable, let textField = textField {
             addSubview(textField)
-            textField.text = fancyTextField.text
-            textField.borderStyle = fancyTextField.borderStyle
-            textField.font = fancyTextField.font
             textField.delegate = self
-            textField.textColor = fancyTextField.textColor
-            textField.textAlignment = fancyTextField.textAlignment
-            textField.returnKeyType = fancyTextField.returnKeyType
             textField.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textFieldTopMargin, width: labelWidth, height: textFieldHeight)
-            textField.tintColor = fancyTextField.cursorColor ?? markedColor
-            textField.placeholder = fancyTextField.placeholder
+            textField.tintColor = textField.cursorColor ?? markedColor
 
-            if fancyTextField.maxInputLength != nil {
+            if textField.maxInputLength != nil {
                 NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: .UITextFieldTextDidChange, object: nil)
             }
         }
@@ -70,7 +62,7 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
 
     @objc private func textFieldDidChange(notification: NSNotification) {
 
-        guard let textField = textField?.textField, let tempText = textField.text as NSString?, let textMaxLength = self.textField?.maxInputLength else { return }
+        guard let textField = textField, let tempText = textField.text as NSString?, let textMaxLength = textField.maxInputLength else { return }
 
         let textCount = tempText.length
         let lang = textInputMode?.primaryLanguage
