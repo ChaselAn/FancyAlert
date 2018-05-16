@@ -22,7 +22,8 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
     }
 
     private lazy var textViewBackgroundImageView: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "textView_background"))
+        let selfBundle = Bundle(for: FancyAlertTextViewHeaderView.self)
+        let imageView = UIImageView(image: UIImage(named: "textView_background", in: selfBundle, compatibleWith: nil))
         return imageView
     }()
 
