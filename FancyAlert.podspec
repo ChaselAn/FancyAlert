@@ -9,4 +9,5 @@ Pod::Spec.new do |s|
     s.source       = {:git => 'https://github.com/ChaselAn/FancyAlert.git', :tag => s.version}
     s.source_files = 'FancyAlertDemo/FancyAlert/*.swift'
     s.requires_arc = true
+    s.resources    = 'FancyAlertDemo/*.xcassets'
 end
