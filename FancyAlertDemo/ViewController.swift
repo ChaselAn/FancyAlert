@@ -173,7 +173,7 @@ class ViewController: UIViewController {
             })
 
         } else if sender == button5 {
-            let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题", message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
+            let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题", message: nil, actions: actions1)
             alertVC.editType = .textView
             alertVC.textView.maxInputLength = 50
             present(alertVC, animated: true, completion: nil)

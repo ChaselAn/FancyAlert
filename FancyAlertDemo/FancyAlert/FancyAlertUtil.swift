@@ -40,6 +40,6 @@ let separatorHeight = 1 / UIScreen.main.scale
 
 public class Config {
 
-    static var textViewHeight: CGFloat = 116
+    static var textViewHeight: CGFloat = 115
     static var textViewLineSpacing: CGFloat = 6
 }

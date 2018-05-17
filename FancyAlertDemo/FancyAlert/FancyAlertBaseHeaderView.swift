@@ -41,8 +41,8 @@ class FancyAlertBaseHeaderView: UIView {
     private(set) var titleLableHeight: CGFloat = 0
     private(set) var messageLabelHeight: CGFloat = 0
 
-    private let labelSpace:CGFloat = 13
-    private(set) var margin: CGFloat = 25
+    private let labelSpace:CGFloat = 5
+    private(set) var margin: CGFloat = 20
     private let bottomMargin: CGFloat = 28
     private let textFieldTopMargin: CGFloat = 25
     private let textFieldHeight: CGFloat = 30

@@ -41,11 +41,11 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
 
     private let labelSpace:CGFloat = 13
     private let bottomMargin: CGFloat = 28
-    private let textViewTopMargin: CGFloat = 25
+    private let textViewTopMargin: CGFloat = 17
     private var textViewHeight: CGFloat {
         return textView?.height ?? Config.textViewHeight
     }
-    private let textViewTopPadding: CGFloat = 14
+    private let textViewTopPadding: CGFloat = 10
     private let textViewLeftPadding: CGFloat = 24
     private let limitLabelHeight: CGFloat = 12
     private let limitLabelTopMargin: CGFloat = 5
@@ -83,13 +83,14 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
 
         guard isEditable, let textView = textView else { return }
 
+        let textViewBackGroundY = margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textViewTopMargin
         addSubview(textViewBackgroundImageView)
-        textViewBackgroundImageView.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textViewTopMargin, width: labelWidth, height: textViewHeight + 2 * textViewTopPadding + limitLabelTotalHeight)
+        textViewBackgroundImageView.frame = CGRect(x: margin, y: textViewBackGroundY, width: labelWidth, height: textViewHeight + 2 * textViewTopPadding + limitLabelTotalHeight)
 
         addSubview(textView)
         textView.backgroundColor = .clear
         textView.tintColor = textView.cursorColor ?? markedColor
-        textView.frame = CGRect(x: margin + textViewLeftPadding, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textViewTopMargin + textViewTopPadding, width: labelWidth - 2 * textViewLeftPadding, height: textViewHeight)
+        textView.frame = CGRect(x: margin + textViewLeftPadding, y: textViewBackGroundY + textViewTopPadding, width: labelWidth - 2 * textViewLeftPadding, height: textViewHeight)
         textView.delegate = self
 
         let paragraphStyle = NSMutableParagraphStyle()
@@ -102,7 +103,7 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
 
         if textView.maxInputLength != nil, let limitLabel = limitLabel {
             addSubview(limitLabel)
-            limitLabel.frame = CGRect(x: textView.frame.origin.x, y: textView.frame.maxY + limitLabelTopMargin, width: textView.bounds.width, height: limitLabelHeight)
+            limitLabel.frame = CGRect(x: textView.frame.origin.x, y: textViewBackgroundImageView.frame.maxY - 20 - limitLabelHeight, width: textView.bounds.width, height: limitLabelHeight)
         }
     }
 }
