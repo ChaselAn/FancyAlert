@@ -1,4 +1,4 @@
-# FancyAlert
+FancyAlert
 
 * A more fancy alert
 * You can use it like UIAlert
@@ -12,7 +12,7 @@
 * With Cocoapods:
 
 ```ruby
-pod 'FancyAlert', '~> 1.3.3'
+pod 'FancyAlert', '~> 1.4.0'
 # Then, run the following command:
 $ pod install
 ```
@@ -26,6 +26,10 @@ $ pod install
 * Alert with TextField
 
 <img width="250" height="445" src="https://raw.githubusercontent.com/ChaselAn/FancyAlert/master/alert_with_textfield.png"/>
+
+- Alert with more TextFields
+
+<img width="250" height="445" src="https://raw.githubusercontent.com/ChaselAn/FancyAlert/master/alert_with_textfields.png"/>
 
 * Alert with TextView
 
@@ -50,8 +54,14 @@ let cancelAction = FancyAlertAction(title: "取消", style: .cancel, handler: {
             print("取消action")
         })
 alertViewController.addAction(cancelAction)
-alertViewController.editType = .textField // Input box style
-alertViewController.textField.maxInputLength = 10 // max input length
+alertVC.addTextField { (textField) in
+                textField.placeholder = "请输入用户名"
+                textField.style = .gray
+                textField.maxInputLength = 10
+            } // add textField
+alertVC.addTextView { (textView) in
+                textView.maxInputLength = 50
+            } // add textView
 alertViewController.hasProgress = true // have progress
 alertViewController.progress = 0.5 // progress value
 present(alertViewController, animated: true, completion: nil)
