@@ -44,6 +44,7 @@ class AlertTableViewController: UITableViewController {
             case title
             case message
             case textField
+            case moreTextFields
             case textView
             case progress
         }
@@ -61,11 +62,22 @@ class AlertTableViewController: UITableViewController {
             let alertVC = FancyAlertViewController(style: .alert, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions2)
             present(alertVC, animated: true, completion: nil)
         case .textField:
-            let alertVC = FancyAlertViewController(style: .alert, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
+            let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题大标题大标", message: nil, actions: actions1)
             alertVC.addTextField { (textField) in
+                textField.maxInputLength = 5
+            }
+            present(alertVC, animated: true, completion: nil)
+        case .moreTextFields:
+            let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题大标题大标", message: nil, actions: actions1)
+            alertVC.addTextField { (textField) in
+                textField.placeholder = "请输入用户名"
+                textField.style = .gray
                 textField.maxInputLength = 10
             }
-            alertVC.addTextField(nil)
+            alertVC.addTextField({ (textField) in
+                textField.placeholder = "请输入密码"
+                textField.style = .gray
+            })
             present(alertVC, animated: true, completion: nil)
         case .textView:
             let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题", message: nil, actions: actions1)

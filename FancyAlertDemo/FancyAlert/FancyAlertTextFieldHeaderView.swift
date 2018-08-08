@@ -11,7 +11,11 @@ import UIKit
 class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
 
     override var headerHeight: CGFloat {
-        return  super.headerHeight + (textFieldHeight + textFieldTopMargin) * CGFloat(textFields.count)
+        if textFields.count > 0 {
+            return super.headerHeight + textFieldTopMargin + textFieldHeight * CGFloat(textFields.count) + textFieldsSpace * CGFloat(textFields.count - 1)
+        } else {
+            return super.headerHeight
+        }
     }
     var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor {
         didSet {
@@ -25,6 +29,7 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
     private let bottomMargin: CGFloat = 28
     private let textFieldTopMargin: CGFloat = 21
     private let textFieldHeight: CGFloat = 30
+    private let textFieldsSpace: CGFloat = 12
 
     private var textFields: [FancyTextField]
 
@@ -47,7 +52,7 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
                 textField.delegate = self
                 textField.frame = CGRect(x: margin, y: firstY, width: labelWidth, height: textFieldHeight)
                 textField.tintColor = textField.cursorColor ?? markedColor
-                firstY += (textFieldHeight + textFieldTopMargin)
+                firstY += (textFieldHeight + textFieldsSpace)
             }
             NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: .UITextFieldTextDidChange, object: nil)
         }
@@ -103,7 +108,7 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
 extension FancyAlertTextFieldHeaderView: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        textFields.first?.resignFirstResponder()
         return true
     }
 
