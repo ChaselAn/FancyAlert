@@ -12,7 +12,7 @@ FancyAlert
 * With Cocoapods:
 
 ```ruby
-pod 'FancyAlert', '~> 1.4.0'
+pod 'FancyAlert', '~> 1.4.1'
 # Then, run the following command:
 $ pod install
 ```
