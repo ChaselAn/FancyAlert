@@ -60,18 +60,11 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
     }
     private var tempInputLength: Int = 0
 
-    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, editType: FancyAlertViewController.TempEditType) {
-        switch editType {
-        case .textView(let textView):
-            self.textView = textView
-            self.isEditable = true
-        case .none:
-            self.isEditable = false
-        default:
-            assertionFailure()
-        }
+    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, textView: FancyTextView) {
+        self.textView = textView
+        self.isEditable = true
         super.init(title: title, message: message, width: width, margin: margin)
-        tempInputLength = textView?.maxInputLength ?? 0
+        tempInputLength = textView.maxInputLength ?? 0
     }
 
     required init?(coder aDecoder: NSCoder) {

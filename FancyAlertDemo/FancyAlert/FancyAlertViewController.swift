@@ -16,15 +16,6 @@ public class FancyAlertViewController: UIViewController {
     // 被标记的颜色，修改此属性，会影响alert的选项颜色 以及actionsheet中marked、cancel类型的选项
     public var markedColor = UIColor.fancyAlertMarkedDefaultColor
 
-    // 输入框类型，只适用于alert
-    public var editType: EditType = .none
-
-    // 只适用于alert
-    public let textField = FancyTextField()
-
-    // 只适用于alert
-    public let textView = FancyTextView()
-
     // 是否有进度条，只适用于alert
     public var hasProgress = false {
         didSet {
@@ -59,13 +50,14 @@ public class FancyAlertViewController: UIViewController {
             (tableView as? FancyAlertTableViewSource)?.actions = actions
         }
     }
-    public var statusBarStyle: UIStatusBarStyle = .default
 
-    public enum EditType {
-        case none
-        case textField
-        case textView
-    }
+    // 只适用于alert
+    public private(set) var textFields: [FancyTextField] = []
+
+    // 只适用于alert
+    public private(set) var textView: FancyTextView?
+
+    public var statusBarStyle: UIStatusBarStyle = .default
 
     private let maskAlpha: CGFloat = 0.75
 
@@ -73,12 +65,6 @@ public class FancyAlertViewController: UIViewController {
     private(set) var maskControl = UIControl()
     private let alertTransitionManager: FancyAlertTransitionManager
     private let type: UIAlertControllerStyle
-
-    enum TempEditType {
-        case none
-        case textField(FancyTextField)
-        case textView(FancyTextView)
-    }
 
     var safeAreaInsetsBottom: CGFloat = 0
 
@@ -102,6 +88,24 @@ public class FancyAlertViewController: UIViewController {
 
     public func addAction(_ action: FancyAlertAction) {
         actions.append(action)
+    }
+
+    public func addTextField(_ completionHandler: ((FancyTextField) -> ())?) {
+        guard type == .alert else {
+            fatalError("Text fields can only be added to an alert controller of style UIAlertControllerStyleAlert")
+        }
+        let textField = FancyTextField()
+        textFields.append(textField)
+        completionHandler?(textField)
+    }
+
+    public func addTextView(_ completionHandler: ((FancyTextView) -> ())?) {
+        guard type == .alert else {
+            fatalError("Text view can only be added to an alert controller of style UIAlertControllerStyleAlert")
+        }
+        let textView = FancyTextView()
+        self.textView = textView
+        completionHandler?(textView)
     }
 
     public override func viewDidLoad() {
@@ -136,16 +140,7 @@ public class FancyAlertViewController: UIViewController {
         case .actionSheet:
             tableView = FancyActionSheetTableView(title: title, message: message, actions: actions, width: view.bounds.width)
         case .alert:
-            let editType: TempEditType
-            switch self.editType {
-            case .none:
-                editType = .none
-            case .textField:
-                editType = .textField(textField)
-            case .textView:
-                editType = .textView(textView)
-            }
-            let alertTableView = FancyAlertTableView(title: title, message: message, actions: actions, width: view.bounds.width, editType: editType, progress: hasProgress ? progress : nil)
+            let alertTableView = FancyAlertTableView(title: title, message: message, actions: actions, width: view.bounds.width, textView: textView, textFields: textFields, progress: hasProgress ? progress : nil)
             tableView = alertTableView
         }
         (tableView as! FancyAlertTableViewSource).markedColor = markedColor

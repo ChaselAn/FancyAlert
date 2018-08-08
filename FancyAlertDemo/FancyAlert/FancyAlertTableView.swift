@@ -85,7 +85,10 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         guard title != nil || message != nil else {
             return nil
         }
-        let headerView = FancyAlertTextFieldHeaderView(title: title, message: message, width: alertWidth, margin: margin, editType: editType)
+        guard !textFields.isEmpty else {
+            fatalError()
+        }
+        let headerView = FancyAlertTextFieldHeaderView(title: title, message: message, width: alertWidth, margin: margin, textFields: textFields)
         headerView.frame.size.height = headerView.headerHeight
         headerView.heightChanged = { [weak self, weak headerView] in
             guard let strongSelf = self, let headerView = headerView else { return }
@@ -100,7 +103,10 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         guard title != nil || message != nil else {
             return nil
         }
-        let headerView = FancyAlertTextViewHeaderView(title: title, message: message, width: alertWidth, margin: margin, editType: editType)
+        guard let textView = textView else {
+            fatalError()
+        }
+        let headerView = FancyAlertTextViewHeaderView(title: title, message: message, width: alertWidth, margin: margin, textView: textView)
         headerView.frame.size.height = headerView.headerHeight
         headerView.heightChanged = { [weak self, weak headerView] in
             guard let strongSelf = self, let headerView = headerView else { return }
@@ -114,9 +120,9 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     private var headerView: FancyAlertBaseHeaderView? {
         if hasProgress {
             return progressHeaderView
-        } else if case .textField = editType {
+        } else if !textFields.isEmpty {
             return textFieldHeaderView
-        }else if case .textView = editType {
+        }else if textView != nil {
             return textViewHeaderView
         } else {
             return baseHeaderView
@@ -125,17 +131,20 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
 
     private let progress: Float?
     private let alertWidth: CGFloat
-    private let editType: FancyAlertViewController.TempEditType
+    private let textView: FancyTextView?
+    private let textFields: [FancyTextField]
+
 
     private var workItem: DispatchWorkItem?
 
-    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, editType: FancyAlertViewController.TempEditType, progress: Float?) {
+    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, textView: FancyTextView?, textFields: [FancyTextField], progress: Float?) {
         self.actions = actions
         self.progress = progress
         self.alertWidth = width
-        self.editType = editType
         self.title = title
         self.message = message
+        self.textView = textView
+        self.textFields = textFields
         self.hasProgress = progress != nil
         super.init(frame: CGRect.zero, style: .plain)
         backgroundColor = .white
@@ -151,9 +160,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
 
             tableHeaderView = headerView
 
-            switch editType {
-            case .none: break
-            default:
+            if !textFields.isEmpty || textView != nil {
                 NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame), name: .UIKeyboardWillChangeFrame, object: nil)
             }
         }

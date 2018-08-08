@@ -62,13 +62,16 @@ class AlertTableViewController: UITableViewController {
             present(alertVC, animated: true, completion: nil)
         case .textField:
             let alertVC = FancyAlertViewController(style: .alert, title: nil, message: "小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题小标题", actions: actions1)
-            alertVC.editType = .textField
-            alertVC.textField.maxInputLength = 10
+            alertVC.addTextField { (textField) in
+                textField.maxInputLength = 10
+            }
+            alertVC.addTextField(nil)
             present(alertVC, animated: true, completion: nil)
         case .textView:
             let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题", message: nil, actions: actions1)
-            alertVC.editType = .textView
-            alertVC.textView.maxInputLength = 50
+            alertVC.addTextView { (textView) in
+                textView.maxInputLength = 50
+            }
             present(alertVC, animated: true, completion: nil)
         case .progress:
             let alertVC = FancyAlertViewController(style: .alert, title: "发送中", message: "3张图片", actions: actions3)

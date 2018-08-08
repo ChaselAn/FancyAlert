@@ -11,11 +11,13 @@ import UIKit
 class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
 
     override var headerHeight: CGFloat {
-        return  super.headerHeight + (isEditable ? textFieldHeight + textFieldTopMargin : 0)
+        return  super.headerHeight + (textFieldHeight + textFieldTopMargin) * CGFloat(textFields.count)
     }
     var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor {
         didSet {
-            textField?.tintColor = textField?.cursorColor ?? markedColor
+            textFields.forEach({
+                $0.tintColor = $0.cursorColor ?? markedColor
+            })
         }
     }
 
@@ -24,19 +26,10 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
     private let textFieldTopMargin: CGFloat = 21
     private let textFieldHeight: CGFloat = 30
 
-    private var isEditable = false
-    private var textField: FancyTextField?
+    private var textFields: [FancyTextField]
 
-    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, editType: FancyAlertViewController.TempEditType) {
-        switch editType {
-        case .textField(let textField):
-            self.textField = textField
-            self.isEditable = true
-        case .none:
-            self.isEditable = false
-        default:
-            assertionFailure()
-        }
+    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, textFields: [FancyTextField]) {
+        self.textFields = textFields
         super.init(title: title, message: message, width: width, margin: margin)
     }
 
@@ -47,22 +40,23 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
     override func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat) {
         super.makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
 
-        if isEditable, let textField = textField {
-            addSubview(textField)
-            textField.delegate = self
-            textField.frame = CGRect(x: margin, y: margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textFieldTopMargin, width: labelWidth, height: textFieldHeight)
-            textField.tintColor = textField.cursorColor ?? markedColor
-
-            if textField.maxInputLength != nil {
-                NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: .UITextFieldTextDidChange, object: nil)
+        var firstY = margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textFieldTopMargin
+        if !textFields.isEmpty {
+            for textField in textFields {
+                addSubview(textField)
+                textField.delegate = self
+                textField.frame = CGRect(x: margin, y: firstY, width: labelWidth, height: textFieldHeight)
+                textField.tintColor = textField.cursorColor ?? markedColor
+                firstY += (textFieldHeight + textFieldTopMargin)
             }
+            NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: .UITextFieldTextDidChange, object: nil)
         }
 
     }
 
     @objc private func textFieldDidChange(notification: NSNotification) {
 
-        guard let textField = textField, let tempText = textField.text as NSString?, let textMaxLength = textField.maxInputLength else { return }
+        guard let textField = notification.object as? FancyTextField, let tempText = textField.text as NSString?, let textMaxLength = textField.maxInputLength else { return }
 
         let textCount = tempText.length
         let lang = textInputMode?.primaryLanguage
