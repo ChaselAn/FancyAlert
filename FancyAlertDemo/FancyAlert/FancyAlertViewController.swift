@@ -59,6 +59,15 @@ public class FancyAlertViewController: UIViewController {
 
     public var statusBarStyle: UIStatusBarStyle = .default
 
+    public var maskStyle: MaskStyle = .default
+
+    public enum MaskStyle {
+        case `default`    // 可见可点
+        case disabled     // 可见不可点
+        case transparent(enable: Bool)   // 透明的
+        case custom(enable: Bool, color: UIColor, alpha: CGFloat)
+    }
+
     private let maskAlpha: CGFloat = 0.75
 
     private(set) var tableView: UITableView!
@@ -127,8 +136,15 @@ public class FancyAlertViewController: UIViewController {
 
     private func makeUI() {
 
+        switch maskStyle {
+        case .default, .disabled:
+            maskControl.backgroundColor = UIColor.black.withAlphaComponent(maskAlpha)
+        case .transparent:
+            maskControl.backgroundColor = UIColor.black.withAlphaComponent(0)
+        case .custom(_, let color, let alpha):
+            maskControl.backgroundColor = color.withAlphaComponent(alpha)
+        }
         maskControl.addTarget(self, action: #selector(maskControlDidClicked), for: .touchUpInside)
-        maskControl.backgroundColor = UIColor.black.withAlphaComponent(maskAlpha)
         view.addSubview(maskControl)
         maskControl.translatesAutoresizingMaskIntoConstraints = false
         maskControl.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -152,7 +168,21 @@ public class FancyAlertViewController: UIViewController {
     }
 
     @objc private func maskControlDidClicked() {
-        self.dismiss(animated: true, completion: nil)
+        let maskEnable: Bool
+        switch maskStyle {
+        case .default:
+            maskEnable = true
+        case .disabled:
+            maskEnable = false
+        case .transparent(let enable):
+            maskEnable = enable
+        case .custom(let enable, _, _):
+            maskEnable = enable
+        }
+
+        if maskEnable {
+            self.dismiss(animated: true, completion: nil)
+        }
         maskDidClicked?()
     }
 }
