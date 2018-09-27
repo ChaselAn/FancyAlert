@@ -5,14 +5,23 @@ FancyAlert
 
 ### Requirements
 
-* Swift 4.1, iOS 9
+* Swift 4.0, iOS 9.0
 
 ###  Installation
 
 * With Cocoapods:
+* swift4.0:
 
 ```ruby
 pod 'FancyAlert', '~> 1.4.2'
+# Then, run the following command:
+$ pod install
+```
+
+* swift4.2:
+
+```ruby
+pod 'FancyAlert', '~> 1.4.3'
 # Then, run the following command:
 $ pod install
 ```
