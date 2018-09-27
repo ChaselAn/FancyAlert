@@ -27,7 +27,7 @@ extension UIColor {
 
 extension String {
 
-    func fancyAlert_getHeight(maxWidth: CGFloat, attributes: [NSAttributedStringKey: Any]?) -> CGFloat {
+    func fancyAlert_getHeight(maxWidth: CGFloat, attributes: [NSAttributedString.Key: Any]?) -> CGFloat {
 
         let size = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
         let rect = (self as NSString).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)

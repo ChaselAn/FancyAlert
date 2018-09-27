@@ -54,7 +54,7 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
                 textField.tintColor = textField.cursorColor ?? markedColor
                 firstY += (textFieldHeight + textFieldsSpace)
             }
-            NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: .UITextFieldTextDidChange, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: UITextField.textDidChangeNotification, object: nil)
         }
 
     }

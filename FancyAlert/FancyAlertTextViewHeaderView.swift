@@ -110,7 +110,7 @@ extension FancyAlertTextViewHeaderView: UITextViewDelegate {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = fancyTextView.lineSpacing
         paragraphStyle.alignment = fancyTextView.textAlignment
-        let attributes: [NSAttributedStringKey: Any] = [.paragraphStyle: paragraphStyle,
+        let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: paragraphStyle,
                                                         .foregroundColor: fancyTextView.textColor as Any,
                                                         .font: fancyTextView.font as Any]
 

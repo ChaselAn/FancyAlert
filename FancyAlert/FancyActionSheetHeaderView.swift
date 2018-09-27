@@ -45,7 +45,7 @@ class FancyActionSheetHeaderView: UIView {
         paragraph.lineHeightMultiple = 1.5
         paragraph.alignment = .center
         if let title = title {
-            let attributes: [NSAttributedStringKey: Any] = [.paragraphStyle: paragraph,
+            let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: paragraph,
                                                             .font: UIFont.systemFont(ofSize: 13, weight: .medium),
                                                             .foregroundColor: UIColor.fancyActionSheetTitleDefaultColor]
             let attributeString = NSMutableAttributedString(string: title,
@@ -60,7 +60,7 @@ class FancyActionSheetHeaderView: UIView {
         }
 
         if let message = message {
-            let attributes: [NSAttributedStringKey: Any] = [.paragraphStyle: paragraph,
+            let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: paragraph,
                                                             .font: UIFont.systemFont(ofSize: 12, weight: .medium),
                                                             .foregroundColor: UIColor.fancyActionSheetTitleDefaultColor]
             let attributeString = NSMutableAttributedString(string: message,

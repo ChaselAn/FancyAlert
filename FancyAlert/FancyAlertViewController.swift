@@ -73,11 +73,11 @@ public class FancyAlertViewController: UIViewController {
     private(set) var tableView: UITableView!
     private(set) var maskControl = UIControl()
     private let alertTransitionManager: FancyAlertTransitionManager
-    private let type: UIAlertControllerStyle
+    private let type: UIAlertController.Style
 
     var safeAreaInsetsBottom: CGFloat = 0
 
-    public init(style: UIAlertControllerStyle, title: String?, message: String? = nil, actions: [FancyAlertAction] = []) {
+    public init(style: UIAlertController.Style, title: String?, message: String? = nil, actions: [FancyAlertAction] = []) {
         self.type = style
         self.actions = actions
         self.message = message

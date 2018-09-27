@@ -11,9 +11,9 @@ import UIKit
 class FancyAlertTransitionAnimator: NSObject {
     var isDismissing: Bool = false
 
-    private let type: UIAlertControllerStyle
+    private let type: UIAlertController.Style
 
-    init(type: UIAlertControllerStyle) {
+    init(type: UIAlertController.Style) {
         self.type = type
         super.init()
     }

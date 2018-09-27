@@ -161,7 +161,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
             tableHeaderView = headerView
 
             if !textFields.isEmpty || textView != nil {
-                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame), name: .UIKeyboardWillChangeFrame, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
             }
         }
 
@@ -190,8 +190,8 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     }
 
     @objc private func keyboardWillChangeFrame(notification: Notification) {
-        guard let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double else { return }
-        guard let keyboardY = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect)?.origin.y else { return }
+        guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
+        guard let keyboardY = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.origin.y else { return }
         let offsetY = UIScreen.main.bounds.height - keyboardY
         
         if offsetY > 0 {

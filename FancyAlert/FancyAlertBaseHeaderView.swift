@@ -75,7 +75,7 @@ class FancyAlertBaseHeaderView: UIView {
         paragraph.alignment = .center
         let labelWidth = width - 2 * outsideMargin - 2 * margin
         if let title = title {
-            let attributes: [NSAttributedStringKey: Any] = [.paragraphStyle: paragraph,
+            let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: paragraph,
                                                             .font: UIFont.systemFont(ofSize: 17, weight: .medium),
                                                             .foregroundColor: UIColor.fancyAlertTitleDefaultColor]
             let attributeString = NSMutableAttributedString(string: title,
@@ -93,7 +93,7 @@ class FancyAlertBaseHeaderView: UIView {
         }
 
         if let message = message {
-            let attributes: [NSAttributedStringKey: Any] = [.paragraphStyle: paragraph,
+            let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: paragraph,
                                                             .font: UIFont.systemFont(ofSize: 14, weight: .regular),
                                                             .foregroundColor: UIColor.fancyAlertMessageDefaultColor]
             let attributeString = NSMutableAttributedString(string: message,

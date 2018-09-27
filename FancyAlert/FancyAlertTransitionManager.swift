@@ -12,7 +12,7 @@ class FancyAlertTransitionManager: NSObject {
 
     var animator: FancyAlertTransitionAnimator
 
-    init(type: UIAlertControllerStyle) {
+    init(type: UIAlertController.Style) {
         animator = FancyAlertTransitionAnimator(type: type)
         super.init()
     }

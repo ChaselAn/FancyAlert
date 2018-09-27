@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FancyAlert
 
 class AlertTableViewController: UITableViewController {
 
