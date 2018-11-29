@@ -13,6 +13,7 @@ public class FancyTextField: UITextField {
     public enum Style {
         case transparent
         case gray
+        case transparentAndSizeFit
     }
 
     public var style: Style = .transparent {
@@ -36,11 +37,8 @@ public class FancyTextField: UITextField {
     private func updateStyle() {
         switch style {
         case .transparent:
-            borderStyle = .none
-            font = UIFont.systemFont(ofSize: 16)
-            textColor = UIColor.fancyAlertMessageDefaultColor
+            setTransparentStyle()
             textAlignment = .center
-            returnKeyType = .done
         case .gray:
             backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
             layer.borderWidth = 0.5
@@ -55,6 +53,16 @@ public class FancyTextField: UITextField {
             textFieldLeftView.frame = CGRect(x: 0, y: 0, width: 6, height: 0)
             leftView = textFieldLeftView
             leftViewMode = .always
+        case .transparentAndSizeFit:
+            setTransparentStyle()
+            textAlignment = .right
         }
+    }
+
+    private func setTransparentStyle() {
+        borderStyle = .none
+        font = UIFont.systemFont(ofSize: 16)
+        textColor = UIColor.fancyAlertMessageDefaultColor
+        returnKeyType = .done
     }
 }

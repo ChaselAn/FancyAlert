@@ -50,13 +50,23 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
             for textField in textFields {
                 addSubview(textField)
                 textField.delegate = self
-                textField.frame = CGRect(x: margin, y: firstY, width: labelWidth, height: textFieldHeight)
+                switch textField.style {
+                case .gray, .transparent:
+                    textField.translatesAutoresizingMaskIntoConstraints = true
+                    textField.frame = CGRect(x: margin, y: firstY, width: labelWidth, height: textFieldHeight)
+                case .transparentAndSizeFit:
+                    textField.translatesAutoresizingMaskIntoConstraints = false
+                    textField.topAnchor.constraint(equalTo: topAnchor, constant: firstY).isActive = true
+                    textField.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: margin).isActive = true
+                    textField.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+                    textField.heightAnchor.constraint(equalToConstant: textFieldHeight).isActive = true
+                }
+
                 textField.tintColor = textField.cursorColor ?? markedColor
                 firstY += (textFieldHeight + textFieldsSpace)
             }
             NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: UITextField.textDidChangeNotification, object: nil)
         }
-
     }
 
     @objc private func textFieldDidChange(notification: NSNotification) {
