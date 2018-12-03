@@ -13,6 +13,9 @@ public class FancyAlertViewController: UIViewController {
     // 遮罩被点击后的事件
     public var maskDidClicked: (() -> Void)?
 
+    // dismiss完成后的回调
+    public var dismissCompleted: (() -> Void)?
+
     // 被标记的颜色，修改此属性，会影响alert的选项颜色 以及actionsheet中marked、cancel类型的选项
     public var markedColor = UIColor.fancyAlertMarkedDefaultColor
 
@@ -161,7 +164,9 @@ public class FancyAlertViewController: UIViewController {
         }
         (tableView as! FancyAlertTableViewSource).markedColor = markedColor
         (tableView as! FancyAlertTableViewSource).actionCompleted = { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
+            self?.dismiss(animated: true, completion: { [weak self] in
+                self?.dismissCompleted?()
+            })
         }
         view.addSubview(tableView)
 
