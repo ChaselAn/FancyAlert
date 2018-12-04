@@ -27,7 +27,7 @@ class FancyActionSheetTableView: UITableView, FancyAlertTableViewSource {
     }
 
     let cornerRadius: CGFloat = 10
-    let margin: CGFloat = 13
+    var margin: CGFloat = 13
     var markedColor = UIColor.fancyAlertMarkedDefaultColor
 
     var actionCompleted: (() -> Void)?

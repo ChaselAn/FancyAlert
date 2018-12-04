@@ -20,6 +20,7 @@ public class FancyAlertAction {
     public var title: String
     public var style: FancyAlertActionStyle
     public var handler: (() -> Void)?
+    public var color: UIColor?
     public var isEnabled: Bool = true {
         didSet {
             if isEnabled != oldValue {
@@ -30,10 +31,11 @@ public class FancyAlertAction {
 
     var enabledDidChange: ((Bool) -> Void)?
     
-    public init(title: String, style: FancyAlertActionStyle, handler: (() -> Void)? = nil) {
+    public init(title: String, style: FancyAlertActionStyle, handler: (() -> Void)? = nil, color: UIColor? = nil) {
         self.title = title
         self.style = style
         self.handler = handler
+        self.color = color
     }
     
 }

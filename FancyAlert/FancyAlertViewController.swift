@@ -9,7 +9,12 @@
 import UIKit
 
 public class FancyAlertViewController: UIViewController {
+    public enum ShowStyle {
+        case fill
+        case inset
+    }
 
+    public var showStyle: ShowStyle = .fill
     // 遮罩被点击后的事件
     public var maskDidClicked: (() -> Void)?
 
@@ -80,10 +85,13 @@ public class FancyAlertViewController: UIViewController {
 
     var safeAreaInsetsBottom: CGFloat = 0
 
-    public init(style: UIAlertController.Style, title: String?, message: String? = nil, actions: [FancyAlertAction] = []) {
+    var bgView = UIView()
+
+    public init(showStyle: ShowStyle = .fill, style: UIAlertController.Style, title: String?, message: String? = nil, actions: [FancyAlertAction] = []) {
         self.type = style
         self.actions = actions
         self.message = message
+        self.showStyle = showStyle
         alertTransitionManager = FancyAlertTransitionManager(type: type)
         super.init(nibName: nil, bundle: nil)
         
@@ -92,6 +100,8 @@ public class FancyAlertViewController: UIViewController {
 
         modalPresentationStyle = .custom
         modalPresentationCapturesStatusBarAppearance = true
+        bgView.backgroundColor = .white
+
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -122,7 +132,6 @@ public class FancyAlertViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
         makeUI()
     }
 
@@ -154,7 +163,6 @@ public class FancyAlertViewController: UIViewController {
         maskControl.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         maskControl.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         maskControl.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-
         switch type {
         case .actionSheet:
             tableView = FancyActionSheetTableView(title: title, message: message, actions: actions, width: view.bounds.width)
@@ -168,8 +176,20 @@ public class FancyAlertViewController: UIViewController {
                 self?.dismissCompleted?()
             })
         }
+        view.addSubview(bgView)
         view.addSubview(tableView)
-
+        bgView.translatesAutoresizingMaskIntoConstraints = false
+        bgView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bgView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bgView.topAnchor.constraint(equalTo: tableView.topAnchor).isActive = true
+        bgView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        bgView.layer.cornerRadius = 10
+        bgView.layer.masksToBounds = true
+        if showStyle == .fill {
+            bgView.isHidden = false
+        } else {
+            bgView.isHidden = true
+        }
     }
 
     @objc private func maskControlDidClicked() {

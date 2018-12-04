@@ -47,6 +47,8 @@ class FancyActionSheetCell: UITableViewCell {
             self?.titleLabel.alpha = action.isEnabled ? 1 : 0.4
             self?.isUserInteractionEnabled = action.isEnabled
         }
+
+        titleLabel.textColor = action.color
     }
 
     private func makeUI() {
