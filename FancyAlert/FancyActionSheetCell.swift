@@ -16,7 +16,7 @@ class FancyActionSheetCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         selectedBackgroundView = UIView()
-        selectedBackgroundView?.backgroundColor = UIColor.fancyActionSheetSelectedColor
+        selectedBackgroundView?.backgroundColor = FancyAlertConfig.actionSheetCellSelectedColor
 
         makeUI()
     }
@@ -31,13 +31,16 @@ class FancyActionSheetCell: UITableViewCell {
         titleLabel.text = action.title
         switch action.style {
         case .normal:
-            titleLabel.textColor = UIColor.fancyAlertNormalDefaultColor
+            titleLabel.textColor = FancyAlertConfig.actionSheetNormalActionDefaultColor
         case .marked:
             titleLabel.textColor = markedColor
         case .disabled:
-            titleLabel.textColor = UIColor.fancyAlertDisabledDefaultColor
+            titleLabel.textColor = FancyAlertConfig.actionSheetDisabledActionDefaultColor
         case .cancel:
-            titleLabel.textColor = markedColor
+            titleLabel.textColor = FancyAlertConfig.actionSheetCancelActionDefaultColor
+        }
+        if let color = action.color {
+            titleLabel.textColor = color
         }
         titleLabel.alpha = action.isEnabled ? 1 : 0.4
         isUserInteractionEnabled = action.isEnabled

@@ -10,19 +10,19 @@ import UIKit
 
 public class FancyTextView: UITextView {
 
-    public var height: CGFloat = Config.textViewHeight
+    public var height: CGFloat = FancyAlertConfig.textViewHeight
     public var maxInputLength: Int?
     public var cursorColor: UIColor?
-    public var lineSpacing: CGFloat = Config.textViewLineSpacing
+    public var lineSpacing: CGFloat = FancyAlertConfig.textViewLineSpacing
 
     // 以下属性maxInputLength不为nil时有效
-    public var maxInputLimitLabelColor = UIColor.fancyAlertProgressTintColor
+    public var maxInputLimitLabelColor = FancyAlertConfig.alertProgressTintColor
     public var maxInputLimitLabelFont = UIFont.systemFont(ofSize: 12)
 
     public override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         font = UIFont.systemFont(ofSize: 14)
-        textColor = UIColor.fancyAlertMessageDefaultColor
+        textColor = FancyAlertConfig.alertMessageDefaultColor
         textAlignment = .left
     }
 

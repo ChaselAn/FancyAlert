@@ -13,7 +13,7 @@ class FancyAlertCell: UITableViewCell {
     private let titleLabel = UILabel()
     private var topSeparatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.fancyAlertSeparatorColor
+        view.backgroundColor = FancyAlertConfig.alertSeparatorColor
         return view
     }()
 
@@ -21,7 +21,7 @@ class FancyAlertCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         selectedBackgroundView = UIView()
-        selectedBackgroundView?.backgroundColor = UIColor.fancyActionSheetSelectedColor
+        selectedBackgroundView?.backgroundColor = FancyAlertConfig.alertCellSelectedColor
 
         makeUI()
     }
@@ -32,7 +32,7 @@ class FancyAlertCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        topSeparatorView.backgroundColor = UIColor.fancyAlertSeparatorColor
+        topSeparatorView.backgroundColor = FancyAlertConfig.alertSeparatorColor
     }
 
     func setData(action: FancyAlertAction, markedColor: UIColor) {
@@ -69,6 +69,6 @@ class FancyAlertCell: UITableViewCell {
         topSeparatorView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         topSeparatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         topSeparatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        topSeparatorView.heightAnchor.constraint(equalToConstant: separatorHeight).isActive = true
+        topSeparatorView.heightAnchor.constraint(equalToConstant: FancyAlertConfig.separatorHeight).isActive = true
     }
 }

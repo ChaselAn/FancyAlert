@@ -14,7 +14,7 @@ class FancyAlertProgressHeaderView: FancyAlertBaseHeaderView {
         didSet {
             if progress != tempProgress {
                 tempProgress = progress
-                makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
+                makeUI(title: title, message: message, width: width, outsideInset: outsideInset)
                 heightChanged?()
             }
         }
@@ -22,8 +22,8 @@ class FancyAlertProgressHeaderView: FancyAlertBaseHeaderView {
 
     private lazy var progressView: UIProgressView = {
         let progressView = UIProgressView()
-        progressView.trackTintColor = .fancyAlertTrackTintColor
-        progressView.progressTintColor = .fancyAlertProgressTintColor
+        progressView.trackTintColor = FancyAlertConfig.alertTrackTintColor
+        progressView.progressTintColor = FancyAlertConfig.alertProgressTintColor
         return progressView
     }()
 
@@ -37,9 +37,9 @@ class FancyAlertProgressHeaderView: FancyAlertBaseHeaderView {
         return  super.headerHeight + progressAreaHeight
     }
 
-    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, progress: Float?) {
+    init(title: String?, message: String?, width: CGFloat, inset: FancyAlertContentEdgeInsets, progress: Float?) {
         self.tempProgress = progress
-        super.init(title: title, message: message, width: width, margin: margin)
+        super.init(title: title, message: message, width: width, inset: inset)
 
     }
 
@@ -47,10 +47,10 @@ class FancyAlertProgressHeaderView: FancyAlertBaseHeaderView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat) {
-        super.makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
+    override func makeUI(title: String?, message: String?, width: CGFloat, outsideInset: FancyAlertContentEdgeInsets) {
+        super.makeUI(title: title, message: message, width: width, outsideInset: outsideInset)
 
-        let progressWidth = width - 2 * outsideMargin - 2 * progressHorizontalMargin
+        let progressWidth = width - outsideInset.left - outsideInset.right - 2 * progressHorizontalMargin
         if title != nil {
             if tempProgress != nil {
                 addSubview(progressView)

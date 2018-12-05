@@ -8,23 +8,6 @@
 
 import UIKit
 
-extension UIColor {
-
-    public static var fancyAlertTitleDefaultColor: UIColor { return #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1) } // 333333
-    public static var fancyAlertMessageDefaultColor: UIColor { return #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1) } // 4a4a4a
-    public static var fancyActionSheetTitleDefaultColor: UIColor { return #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1) } // 979797
-
-    public static var fancyAlertNormalDefaultColor: UIColor { return #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1) } // 333333
-    public static var fancyAlertMarkedDefaultColor: UIColor { return #colorLiteral(red: 1, green: 0.1882352941, blue: 0.2862745098, alpha: 1) } // FF3049
-    public static var fancyAlertDisabledDefaultColor: UIColor { return #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1) } // 979797
-
-    public static var fancyAlertSeparatorColor: UIColor { return #colorLiteral(red: 0.9254901961, green: 0.9254901961, blue: 0.9254901961, alpha: 1) } // ececec
-    public static var fancyActionSheetSelectedColor: UIColor { return #colorLiteral(red: 0.9294117647, green: 0.9294117647, blue: 0.9294117647, alpha: 1) } // ededed
-
-    public static var fancyAlertProgressTintColor: UIColor { return #colorLiteral(red: 0.7647058824, green: 0.7647058824, blue: 0.7647058824, alpha: 1) } // c3c3c3
-    public static var fancyAlertTrackTintColor: UIColor { return #colorLiteral(red: 0.8901960784, green: 0.8901960784, blue: 0.8901960784, alpha: 1) } // e3e3e3
-}
-
 extension String {
 
     func fancyAlert_getHeight(maxWidth: CGFloat, attributes: [NSAttributedString.Key: Any]?) -> CGFloat {
@@ -34,12 +17,4 @@ extension String {
 
         return rect.size.height
     }
-}
-
-let separatorHeight = 1 / UIScreen.main.scale
-
-public class Config {
-
-    static var textViewHeight: CGFloat = 115
-    static var textViewLineSpacing: CGFloat = 6
 }

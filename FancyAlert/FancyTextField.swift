@@ -46,7 +46,7 @@ public class FancyTextField: UITextField {
             layer.cornerRadius = 2
             layer.masksToBounds = true
             font = UIFont.systemFont(ofSize: 13)
-            textColor = UIColor.fancyAlertMessageDefaultColor
+            textColor = FancyAlertConfig.alertMessageDefaultColor
             textAlignment = .left
             returnKeyType = .done
             let textFieldLeftView = UIView()
@@ -62,7 +62,7 @@ public class FancyTextField: UITextField {
     private func setTransparentStyle() {
         borderStyle = .none
         font = UIFont.systemFont(ofSize: 16)
-        textColor = UIColor.fancyAlertMessageDefaultColor
+        textColor = FancyAlertConfig.alertMessageDefaultColor
         returnKeyType = .done
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
 
-    var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor {
+    var markedColor: UIColor = FancyAlertConfig.actionSheetMarkedActionDefaultColor {
         didSet {
             textView?.tintColor = textView?.cursorColor ?? markedColor
         }
@@ -43,7 +43,7 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
     private let bottomMargin: CGFloat = 28
     private let textViewTopMargin: CGFloat = 17
     private var textViewHeight: CGFloat {
-        return textView?.height ?? Config.textViewHeight
+        return textView?.height ?? FancyAlertConfig.textViewHeight
     }
     private let textViewTopPadding: CGFloat = 10
     private let textViewLeftPadding: CGFloat = 24
@@ -60,10 +60,10 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
     }
     private var tempInputLength: Int = 0
 
-    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, textView: FancyTextView) {
+    init(title: String?, message: String?, width: CGFloat, inset: FancyAlertContentEdgeInsets, textView: FancyTextView) {
         self.textView = textView
         self.isEditable = true
-        super.init(title: title, message: message, width: width, margin: margin)
+        super.init(title: title, message: message, width: width, inset: inset)
         tempInputLength = textView.maxInputLength ?? 0
     }
 
@@ -71,8 +71,8 @@ class FancyAlertTextViewHeaderView: FancyAlertBaseHeaderView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat) {
-        super.makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
+    override func makeUI(title: String?, message: String?, width: CGFloat, outsideInset: FancyAlertContentEdgeInsets) {
+        super.makeUI(title: title, message: message, width: width, outsideInset: outsideInset)
 
         guard isEditable, let textView = textView else { return }
 

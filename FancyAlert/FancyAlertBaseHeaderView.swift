@@ -14,7 +14,7 @@ class FancyAlertBaseHeaderView: UIView {
         didSet {
             if message != tempMessage {
                 tempMessage = message
-                makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
+                makeUI(title: title, message: message, width: width, outsideInset: outsideInset)
                 heightChanged?()
             }
         }
@@ -23,7 +23,7 @@ class FancyAlertBaseHeaderView: UIView {
         didSet {
             if title != tempTitle {
                 tempTitle = title
-                makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
+                makeUI(title: title, message: message, width: width, outsideInset: outsideInset)
                 heightChanged?()
             }
         }
@@ -47,37 +47,37 @@ class FancyAlertBaseHeaderView: UIView {
     private let textFieldTopMargin: CGFloat = 25
     private let textFieldHeight: CGFloat = 30
     var labelWidth: CGFloat {
-        return width - 2 * outsideMargin - 2 * margin
+        return width - outsideInset.left - outsideInset.right - 2 * margin
     }
 
     private var tempTitle: String?
     private var tempMessage: String?
     private(set) var width: CGFloat
-    private(set) var outsideMargin: CGFloat
+    private(set) var outsideInset: FancyAlertContentEdgeInsets
 
-    init(title: String?, message: String?, width: CGFloat, margin: CGFloat) {
+    init(title: String?, message: String?, width: CGFloat, inset: FancyAlertContentEdgeInsets) {
         self.tempMessage = message
         self.tempTitle = title
         self.width = width
-        self.outsideMargin = margin
+        self.outsideInset = inset
         super.init(frame: CGRect.zero)
 
-        makeUI(title: tempTitle, message: tempMessage, width: width, outsideMargin: margin)
+        makeUI(title: tempTitle, message: tempMessage, width: width, outsideInset: inset)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat) {
+    func makeUI(title: String?, message: String?, width: CGFloat, outsideInset: FancyAlertContentEdgeInsets) {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineHeightMultiple = 1.5
         paragraph.alignment = .center
-        let labelWidth = width - 2 * outsideMargin - 2 * margin
+        let labelWidth = width - outsideInset.left - outsideInset.right - 2 * margin
         if let title = title {
             let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: paragraph,
                                                             .font: UIFont.systemFont(ofSize: 17, weight: .medium),
-                                                            .foregroundColor: UIColor.fancyAlertTitleDefaultColor]
+                                                            .foregroundColor: FancyAlertConfig.alertTitleDefaultColor]
             let attributeString = NSMutableAttributedString(string: title,
                                                             attributes: attributes)
             titleLabel.attributedText = attributeString
@@ -95,7 +95,7 @@ class FancyAlertBaseHeaderView: UIView {
         if let message = message {
             let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: paragraph,
                                                             .font: UIFont.systemFont(ofSize: 14, weight: .regular),
-                                                            .foregroundColor: UIColor.fancyAlertMessageDefaultColor]
+                                                            .foregroundColor: FancyAlertConfig.alertMessageDefaultColor]
             let attributeString = NSMutableAttributedString(string: message,
                                                             attributes: attributes)
             messageLabel.attributedText = attributeString

@@ -16,12 +16,12 @@ class FancyAlertTwoActionCell: UITableViewCell {
     private var rightButton = UIButton()
     private var centerSeparatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.fancyAlertSeparatorColor
+        view.backgroundColor = FancyAlertConfig.alertSeparatorColor
         return view
     }()
     private var topSeparatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.fancyAlertSeparatorColor
+        view.backgroundColor = FancyAlertConfig.alertSeparatorColor
         return view
     }()
 
@@ -45,7 +45,7 @@ class FancyAlertTwoActionCell: UITableViewCell {
         centerSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         centerSeparatorView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         centerSeparatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        centerSeparatorView.widthAnchor.constraint(equalToConstant: separatorHeight).isActive = true
+        centerSeparatorView.widthAnchor.constraint(equalToConstant: FancyAlertConfig.separatorHeight).isActive = true
 
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         rightButton.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -57,7 +57,7 @@ class FancyAlertTwoActionCell: UITableViewCell {
         topSeparatorView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         topSeparatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         topSeparatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        topSeparatorView.heightAnchor.constraint(equalToConstant: separatorHeight).isActive = true
+        topSeparatorView.heightAnchor.constraint(equalToConstant: FancyAlertConfig.separatorHeight).isActive = true
 
         leftButton.addTarget(self, action: #selector(buttonTouchDown), for: .touchDown)
         leftButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
@@ -118,7 +118,7 @@ class FancyAlertTwoActionCell: UITableViewCell {
     }
 
     @objc private func buttonTouchDown(sender: UIButton) {
-        sender.backgroundColor = UIColor.fancyActionSheetSelectedColor
+        sender.backgroundColor = FancyAlertConfig.alertCellSelectedColor
     }
 
     @objc private func buttonTouchOutside(sender: UIButton) {

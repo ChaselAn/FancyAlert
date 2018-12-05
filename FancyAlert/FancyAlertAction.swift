@@ -15,18 +15,19 @@ public enum FancyAlertActionStyle {
     case disabled // 点击后不会dismiss，只适用于actionsheet
 }
 
-public class FancyAlertAction {
+open class FancyAlertAction {
 
-    public var title: String
-    public var style: FancyAlertActionStyle
-    public var handler: (() -> Void)?
-    public var isEnabled: Bool = true {
+    open var title: String
+    open var style: FancyAlertActionStyle
+    open var handler: (() -> Void)?
+    open var isEnabled: Bool = true {
         didSet {
             if isEnabled != oldValue {
                 enabledDidChange?(isEnabled)
             }
         }
     }
+    open var color: UIColor? // default is FancyAlertViewController.markedColor
 
     var enabledDidChange: ((Bool) -> Void)?
     

@@ -44,7 +44,6 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
 
         guard let alertController = controller as? FancyAlertViewController else { return }
         let tableViewHeight = (alertController.tableView as! FancyAlertTableViewSource).tableViewHeight
-        let margin = (alertController.tableView as! FancyAlertTableViewSource).margin
         switch type {
         case .alert:
             alertController.view.alpha = initialAlpha
@@ -52,7 +51,7 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
                 alertController.tableView.center = alertController.view.center
                 alertController.tableView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
             }
-            alertController.tableView.bounds.size = CGSize(width: alertController.view.bounds.width - 2 * margin, height: tableViewHeight)
+            alertController.tableView.bounds.size = CGSize(width: alertController.view.bounds.width - alertController.alertContentInset.left - alertController.alertContentInset.right, height: tableViewHeight)
             UIView.animate(withDuration: animationDuration, animations: {
                 alertController.view.alpha = finalAlpha
                 alertController.tableView.transform = CGAffineTransform.identity
@@ -71,9 +70,37 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
             })
         case .actionSheet:
             alertController.maskControl.alpha = initialAlpha
-            let beginY = !isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - tableViewHeight - margin - alertController.safeAreaInsetsBottom
-            let endY = isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - tableViewHeight - margin - alertController.safeAreaInsetsBottom
-            alertController.tableView.frame = CGRect(x: margin, y: beginY, width: alertController.view.bounds.width - 2 * margin, height: tableViewHeight)
+            var behavior: FancyAlertViewController.PrivateContentInsetAdjustmentBehavior = .never
+            if #available(iOS 11.0, *) {
+                if let privateBehavior = alertController._actionSheetContentInsetAdjustmentBehavior {
+                    behavior = privateBehavior
+                } else {
+                    switch FancyAlertConfig.actionSheetContentInsetAdjustmentBehavior {
+                    case .always:
+                        behavior = .always
+                    case .never:
+                        behavior = .never
+                    case .alwaysAndTileDown:
+                        behavior = .alwaysAndTileDown
+                    }
+                }
+            }
+            let insetsBottom: CGFloat
+            let newTableViewHeight: CGFloat
+            switch behavior {
+            case .always:
+                insetsBottom = alertController.safeAreaInsetsBottom + alertController.actionSheetContentInset.bottom
+                newTableViewHeight = tableViewHeight
+            case .never:
+                insetsBottom = alertController.actionSheetContentInset.bottom
+                newTableViewHeight = tableViewHeight
+            case .alwaysAndTileDown:
+                insetsBottom = alertController.actionSheetContentInset.bottom
+                newTableViewHeight = tableViewHeight + alertController.safeAreaInsetsBottom
+            }
+            let beginY = !isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - newTableViewHeight - insetsBottom
+            let endY = isDismissing ? alertController.view.bounds.height : alertController.view.bounds.height - newTableViewHeight - insetsBottom
+            alertController.tableView.frame = CGRect(x: alertController.actionSheetContentInset.left, y: beginY, width: alertController.view.bounds.width - alertController.actionSheetContentInset.left - alertController.actionSheetContentInset.right, height: newTableViewHeight)
             UIView.animate(withDuration: animationDuration, animations: { 
                 alertController.maskControl.alpha = finalAlpha
                 alertController.tableView.frame.origin.y = endY

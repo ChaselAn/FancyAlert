@@ -17,7 +17,7 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
             return super.headerHeight
         }
     }
-    var markedColor: UIColor = UIColor.fancyAlertMarkedDefaultColor {
+    var markedColor: UIColor = FancyAlertConfig.actionSheetMarkedActionDefaultColor {
         didSet {
             textFields.forEach({
                 $0.tintColor = $0.cursorColor ?? markedColor
@@ -33,17 +33,17 @@ class FancyAlertTextFieldHeaderView: FancyAlertBaseHeaderView {
 
     private var textFields: [FancyTextField]
 
-    init(title: String?, message: String?, width: CGFloat, margin: CGFloat, textFields: [FancyTextField]) {
+    init(title: String?, message: String?, width: CGFloat, inset: FancyAlertContentEdgeInsets, textFields: [FancyTextField]) {
         self.textFields = textFields
-        super.init(title: title, message: message, width: width, margin: margin)
+        super.init(title: title, message: message, width: width, inset: inset)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func makeUI(title: String?, message: String?, width: CGFloat, outsideMargin: CGFloat) {
-        super.makeUI(title: title, message: message, width: width, outsideMargin: outsideMargin)
+    override func makeUI(title: String?, message: String?, width: CGFloat, outsideInset: FancyAlertContentEdgeInsets) {
+        super.makeUI(title: title, message: message, width: width, outsideInset: outsideInset)
 
         var firstY = margin + titleLableHeight + (title != nil && message != nil ? labelSpace : 0) + messageLabelHeight + textFieldTopMargin
         if !textFields.isEmpty {

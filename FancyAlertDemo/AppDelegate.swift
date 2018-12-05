@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FancyAlert
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//        FancyAlertConfig.alertTitleDefaultColor = .red
+//        if #available(iOS 11.0, *) {
+//            FancyAlertConfig.actionSheetContentInsetAdjustmentBehavior = .alwaysAndTileDown
+//        }
+//        FancyAlertConfig.actionSheetContentInset = UIEdgeInsets.zero
         return true
     }
 

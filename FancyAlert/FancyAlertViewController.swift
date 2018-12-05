@@ -8,61 +8,84 @@
 
 import UIKit
 
-public class FancyAlertViewController: UIViewController {
+open class FancyAlertViewController: UIViewController {
 
     // 遮罩被点击后的事件
-    public var maskDidClicked: (() -> Void)?
+    open var maskDidClicked: (() -> Void)?
 
     // dismiss完成后的回调
-    public var dismissCompleted: (() -> Void)?
+    open var dismissCompleted: (() -> Void)?
 
-    // 被标记的颜色，修改此属性，会影响alert的选项颜色 以及actionsheet中marked、cancel类型的选项
-    public var markedColor = UIColor.fancyAlertMarkedDefaultColor
+    // 被标记的颜色，修改此属性，会影响alert的选项颜色 以及actionsheet中marked的选项
+    open var markedColor = FancyAlertConfig.actionSheetMarkedActionDefaultColor
+
+    open var backgroundColor = FancyAlertConfig.backgroundColor
+
+    open var actionSheetContentInset = FancyAlertConfig.actionSheetContentInset
+
+    open var alertContentInset = FancyAlertConfig.alertContentInset
+
+    @available(iOS 11.0, *)
+    open var actionSheetContentInsetAdjustmentBehavior: ContentInsetAdjustmentBehavior {
+        get {
+            return _actionSheetContentInsetAdjustmentBehavior?.ios11Value ?? FancyAlertConfig.actionSheetContentInsetAdjustmentBehavior
+        }
+        set {
+            switch newValue {
+            case .always:
+                _actionSheetContentInsetAdjustmentBehavior = .always
+            case .never:
+                _actionSheetContentInsetAdjustmentBehavior = .never
+            case .alwaysAndTileDown:
+                _actionSheetContentInsetAdjustmentBehavior = .alwaysAndTileDown
+            }
+        }
+    }
 
     // 是否有进度条，只适用于alert
-    public var hasProgress = false {
+    open var hasProgress = false {
         didSet {
             (tableView as? FancyAlertTableView)?.hasProgress = hasProgress
         }
     }
 
     // 进度条的进度，只适用于alert
-    public var progress: Float = 0 {
+    open var progress: Float = 0 {
         didSet {
             (tableView as? FancyAlertTableView)?.setProgress(progress)
         }
     }
 
     // title
-    public override var title: String? {
+    open override var title: String? {
         didSet {
             (tableView as? FancyAlertTableViewSource)?.title = title
         }
     }
 
     // message
-    public var message: String? {
+    open var message: String? {
         didSet {
             (tableView as? FancyAlertTableViewSource)?.message = message
         }
     }
 
     // actions
-    public var actions: [FancyAlertAction] {
+    open var actions: [FancyAlertAction] {
         didSet {
             (tableView as? FancyAlertTableViewSource)?.actions = actions
         }
     }
 
     // 只适用于alert
-    public private(set) var textFields: [FancyTextField] = []
+    open private(set) var textFields: [FancyTextField] = []
 
     // 只适用于alert
-    public private(set) var textView: FancyTextView?
+    open private(set) var textView: FancyTextView?
 
-    public var statusBarStyle: UIStatusBarStyle = .default
+    open var statusBarStyle: UIStatusBarStyle = .default
 
-    public var maskStyle: MaskStyle = .default
+    open var maskStyle: MaskStyle = .default
 
     public enum MaskStyle {
         case `default`    // 可见可点
@@ -71,12 +94,38 @@ public class FancyAlertViewController: UIViewController {
         case custom(enable: Bool, color: UIColor, alpha: CGFloat)
     }
 
+    @available(iOS 11.0, *)
+    public enum ContentInsetAdjustmentBehavior {
+        case always
+        case never
+        case alwaysAndTileDown
+    }
+
     private let maskAlpha: CGFloat = 0.75
 
     private(set) var tableView: UITableView!
     private(set) var maskControl = UIControl()
     private let alertTransitionManager: FancyAlertTransitionManager
     private let type: UIAlertController.Style
+    private(set) var _actionSheetContentInsetAdjustmentBehavior: PrivateContentInsetAdjustmentBehavior?
+
+    enum PrivateContentInsetAdjustmentBehavior {
+        case always
+        case never
+        case alwaysAndTileDown
+
+        @available(iOS 11.0, *)
+        var ios11Value: ContentInsetAdjustmentBehavior {
+            switch self {
+            case .always:
+                return .always
+            case .never:
+                return .never
+            case .alwaysAndTileDown:
+                return .alwaysAndTileDown
+            }
+        }
+    }
 
     var safeAreaInsetsBottom: CGFloat = 0
 
@@ -98,11 +147,11 @@ public class FancyAlertViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func addAction(_ action: FancyAlertAction) {
+    open func addAction(_ action: FancyAlertAction) {
         actions.append(action)
     }
 
-    public func addTextField(_ completionHandler: ((FancyTextField) -> ())?) {
+    open func addTextField(_ completionHandler: ((FancyTextField) -> ())?) {
         guard type == .alert else {
             fatalError("Text fields can only be added to an alert controller of style UIAlertControllerStyleAlert")
         }
@@ -111,7 +160,7 @@ public class FancyAlertViewController: UIViewController {
         completionHandler?(textField)
     }
 
-    public func addTextView(_ completionHandler: ((FancyTextView) -> ())?) {
+    open func addTextView(_ completionHandler: ((FancyTextView) -> ())?) {
         guard type == .alert else {
             fatalError("Text view can only be added to an alert controller of style UIAlertControllerStyleAlert")
         }
@@ -120,20 +169,20 @@ public class FancyAlertViewController: UIViewController {
         completionHandler?(textView)
     }
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
         makeUI()
     }
 
-    public override func viewSafeAreaInsetsDidChange() {
+    open override func viewSafeAreaInsetsDidChange() {
         if #available(iOS 11.0, *) {
             super.viewSafeAreaInsetsDidChange()
             safeAreaInsetsBottom = view.safeAreaInsets.bottom
         }
     }
 
-    public override var preferredStatusBarStyle: UIStatusBarStyle {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyle
     }
 
@@ -157,9 +206,9 @@ public class FancyAlertViewController: UIViewController {
 
         switch type {
         case .actionSheet:
-            tableView = FancyActionSheetTableView(title: title, message: message, actions: actions, width: view.bounds.width)
+            tableView = FancyActionSheetTableView(title: title, message: message, actions: actions, width: view.bounds.width, inset: actionSheetContentInset)
         case .alert:
-            let alertTableView = FancyAlertTableView(title: title, message: message, actions: actions, width: view.bounds.width, textView: textView, textFields: textFields, progress: hasProgress ? progress : nil)
+            let alertTableView = FancyAlertTableView(title: title, message: message, actions: actions, width: view.bounds.width, textView: textView, textFields: textFields, progress: hasProgress ? progress : nil, inset: alertContentInset)
             tableView = alertTableView
         }
         (tableView as! FancyAlertTableViewSource).markedColor = markedColor
@@ -168,6 +217,7 @@ public class FancyAlertViewController: UIViewController {
                 self?.dismissCompleted?()
             })
         }
+        tableView.backgroundColor = backgroundColor
         view.addSubview(tableView)
 
     }

@@ -40,8 +40,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     }
 
     let cornerRadius: CGFloat = 10
-    let margin: CGFloat = 39
-    var markedColor = UIColor.fancyAlertMarkedDefaultColor {
+    var markedColor = FancyAlertConfig.actionSheetMarkedActionDefaultColor {
         didSet {
             (headerView as? FancyAlertTextFieldHeaderView)?.markedColor = markedColor
             (headerView as? FancyAlertTextViewHeaderView)?.markedColor = markedColor
@@ -53,7 +52,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
 
     private(set) lazy var baseHeaderView: FancyAlertBaseHeaderView? = {
         if title != nil || message != nil {
-            let headerView = FancyAlertBaseHeaderView(title: title, message: message, width: alertWidth, margin: margin)
+            let headerView = FancyAlertBaseHeaderView(title: title, message: message, width: alertWidth, inset: inset)
             headerView.frame.size.height = headerView.headerHeight
             headerView.heightChanged = { [weak self, weak headerView] in
                 guard let strongSelf = self, let headerView = headerView else { return }
@@ -68,7 +67,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
 
     private(set) lazy var progressHeaderView: FancyAlertProgressHeaderView? = {
         if title != nil || message != nil {
-            let headerView = FancyAlertProgressHeaderView(title: title, message: message, width: alertWidth, margin: margin, progress: progress)
+            let headerView = FancyAlertProgressHeaderView(title: title, message: message, width: alertWidth, inset: inset, progress: progress)
             headerView.frame.size.height = headerView.headerHeight
             headerView.heightChanged = { [weak self, weak headerView] in
                 guard let strongSelf = self, let headerView = headerView else { return }
@@ -88,7 +87,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         guard !textFields.isEmpty else {
             fatalError()
         }
-        let headerView = FancyAlertTextFieldHeaderView(title: title, message: message, width: alertWidth, margin: margin, textFields: textFields)
+        let headerView = FancyAlertTextFieldHeaderView(title: title, message: message, width: alertWidth, inset: inset, textFields: textFields)
         headerView.frame.size.height = headerView.headerHeight
         headerView.heightChanged = { [weak self, weak headerView] in
             guard let strongSelf = self, let headerView = headerView else { return }
@@ -106,7 +105,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         guard let textView = textView else {
             fatalError()
         }
-        let headerView = FancyAlertTextViewHeaderView(title: title, message: message, width: alertWidth, margin: margin, textView: textView)
+        let headerView = FancyAlertTextViewHeaderView(title: title, message: message, width: alertWidth, inset: inset, textView: textView)
         headerView.frame.size.height = headerView.headerHeight
         headerView.heightChanged = { [weak self, weak headerView] in
             guard let strongSelf = self, let headerView = headerView else { return }
@@ -133,11 +132,11 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     private let alertWidth: CGFloat
     private let textView: FancyTextView?
     private let textFields: [FancyTextField]
-
+    private let inset: FancyAlertContentEdgeInsets
 
     private var workItem: DispatchWorkItem?
 
-    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, textView: FancyTextView?, textFields: [FancyTextField], progress: Float?) {
+    init(title: String?, message: String?, actions: [FancyAlertAction], width: CGFloat, textView: FancyTextView?, textFields: [FancyTextField], progress: Float?, inset: FancyAlertContentEdgeInsets) {
         self.actions = actions
         self.progress = progress
         self.alertWidth = width
@@ -146,8 +145,8 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         self.textView = textView
         self.textFields = textFields
         self.hasProgress = progress != nil
+        self.inset = inset
         super.init(frame: CGRect.zero, style: .plain)
-        backgroundColor = .white
         isScrollEnabled = false
         dataSource = self
         delegate = self

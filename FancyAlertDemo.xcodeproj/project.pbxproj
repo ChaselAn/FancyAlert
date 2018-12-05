@@ -11,6 +11,8 @@
 		F10F466E206107E90066C901 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F10F466C206107E90066C901 /* Main.storyboard */; };
 		F10F4670206107E90066C901 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F10F466F206107E90066C901 /* Assets.xcassets */; };
 		F10F4673206107E90066C901 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F10F4671206107E90066C901 /* LaunchScreen.storyboard */; };
+		F11C21FA21B6A1FC00438966 /* FancyAlertConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11C21F921B6A1FC00438966 /* FancyAlertConfig.swift */; };
+		F11C21FC21B785B600438966 /* FancyAlertContentEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11C21FB21B785B600438966 /* FancyAlertContentEdgeInsets.swift */; };
 		F1919887215CB88100798295 /* FancyAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = F1919885215CB88100798295 /* FancyAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F191988A215CB88100798295 /* FancyAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1919883215CB88100798295 /* FancyAlert.framework */; };
 		F191988B215CB88100798295 /* FancyAlert.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1919883215CB88100798295 /* FancyAlert.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -70,6 +72,8 @@
 		F10F467B2061082C0066C901 /* FancyAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertAction.swift; sourceTree = "<group>"; };
 		F10F467F2061082C0066C901 /* FancyAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertViewController.swift; sourceTree = "<group>"; };
 		F10F46802061082D0066C901 /* FancyAlertTransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyAlertTransitionManager.swift; sourceTree = "<group>"; };
+		F11C21F921B6A1FC00438966 /* FancyAlertConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyAlertConfig.swift; sourceTree = "<group>"; };
+		F11C21FB21B785B600438966 /* FancyAlertContentEdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyAlertContentEdgeInsets.swift; sourceTree = "<group>"; };
 		F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyActionSheetCell.swift; sourceTree = "<group>"; };
 		F123B247206239E600CDD105 /* FancyActionSheetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyActionSheetHeaderView.swift; sourceTree = "<group>"; };
 		F123B24D2062512B00CDD105 /* FancyActionSheetTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyActionSheetTableView.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 			children = (
 				F1919885215CB88100798295 /* FancyAlert.h */,
 				F10F467F2061082C0066C901 /* FancyAlertViewController.swift */,
+				F11C21FB21B785B600438966 /* FancyAlertContentEdgeInsets.swift */,
 				F123B24D2062512B00CDD105 /* FancyActionSheetTableView.swift */,
 				F123B2452061FF5300CDD105 /* FancyActionSheetCell.swift */,
 				F123B247206239E600CDD105 /* FancyActionSheetHeaderView.swift */,
@@ -162,6 +167,7 @@
 				F177AE5520A976F200BD3C41 /* FancyTextField.swift */,
 				F177AE5720A979D500BD3C41 /* FancyTextView.swift */,
 				F1AA867F2063627E006B8D89 /* FancyAlertUtil.swift */,
+				F11C21F921B6A1FC00438966 /* FancyAlertConfig.swift */,
 				F1919886215CB88100798295 /* Info.plist */,
 			);
 			path = FancyAlert;
@@ -306,9 +312,11 @@
 				F1919897215CB89700798295 /* FancyAlertTextFieldHeaderView.swift in Sources */,
 				F1919892215CB89700798295 /* FancyAlertTransitionManager.swift in Sources */,
 				F191989E215CB89700798295 /* FancyAlertProgressHeaderView.swift in Sources */,
+				F11C21FA21B6A1FC00438966 /* FancyAlertConfig.swift in Sources */,
 				F1919890215CB89700798295 /* FancyTextView.swift in Sources */,
 				F1919894215CB89700798295 /* FancyActionSheetHeaderView.swift in Sources */,
 				F1919899215CB89700798295 /* FancyAlertViewController.swift in Sources */,
+				F11C21FC21B785B600438966 /* FancyAlertContentEdgeInsets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
