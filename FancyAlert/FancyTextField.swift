@@ -28,6 +28,7 @@ public class FancyTextField: UITextField {
         super.init(frame: frame)
 
         updateStyle()
+        setupTextChangeNotification()
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -64,5 +65,40 @@ public class FancyTextField: UITextField {
         font = UIFont.systemFont(ofSize: 16)
         textColor = FancyAlertConfig.alertMessageDefaultColor
         returnKeyType = .done
+    }
+
+    func setupTextChangeNotification() {
+        NotificationCenter.default.addObserver(
+            forName: UITextField.textDidChangeNotification,
+            object: self,
+            queue: nil) { (notification) in
+                UIView.animate(withDuration: 0.05, animations: {
+                    self.invalidateIntrinsicContentSize()
+                })
+        }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    override public var intrinsicContentSize: CGSize {
+        if isEditing {
+            if let text = text,
+                !text.isEmpty {
+                // Convert to NSString to use size(attributes:)
+                let string = text as NSString
+                // Calculate size for current text
+                var size = string.size(withAttributes: typingAttributes)
+                // Add margin to calculated size
+                size.width += 10
+                return size
+            } else {
+                // You can return some custom size in case of empty string
+                return super.intrinsicContentSize
+            }
+        } else {
+            return super.intrinsicContentSize
+        }
     }
 }

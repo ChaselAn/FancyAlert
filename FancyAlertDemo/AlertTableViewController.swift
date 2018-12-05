@@ -65,7 +65,13 @@ class AlertTableViewController: UITableViewController {
         case .textField:
             let alertVC = FancyAlertViewController(style: .alert, title: "大标题大标题大标题大标", message: nil, actions: actions1)
             alertVC.addTextField { (textField) in
-                textField.maxInputLength = 5
+//                textField.style = .transparentAndSizeFit
+//                let leftView = UIView()
+//                leftView.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+//                leftView.backgroundColor = .red
+//                textField.leftView = leftView
+//                textField.leftViewMode = .always
+                textField.maxInputLength = 20
             }
             present(alertVC, animated: true, completion: nil)
         case .moreTextFields:
