@@ -21,7 +21,7 @@ $ pod install
 * swift4.2:
 
 ```ruby
-pod 'FancyAlert', '~> 1.5.0'
+pod 'FancyAlert', '~> 1.5.1'
 # Then, run the following command:
 $ pod install
 ```
