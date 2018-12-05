@@ -21,7 +21,7 @@ $ pod install
 * swift4.2:
 
 ```ruby
-pod 'FancyAlert', '~> 1.4.3'
+pod 'FancyAlert', '~> 1.5.0'
 # Then, run the following command:
 $ pod install
 ```
@@ -76,3 +76,4 @@ alertViewController.progress = 0.5 // progress value
 present(alertViewController, animated: true, completion: nil)
 ```
 
+* Global properties can be set by `FancyAlertConfig`
