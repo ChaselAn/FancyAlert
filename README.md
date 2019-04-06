@@ -26,6 +26,14 @@ pod 'FancyAlert', '~> 1.5.1'
 $ pod install
 ```
 
+- swift5.0:
+
+```ruby
+pod 'FancyAlert', '~> 1.6.0'
+# Then, run the following command:
+$ pod install
+```
+
 ### Example
 
 * Normal Alert
