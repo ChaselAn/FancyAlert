@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'FancyAlert'
-    s.version      = '1.5.1'
+    s.version      = '1.6.0'
     s.summary      = 'fancy alert'
     s.homepage     = 'https://github.com/ChaselAn/FancyAlert'
     s.license      = 'MIT'
@@ -10,4 +10,5 @@ Pod::Spec.new do |s|
     s.source_files = 'FancyAlert/*.swift'
     s.requires_arc = true
     s.resources    = 'FancyAlertDemo/*.xcassets'
+    s.swift_version = '5.0'
 end
