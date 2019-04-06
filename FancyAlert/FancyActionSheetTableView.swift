@@ -56,7 +56,7 @@ class FancyActionSheetTableView: UITableView, FancyAlertTableViewSource {
             tableHeaderView = headerView
         }
 
-        if let index = self.actions.index(where: { $0.style == .cancel }) {
+        if let index = self.actions.firstIndex(where: { $0.style == .cancel }) {
             haveCancelAction = true
             let cancelAction = actions[index]
             self.actions.remove(at: index)

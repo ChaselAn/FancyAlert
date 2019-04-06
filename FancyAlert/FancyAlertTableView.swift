@@ -164,7 +164,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
             }
         }
 
-        if actions.count > 2, let index = self.actions.index(where: { $0.style == .cancel }) {
+        if actions.count > 2, let index = self.actions.firstIndex(where: { $0.style == .cancel }) {
             let cancelAction = actions[index]
             self.actions.remove(at: index)
             self.actions.append(cancelAction)

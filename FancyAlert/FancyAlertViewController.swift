@@ -210,6 +210,8 @@ open class FancyAlertViewController: UIViewController {
         case .alert:
             let alertTableView = FancyAlertTableView(title: title, message: message, actions: actions, width: view.bounds.width, textView: textView, textFields: textFields, progress: hasProgress ? progress : nil, inset: alertContentInset)
             tableView = alertTableView
+        @unknown default:
+            fatalError()
         }
         (tableView as! FancyAlertTableViewSource).markedColor = markedColor
         (tableView as! FancyAlertTableViewSource).actionCompleted = { [weak self] in

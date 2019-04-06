@@ -27,6 +27,8 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
             return 0.15
         case .actionSheet:
             return 0.25
+        @unknown default:
+            fatalError()
         }
     }
 
@@ -107,6 +109,8 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
             }, completion: { finished in
                 transitionContext.completeTransition(finished)
             })
+        @unknown default:
+            fatalError()
         }
 
     }
