@@ -12,6 +12,9 @@ public class FancyAlertConfig {
 
     public static var backgroundColor = UIColor.white
     public static var separatorHeight = 1 / UIScreen.main.scale
+
+    public static var cornerRadius: CGFloat = 10
+    public static var actionCellHeight: CGFloat = 50
 }
 
 // MARK:- alert config

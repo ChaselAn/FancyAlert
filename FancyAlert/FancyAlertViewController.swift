@@ -101,12 +101,18 @@ open class FancyAlertViewController: UIViewController {
         case alwaysAndTileDown
     }
 
+    public enum Style: Equatable {
+        case alert
+        case actionSheet
+        case alertCustom(containerView: UIView, viewHeight: CGFloat)
+    }
+
     private let maskAlpha: CGFloat = 0.75
 
     private(set) var tableView: UITableView!
     private(set) var maskControl = UIControl()
     private let alertTransitionManager: FancyAlertTransitionManager
-    private let type: UIAlertController.Style
+    private let type: Style
     private(set) var _actionSheetContentInsetAdjustmentBehavior: PrivateContentInsetAdjustmentBehavior?
 
     enum PrivateContentInsetAdjustmentBehavior {
@@ -129,7 +135,7 @@ open class FancyAlertViewController: UIViewController {
 
     var safeAreaInsetsBottom: CGFloat = 0
 
-    public init(style: UIAlertController.Style, title: String?, message: String? = nil, actions: [FancyAlertAction] = []) {
+    public init(style: Style, title: String?, message: String? = nil, actions: [FancyAlertAction] = []) {
         self.type = style
         self.actions = actions
         self.message = message
@@ -210,8 +216,9 @@ open class FancyAlertViewController: UIViewController {
         case .alert:
             let alertTableView = FancyAlertTableView(title: title, message: message, actions: actions, width: view.bounds.width, textView: textView, textFields: textFields, progress: hasProgress ? progress : nil, inset: alertContentInset)
             tableView = alertTableView
-        @unknown default:
-            fatalError()
+        case .alertCustom(containerView: let containerView, let height):
+            let alertTableView = FancyAlertCustomTableView(customView: containerView, height: height, actions: actions, width: view.bounds.width, inset: alertContentInset)
+            tableView = alertTableView
         }
         (tableView as! FancyAlertTableViewSource).markedColor = markedColor
         (tableView as! FancyAlertTableViewSource).actionCompleted = { [weak self] in

@@ -22,15 +22,13 @@ class FancyActionSheetTableView: UITableView, FancyAlertTableViewSource {
     var message: String? // 暂时没用到，留着备用
 
     var tableViewHeight: CGFloat {
-        return CGFloat(actions.count) * actionSheetCellHeight + (haveCancelAction ? separatorSectionHeaderHeight : 0) + cornerRadius + (headerView?.headerHeight ?? 0)
+        return CGFloat(actions.count) * FancyAlertConfig.actionCellHeight + (haveCancelAction ? separatorSectionHeaderHeight : 0) + FancyAlertConfig.cornerRadius + (headerView?.headerHeight ?? 0)
     }
 
-    let cornerRadius: CGFloat = 10
     var markedColor = FancyAlertConfig.actionSheetMarkedActionDefaultColor
 
     var actionCompleted: (() -> Void)?
 
-    private let actionSheetCellHeight: CGFloat = 50
     private let separatorSectionHeaderHeight:CGFloat = 8 + FancyAlertConfig.separatorHeight
 
     var actions: [FancyAlertAction]
@@ -44,12 +42,12 @@ class FancyActionSheetTableView: UITableView, FancyAlertTableViewSource {
         isScrollEnabled = false
         dataSource = self
         delegate = self
-        layer.cornerRadius = cornerRadius
+        layer.cornerRadius = FancyAlertConfig.cornerRadius
         layer.masksToBounds = true
         register(FancyActionSheetCell.self, forCellReuseIdentifier: "FancyActionSheetCell")
         separatorStyle = .none
-        estimatedRowHeight = actionSheetCellHeight
-        contentInset = UIEdgeInsets(top: cornerRadius, left: 0, bottom: 0, right: 0)
+        estimatedRowHeight = FancyAlertConfig.actionCellHeight
+        contentInset = UIEdgeInsets(top: FancyAlertConfig.cornerRadius, left: 0, bottom: 0, right: 0)
         if title != nil || message != nil {
             headerView = FancyActionSheetHeaderView(title: title, message: message, width: width, inset: inset)
             headerView!.frame.size.height = headerView!.headerHeight
@@ -107,7 +105,7 @@ extension FancyActionSheetTableView: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return actionSheetCellHeight
+        return FancyAlertConfig.actionCellHeight
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

@@ -11,9 +11,9 @@ import UIKit
 class FancyAlertTransitionAnimator: NSObject {
     var isDismissing: Bool = false
 
-    private let type: UIAlertController.Style
+    private let type: FancyAlertViewController.Style
 
-    init(type: UIAlertController.Style) {
+    init(type: FancyAlertViewController.Style) {
         self.type = type
         super.init()
     }
@@ -23,12 +23,10 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         switch type {
-        case .alert:
+        case .alert, .alertCustom:
             return 0.15
         case .actionSheet:
             return 0.25
-        @unknown default:
-            fatalError()
         }
     }
 
@@ -47,7 +45,7 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
         guard let alertController = controller as? FancyAlertViewController else { return }
         let tableViewHeight = (alertController.tableView as! FancyAlertTableViewSource).tableViewHeight
         switch type {
-        case .alert:
+        case .alert, .alertCustom:
             alertController.view.alpha = initialAlpha
             if !isDismissing {
                 alertController.tableView.center = alertController.view.center
@@ -109,8 +107,6 @@ extension FancyAlertTransitionAnimator: UIViewControllerAnimatedTransitioning {
             }, completion: { finished in
                 transitionContext.completeTransition(finished)
             })
-        @unknown default:
-            fatalError()
         }
 
     }

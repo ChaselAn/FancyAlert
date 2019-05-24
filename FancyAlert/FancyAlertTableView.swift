@@ -36,10 +36,9 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
     }
 
     var tableViewHeight: CGFloat {
-        return (actions.count == 2 ? alertCellHeight : CGFloat(actions.count) * alertCellHeight) + (headerView?.headerHeight ?? 0)
+        return (actions.count == 2 ? FancyAlertConfig.actionCellHeight : CGFloat(actions.count) * FancyAlertConfig.actionCellHeight) + (headerView?.headerHeight ?? 0)
     }
 
-    let cornerRadius: CGFloat = 10
     var markedColor = FancyAlertConfig.actionSheetMarkedActionDefaultColor {
         didSet {
             (headerView as? FancyAlertTextFieldHeaderView)?.markedColor = markedColor
@@ -47,8 +46,6 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         }
     }
     var actionCompleted: (() -> Void)?
-
-    private let alertCellHeight: CGFloat = 50
 
     private(set) lazy var baseHeaderView: FancyAlertBaseHeaderView? = {
         if title != nil || message != nil {
@@ -150,7 +147,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         isScrollEnabled = false
         dataSource = self
         delegate = self
-        layer.cornerRadius = cornerRadius
+        layer.cornerRadius = FancyAlertConfig.cornerRadius
         layer.masksToBounds = true
         register(FancyAlertTwoActionCell.self, forCellReuseIdentifier: "FancyAlertTwoActionCell")
         register(FancyAlertCell.self, forCellReuseIdentifier: "FancyAlertCell")
@@ -247,6 +244,6 @@ extension FancyAlertTableView: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return alertCellHeight
+        return FancyAlertConfig.actionCellHeight
     }
 }
