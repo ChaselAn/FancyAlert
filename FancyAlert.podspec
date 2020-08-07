@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'FancyAlert'
-    s.version      = '1.6.3'
+    s.version      = '1.7.0'
     s.summary      = 'fancy alert'
     s.homepage     = 'https://github.com/ChaselAn/FancyAlert'
     s.license      = 'MIT'

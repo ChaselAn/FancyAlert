@@ -84,13 +84,37 @@ class FancyAlertTwoActionCell: UITableViewCell {
         }
         self.actions = tempActions
         leftButton.setTitle(tempActions.first!.title, for: .normal)
-        leftButton.setTitleColor(markedColor, for: .normal)
+        switch tempActions.first!.style {
+        case .normal:
+            leftButton.setTitleColor(FancyAlertConfig.alertNormalActionDefaultColor, for: .normal)
+        case .marked:
+            leftButton.setTitleColor(markedColor, for: .normal)
+        case .disabled:
+            leftButton.setTitleColor(FancyAlertConfig.alertDisabledActionDefaultColor, for: .normal)
+        case .cancel:
+            leftButton.setTitleColor(FancyAlertConfig.alertCancelActionDefaultColor, for: .normal)
+        }
+        if let color = tempActions.first!.color {
+            leftButton.setTitleColor(color, for: .normal)
+        }
         leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: actions.first!.style == .cancel ? .medium : .semibold)
         leftButton.titleLabel?.minimumScaleFactor = 0.1
         leftButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         rightButton.setTitle(tempActions.last!.title, for: .normal)
-        rightButton.setTitleColor(markedColor, for: .normal)
+        switch tempActions.last!.style {
+        case .normal:
+            rightButton.setTitleColor(FancyAlertConfig.alertNormalActionDefaultColor, for: .normal)
+        case .marked:
+            rightButton.setTitleColor(markedColor, for: .normal)
+        case .disabled:
+            rightButton.setTitleColor(FancyAlertConfig.alertDisabledActionDefaultColor, for: .normal)
+        case .cancel:
+            rightButton.setTitleColor(FancyAlertConfig.alertCancelActionDefaultColor, for: .normal)
+        }
+        if let color = tempActions.last!.color {
+            rightButton.setTitleColor(color, for: .normal)
+        }
         rightButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: actions.last!.style == .cancel ? .medium : .semibold)
         rightButton.titleLabel?.minimumScaleFactor = 0.1
         rightButton.titleLabel?.adjustsFontSizeToFitWidth = true

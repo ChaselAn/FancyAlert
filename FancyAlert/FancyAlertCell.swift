@@ -38,7 +38,19 @@ class FancyAlertCell: UITableViewCell {
     func setData(action: FancyAlertAction, markedColor: UIColor) {
         titleLabel.text = action.title
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: action.style == .cancel ? .medium : .semibold)
-        titleLabel.textColor = markedColor
+        switch action.style {
+        case .normal:
+            titleLabel.textColor = FancyAlertConfig.alertNormalActionDefaultColor
+        case .marked:
+            titleLabel.textColor = markedColor
+        case .disabled:
+            titleLabel.textColor = FancyAlertConfig.alertDisabledActionDefaultColor
+        case .cancel:
+            titleLabel.textColor = FancyAlertConfig.alertCancelActionDefaultColor
+        }
+        if let color = action.color {
+            titleLabel.textColor = color
+        }
 
         titleLabel.alpha = action.isEnabled ? 1 : 0.4
         isUserInteractionEnabled = action.isEnabled

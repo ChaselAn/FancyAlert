@@ -23,6 +23,11 @@ extension FancyAlertConfig {
     public static var alertTitleDefaultColor: UIColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)  // 333333
     public static var alertMessageDefaultColor: UIColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)  // 4a4a4a
 
+    public static var alertNormalActionDefaultColor: UIColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)  // 333333
+    public static var alertMarkedActionDefaultColor: UIColor = #colorLiteral(red: 1, green: 0.1882352941, blue: 0.2862745098, alpha: 1)  // FF3049
+    public static var alertDisabledActionDefaultColor: UIColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)  // 979797
+    public static var alertCancelActionDefaultColor: UIColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)  // 979797
+
     public static var alertSeparatorColor: UIColor = #colorLiteral(red: 0.9254901961, green: 0.9254901961, blue: 0.9254901961, alpha: 1)  // ececec
 
     public static var alertProgressTintColor: UIColor = #colorLiteral(red: 0.7647058824, green: 0.7647058824, blue: 0.7647058824, alpha: 1)  // c3c3c3

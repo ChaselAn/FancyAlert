@@ -27,7 +27,7 @@ open class FancyAlertAction {
             }
         }
     }
-    open var color: UIColor? // default is FancyAlertViewController.markedColor
+    open var color: UIColor?
 
     var enabledDidChange: ((Bool) -> Void)?
     
