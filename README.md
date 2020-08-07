@@ -29,7 +29,7 @@ $ pod install
 - swift5.0:
 
 ```ruby
-pod 'FancyAlert', '~> 1.7.0'
+pod 'FancyAlert', '~> 1.7.1'
 # Then, run the following command:
 $ pod install
 ```

@@ -25,7 +25,7 @@ class FancyAlertCustomTableView: UITableView, FancyAlertTableViewSource {
         return CGFloat(actions.count) * FancyAlertConfig.actionCellHeight + customView.bounds.height
     }
 
-    var markedColor = FancyAlertConfig.actionSheetMarkedActionDefaultColor
+    var markedColor = FancyAlertConfig.alertMarkedActionDefaultColor
 
     var actionCompleted: (() -> Void)?
 

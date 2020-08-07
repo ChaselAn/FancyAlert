@@ -39,7 +39,7 @@ class FancyAlertTableView: UITableView, FancyAlertTableViewSource {
         return (actions.count == 2 ? FancyAlertConfig.actionCellHeight : CGFloat(actions.count) * FancyAlertConfig.actionCellHeight) + (headerView?.headerHeight ?? 0)
     }
 
-    var markedColor = FancyAlertConfig.actionSheetMarkedActionDefaultColor {
+    var markedColor = FancyAlertConfig.alertMarkedActionDefaultColor {
         didSet {
             (headerView as? FancyAlertTextFieldHeaderView)?.markedColor = markedColor
             (headerView as? FancyAlertTextViewHeaderView)?.markedColor = markedColor
