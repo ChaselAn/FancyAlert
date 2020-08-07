@@ -222,12 +222,14 @@ extension FancyAlertTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if actions.count == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FancyAlertTwoActionCell", for: indexPath) as! FancyAlertTwoActionCell
+            cell.backgroundColor = tableView.backgroundColor
             cell.setData(actions: actions, markedColor: markedColor)
             cell.buttonDidClicked = actionCompleted
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FancyAlertCell", for: indexPath) as! FancyAlertCell
             let action = actions[indexPath.row]
+            cell.backgroundColor = tableView.backgroundColor
             cell.setData(action: action, markedColor: markedColor)
             return cell
         }
